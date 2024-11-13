@@ -54,7 +54,7 @@ const obraTarefas = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push("../obraPage")}>
+        <TouchableOpacity onPress={() => router.push("Obras/obraPage")}>
           <Image
             source={require("../../Images/backArrow.png")}
             style={styles.backArrowImage}
@@ -62,7 +62,10 @@ const obraTarefas = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.header}>
-        <Image source={require("../../Images/House.png")} style={styles.image} />
+        <Image
+          source={require("../../Images/House.png")}
+          style={styles.image}
+        />
         <View style={styles.headerPosition}>
           <Text style={styles.headerTitle}>Rua do poço azul</Text>
           <Text style={styles.headerDescription}>Estado: em progresso</Text>

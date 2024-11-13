@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import ConteinerDelete from "../../components/ConteinerDelete";
 import Conteiner from "../../components/Conteiner";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import obrasData from "../../data/obras.json";
 
 const DATA = [
   {
@@ -26,16 +27,44 @@ const DATA = [
 ];
 
 const obraPage = () => {
+  const { id } = useLocalSearchParams(); // Fetch the id from URL params
+  const [obra, setObra] = useState(null); // State to hold the obra data
+  console.log("Received id:", id); // Add this line for debugging
+  // Function to get obra by obraId
+  const fetchObraById = (id) => {
+    console.log("obrasData:", obrasData); // Log to verify the data
+    const foundObra = obrasData.find((item) => item.id === id);
+    if (foundObra) {
+      console.log("Found obra:", foundObra);
+      setObra(foundObra); // Set the obra if found
+    } else {
+      console.log("Obra not found!");
+      setObra(null); // Reset if obraId is not found
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      const obraId = parseInt(id, 10); // Convert `id` to a number
+      console.log("Fetching obra with id:", obraId);
+      fetchObraById(obraId); // This will call fetchObraById with the numeric id
+    }
+  }, [id]); // Ensure that useEffect watches the id.
+
   const router = useRouter();
 
   const renderTaskItem = ({ item }) => (
     <ConteinerDelete labelTitle={item.title} labelText={item.description} />
   );
 
+  if (!obra) {
+    return <Text>Loading...</Text>; // Display loading message until obra is fetched
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push("../obras")}>
+        <TouchableOpacity onPress={() => router.push("/Obras/obras")}>
           <Image
             source={require("../../Images/backArrow.png")}
             style={styles.backArrowImage}
@@ -43,12 +72,17 @@ const obraPage = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.header}>
-        <Image source={require("../../Images/House.png")} style={styles.image} />
+        <Image
+          source={require("../../Images/House.png")}
+          style={styles.image}
+        />
         <View style={styles.headerPosition}>
-          <Text style={styles.headerTitle}>Rua do poço azul</Text>
-          <Text style={styles.headerDescription}>Estado: em progresso</Text>
+          <Text style={styles.headerTitle}>{obra.title}</Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: 12/24
+            Estado: {obra.done ? "Concluida" : "Em progresso"}
+          </Text>
+          <Text style={styles.headerDescription}>
+            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
           </Text>
         </View>
       </View>
@@ -56,14 +90,16 @@ const obraPage = () => {
       <View style={styles.infoContainer}>
         <Conteiner
           labelTitle={"Informações"}
-          labelText={
-            "Morada: Rua A de Lisboa, 2810-108\nHoras despendidas: 5 horas\nPago: não"
-          }
+          labelText={`Morada: ${obra.info.location} \nHoras despendidas: ${
+            obra.info.hours
+          } horas \nPago: ${obra.info.paid ? "Sim" : "Não"}`}
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => router.push("Obras/obraOrcamentoPage")}>
+        <TouchableOpacity
+          onPress={() => router.push("Obras/obraOrcamentoPage")}
+        >
           <View style={styles.squareButton}>
             <Image
               source={require("../../Images/orcamento.png")}
@@ -72,7 +108,7 @@ const obraPage = () => {
             <Text style={styles.buttonText}>Orçamentos</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push("../obraTarefas")}>
+        <TouchableOpacity onPress={() => router.push("Obras/obraTarefas")}>
           <View style={styles.squareButton}>
             {/*  <Image
               source={require('../Images/task.png')}
@@ -122,6 +158,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 80,
     marginLeft: 15,
+    marginBottom: 15,
   },
   image: {
     height: 90,

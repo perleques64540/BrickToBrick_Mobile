@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "obraId": 1001,
+    "amount": 15000,
+    "description": "Marketing budget for Q1 campaign",
+    "approved": true
+  },
+  {
+    "id": 2,
+    "obraId": 1002,
+    "amount": 25000,
+    "description": "Research and development for new product line",
+    "approved": false
+  },
+  {
+    "id": 3,
+    "obraId": 1003,
+    "amount": 10000,
+    "description": "Office supplies and equipment",
+    "approved": true
+  },
+  {
+    "id": 4,
+    "obraId": 1004,
+    "amount": 30000,
+    "description": "Staff training and workshops",
+    "approved": true
+  },
+  {
+    "id": 5,
+    "obraId": 1005,
+    "amount": 50000,
+    "description": "Annual IT infrastructure upgrades",
+    "approved": false
+  },
+  {
+    "id": 6,
+    "obraId": 1006,
+    "amount": 12000,
+    "description": "Travel and accommodation for client meetings",
+    "approved": true
+  },
+  {
+    "id": 7,
+    "obraId": 1007,
+    "amount": 8000,
+    "description": "Corporate events and team building",
+    "approved": true
+  },
+  {
+    "id": 8,
+    "obraId": 1008,
+    "amount": 20000,
+    "description": "Social media advertising for product launch",
+    "approved": false
+  },
+  {
+    "id": 9,
+    "obraId": 1009,
+    "amount": 1500,
+    "description": "Office maintenance and repairs",
+    "approved": true
+  },
+  {
+    "id": 10,
+    "obraId": 1010,
+    "amount": 7500,
+    "description": "Customer satisfaction survey and analysis",
+    "approved": false
+  }
+]

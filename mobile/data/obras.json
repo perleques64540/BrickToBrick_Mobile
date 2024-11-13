@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "title": "New York, 5th Avenue",
+    "info": {
+      "location": "New York, 5th Avenue",
+      "hours": "10",
+      "paid": true
+    },
+    "done": false,
+    "quotes": [1, 2],
+    "tasks": [1, 2, 3],
+    "employees": [101, 102]
+  },
+  {
+    "id": 2,
+    "title": "Los Angeles, Sunset Boulevard",
+    "info": {
+      "location": "Los Angeles, Sunset Boulevard",
+      "hours": "8",
+      "paid": false
+    },
+    "done": false,
+    "quotes": [3, 4],
+    "tasks": [4, 5, 6],
+    "employees": [103, 104]
+  },
+  {
+    "id": 3,
+    "title": "Chicago, Michigan Avenue",
+    "info": {
+      "location": "Chicago, Michigan Avenue",
+      "hours": "12",
+      "paid": true
+    },
+    "done": false,
+    "quotes": [5, 6],
+    "tasks": [7, 8, 9],
+    "employees": [105, 106]
+  },
+  {
+    "id": 4,
+    "title": "Miami, Ocean Drive",
+    "info": {
+      "location": "Miami, Ocean Drive",
+      "hours": "9",
+      "paid": false
+    },
+    "done": false,
+    "quotes": [7, 8],
+    "tasks": [10, 11, 12],
+    "employees": [107, 108]
+  },
+  {
+    "id": 5,
+    "title": "Houston, Main Street",
+    "info": {
+      "location": "Houston, Main Street",
+      "hours": "11",
+      "paid": true
+    },
+    "done": false,
+    "quotes": [9, 10],
+    "tasks": [13, 14, 15],
+    "employees": [109, 110]
+  },
+  {
+    "id": 6,
+    "title": "San Francisco, Market Street",
+    "info": {
+      "location": "San Francisco, Market Street",
+      "hours": "10",
+      "paid": true
+    },
+    "done": false,
+    "quotes": [11, 12],
+    "tasks": [16, 17, 18],
+    "employees": [101, 103]
+  },
+  {
+    "id": 7,
+    "title": "Seattle, Pike Place",
+    "info": {
+      "location": "Seattle, Pike Place",
+      "hours": "8",
+      "paid": false
+    },
+    "done": false,
+    "quotes": [13, 14],
+    "tasks": [19, 20, 21],
+    "employees": [104, 106]
+  },
+  {
+    "id": 8,
+    "title": "Boston, Beacon Hill",
+    "info": {
+      "location": "Boston, Beacon Hill",
+      "hours": "12",
+      "paid": true
+    },
+    "done": false,
+    "quotes": [15, 16],
+    "tasks": [22, 23, 24],
+    "employees": [105, 107]
+  },
+  {
+    "id": 9,
+    "title": "Denver, Cherry Creek",
+    "info": {
+      "location": "Denver, Cherry Creek",
+      "hours": "9",
+      "paid": true
+    },
+    "done": false,
+    "quotes": [17, 18],
+    "tasks": [25, 26, 27],
+    "employees": [108, 109]
+  },
+  {
+    "id": 10,
+    "title": "Atlanta, Peachtree Street",
+    "info": {
+      "location": "Atlanta, Peachtree Street",
+      "hours": "10",
+      "paid": false
+    },
+    "done": false,
+    "quotes": [19, 20],
+    "tasks": [28, 29, 30],
+    "employees": [102, 110]
+  }
+]

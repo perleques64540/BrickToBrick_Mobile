@@ -1,0 +1,129 @@
+const DATA = [
+  {
+    id: "1",
+    title: "Substituição de Janela",
+    description:
+      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
+  },
+  {
+    id: "2",
+    title: "Remoção de Telhado",
+    description: "Tarefa concluída por Rui Manel em Rua do poço azul",
+  },
+];
+
+const obraPage = () => {
+  const { id } = useLocalSearchParams();
+  const [obra, setObra] = useState(null);
+
+  // Function to get obra by obraId
+  const fetchObraById = (id) => {
+    const foundObra = obrasData.find((item) => item.id === id);
+    if (foundObra) {
+      console.log("found it!");
+      setObra(foundObra);
+    } else {
+      console.log("not found it!");
+      setObra(null); // Reset if obraId is not found
+    }
+  };
+
+  useEffect(() => {
+    console.log("fetching obra...");
+    fetchObraById({ id });
+  }, []);
+
+  const router = useRouter();
+
+  const renderTaskItem = ({ item }) => (
+    <ConteinerDelete labelTitle={item.title} labelText={item.description} />
+  );
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.push("/Obras/obras")}>
+          <Image
+            source={require("../../Images/backArrow.png")}
+            style={styles.backArrowImage}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.header}>
+        <Image
+          source={require("../../Images/House.png")}
+          style={styles.image}
+        />
+        <View style={styles.headerPosition}>
+          <Text style={styles.headerTitle}>{obra.title}</Text>
+          <Text style={styles.headerDescription}>
+            Estado: {obra.done ? "Concluida" : "Em progresso"}
+          </Text>
+          <Text style={styles.headerDescription}>
+            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <Conteiner
+          labelTitle={"Informações"}
+          labelText={
+            "Morada:" +
+            obra.info.location +
+            "\nHoras despendidas:" +
+            obra.info.hours +
+            "horas\nPago:" +
+            obra.info.paid
+              ? "Sim"
+              : "Não"
+          }
+        />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => router.push("Obras/obraOrcamentoPage")}
+        >
+          <View style={styles.squareButton}>
+            <Image
+              source={require("../../Images/orcamento.png")}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Orçamentos</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("../obraTarefas")}>
+          <View style={styles.squareButton}>
+            {/*  <Image
+                source={require('../Images/task.png')}
+                style={styles.buttonImage}
+              /> */}
+            <Text style={styles.buttonText}>Tarefas</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.squareButton}>
+            {/*  <Image
+                source={require('../Images/func.png')}
+                style={styles.buttonImage}
+              /> */}
+            <Text style={styles.buttonText}>Funcionários</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.taskContainer}>
+        <Text style={styles.headerTitle}>Últimas tarefas</Text>
+        <TouchableOpacity>
+          <Text style={styles.viewAllText}>Ver todas</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={DATA}
+        renderItem={renderTaskItem}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  );
+};

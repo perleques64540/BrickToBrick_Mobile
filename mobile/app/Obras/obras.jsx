@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,31 +5,34 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar";
 import ConteinerImage from "../../components/ConteinerImage";
 import { useRouter } from "expo-router";
+import obrasData from "../../data/obras.json"; // Import your obras data JSON file
 
+const pathImg = require("../../Images/House.png");
 const DATA = [
   {
-    id: "1",
+    id: 1,
     path: require("../../Images/House.png"),
     labelTitle: "Rua do poço azul",
     labelText: "Outras informações \nTarefas concluídas: 12/24",
   },
   {
-    id: "2",
+    id: 2,
     path: require("../../Images/House.png"),
     labelTitle: "Rua do Carvalho",
     labelText: "Outras informações \nTarefas concluídas: 5/20",
   },
   {
-    id: "3",
+    id: 3,
     path: require("../../Images/House.png"),
     labelTitle: "Avenida das Flores",
     labelText: "Outras informações \nTarefas concluídas: 8/15",
   },
   {
-    id: "4",
+    id: 4,
     path: require("../../Images/House.png"),
     labelTitle: "Rua do Sol",
     labelText: "Outras informações \nTarefas concluídas: 10/22",
@@ -38,14 +40,30 @@ const DATA = [
 ];
 
 const obras = () => {
+  const [obras, setObras] = useState([]); // State to hold the obras data
   const router = useRouter();
 
+  // Load obra data (from local file or API)
+  useEffect(() => {
+    // You can directly use imported data here or fetch if you're using an API
+    setObras(obrasData); // Setting obras data to state
+  }, []); // Empty dependency array ensures this runs once when the component mounts
+
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => router.push("Obras/obraPage")}>
+    <TouchableOpacity
+      onPress={() =>
+        router.push({
+          pathname: "Obras/obraPage",
+          params: {
+            id: item.id, // Pass obra ID to the details page
+          },
+        })
+      }
+    >
       <ConteinerImage
-        path={item.path}
-        labelTitle={item.labelTitle}
-        labelText={item.labelText}
+        path={pathImg}
+        labelTitle={item.title}
+        labelText={item.info.location}
       />
     </TouchableOpacity>
   );
@@ -53,7 +71,7 @@ const obras = () => {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <SearchBar label={"Pesquisar"} s />
+        <SearchBar label={"Pesquisar"} />
       </View>
 
       <View style={styles.headerContainer}>
@@ -61,11 +79,10 @@ const obras = () => {
       </View>
 
       {/* Obras List */}
-
       <FlatList
-        data={DATA} // The data array
+        data={obras} // Use the state to render data
         renderItem={renderItem} // Render each item
-        keyExtractor={(item) => item.id} // Unique key for each item
+        keyExtractor={(item) => item.id.toString()} // Make sure id is unique, convert to string if necessary
         contentContainerStyle={styles.listContent} // Styling the list container
       />
     </View>
