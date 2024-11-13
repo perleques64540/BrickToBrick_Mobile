@@ -73,7 +73,6 @@ const AddWorkScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#e7efef",
     padding: 20,
     height: "100%",
     width: "100%",

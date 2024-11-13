@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     position: "absolute",
-    bottom: 0,
+    bottom: -30,
   },
   bottomNavButtons: {
     height: 50,

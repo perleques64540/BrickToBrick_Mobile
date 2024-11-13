@@ -34,6 +34,10 @@ const Layout = () => {
     <SafeAreaView style={styles.safeArea}>
       <PopUpContext.Provider value={{ showPopUp, hidePopUp }}>
         <View style={styles.container}>
+          <StatusBar
+            barStyle={"dark-content"}
+            backgroundColor={"#ffffff"}
+          ></StatusBar>
           <Slot />
           <FlashMessage position="top" />
           <TabBar />
@@ -67,11 +71,11 @@ const Layout = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight || 0,
-    backgroundColor: "#e9e9e9",
+    backgroundColor: "#FAFAFA",
   },
   container: {
     flex: 1,
+    backgroundColor: "#FAFAFA",
   },
 });
 

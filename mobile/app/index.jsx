@@ -128,9 +128,10 @@ const obras = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#FAFAFA",
-    padding: 20,
+    flex: 1, // Take up all available space
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "column", // Stack children vertically
   },
   searchContainer: {
     flexDirection: "row",
