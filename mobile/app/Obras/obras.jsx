@@ -12,42 +12,25 @@ import { useRouter } from "expo-router";
 import obrasData from "../../data/obras.json"; // Import your obras data JSON file
 
 const pathImg = require("../../Images/House.png");
-const DATA = [
-  {
-    id: 1,
-    path: require("../../Images/House.png"),
-    labelTitle: "Rua do poço azul",
-    labelText: "Outras informações \nTarefas concluídas: 12/24",
-  },
-  {
-    id: 2,
-    path: require("../../Images/House.png"),
-    labelTitle: "Rua do Carvalho",
-    labelText: "Outras informações \nTarefas concluídas: 5/20",
-  },
-  {
-    id: 3,
-    path: require("../../Images/House.png"),
-    labelTitle: "Avenida das Flores",
-    labelText: "Outras informações \nTarefas concluídas: 8/15",
-  },
-  {
-    id: 4,
-    path: require("../../Images/House.png"),
-    labelTitle: "Rua do Sol",
-    labelText: "Outras informações \nTarefas concluídas: 10/22",
-  },
-];
-
 const obras = () => {
+  const [searchText, setSearchText] = useState("");
   const [obras, setObras] = useState([]); // State to hold the obras data
   const router = useRouter();
 
   // Load obra data (from local file or API)
   useEffect(() => {
-    // You can directly use imported data here or fetch if you're using an API
-    setObras(obrasData); // Setting obras data to state
-  }, []); // Empty dependency array ensures this runs once when the component mounts
+    setObras(obrasData); // Set obras data to state from imported JSON
+  }, []);
+
+  // Filter obras based on search text
+  const filteredObras = obrasData.filter((obra) =>
+    obra.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  useEffect(() => {
+    setObras(filteredObras);
+    console.log(obras);
+  }, [searchText]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -63,7 +46,7 @@ const obras = () => {
       <ConteinerImage
         path={pathImg}
         labelTitle={item.title}
-        labelText={item.info.location}
+        labelText={item.title}
       />
     </TouchableOpacity>
   );
@@ -71,7 +54,11 @@ const obras = () => {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <SearchBar label={"Pesquisar"} />
+        <SearchBar
+          label={"Pesquisar"}
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
       </View>
 
       <View style={styles.headerContainer}>
@@ -92,7 +79,7 @@ const obras = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
+    backgroundColor: "#FAFAFA",
     padding: 20,
   },
   searchContainer: {

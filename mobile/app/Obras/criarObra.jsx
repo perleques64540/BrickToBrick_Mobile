@@ -1,50 +1,70 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHammer } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHammer } from "@fortawesome/free-solid-svg-icons";
 
-import OrangeButton from '../../components/OrangeButton';
-import GreyButton from '../../components/GreyButton';
-import TextBox from '../../components/TextBox';
-import { usePopUp } from '../_layout';  // Import usePopUp
+import OrangeButton from "../../components/OrangeButton";
+import GreyButton from "../../components/GreyButton";
+import TextBox from "../../components/TextBox";
+import { usePopUp } from "../_layout"; // Import usePopUp
 
 const AddWorkScreen = () => {
   const router = useRouter();
-  const { showPopUp } = usePopUp();  // Get showPopUp function
+  const { showPopUp } = usePopUp(); // Get showPopUp function
 
   const handleShowPopUp = () => {
-    console.log("cancelar clicked")
+    console.log("cancelar clicked");
     showPopUp({
-      title: 'Maaucoo',
-      message: 'Este serviço já não está disponível',
+      title: "Maaucoo",
+      message: "Este serviço já não está disponível",
       primaryBtn: {
-        label: 'Ok',
-        onPress: () => console.log('Ok button pressed'),
+        label: "Ok",
+        onPress: () => console.log("Ok button pressed"),
       },
       secondaryBtn: {
-        label: 'Cancelar',
-        onPress: () => console.log('Cancel button pressed'),
+        label: "Cancelar",
+        onPress: () => console.log("Cancel button pressed"),
       },
     });
   };
 
   return (
     <View style={styles.container}>
-      <FontAwesomeIcon style={styles.icon} icon={faHammer} />
+      <FontAwesomeIcon style={styles.icon} icon={faHammer} size={46} />
       <Text style={styles.title}>Adicionar Obra</Text>
 
-      <TextBox label={'Titulo'} width={'100%'} />
-      <TextBox label={'Descrição'} width={'100%'} />
-      <TextBox label={'Outras informações'} width={'100%'} />
-      <TextBox label={'Relacionadas com a obra'} width={'100%'} />
+      <TextBox
+        backgroundColor={"white"}
+        label={"Titulo"}
+        width={"100%"}
+        textcolor={"#333"}
+      />
+      <TextBox
+        backgroundColor={"white"}
+        label={"Descrição"}
+        width={"100%"}
+        textcolor={"#333"}
+      />
+      <TextBox
+        backgroundColor={"white"}
+        label={"Outras informações"}
+        width={"100%"}
+        textcolor={"#333"}
+      />
+      <TextBox
+        backgroundColor={"white"}
+        label={"Relacionadas com a obra"}
+        width={"100%"}
+        textcolor={"#333"}
+      />
 
       <OrangeButton
-        label={'Confirmar'}
-        onPress={() => router.push('tabs/tasks')}
+        label={"Confirmar"}
+        onPress={() => router.push("tabs/tasks")}
       />
       <GreyButton
-        label={'Cancelar'}
+        label={"Cancelar"}
         onPress={handleShowPopUp} // Show PopUp on Cancel button press
       />
     </View>
@@ -53,25 +73,25 @@ const AddWorkScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#e7efef',
+    backgroundColor: "#e7efef",
     padding: 20,
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
   },
   icon: {
     width: 120,
     height: 120,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: 30,
-    color: '#333333',
+    color: "#333333",
   },
   title: {
     fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 20,
-    color: '#333333',
+    color: "#333333",
   },
 });
 

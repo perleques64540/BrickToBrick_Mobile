@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 import SearchBar from "../components/SearchBar";
 import ConteinerImage from "../components/ConteinerImage";
 import { useRouter } from "expo-router";
+import obrasData from "../data/obras.json"; // Import your obras data JSON file
 
 const DATA = [
   {
@@ -37,8 +38,27 @@ const DATA = [
   },
 ];
 
+const pathImg = require("../Images/House.png");
+
 const obras = () => {
+  const [searchText, setSearchText] = useState("");
   const router = useRouter();
+  const [obras, setObras] = useState([]); // State to hold all obras data
+
+  // Load obra data (from local file or API)
+  useEffect(() => {
+    setObras(obrasData); // Set obras data to state from imported JSON
+  }, []);
+
+  // Filter obras based on search text
+  const filteredObras = obrasData.filter((obra) =>
+    obra.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  useEffect(() => {
+    setObras(filteredObras);
+    console.log(obras);
+  }, [searchText]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -52,9 +72,9 @@ const obras = () => {
       }
     >
       <ConteinerImage
-        path={item.path}
-        labelTitle={item.labelTitle}
-        labelText={item.labelText}
+        path={pathImg}
+        labelTitle={item.title}
+        labelText={item.title}
       />
     </TouchableOpacity>
   );
@@ -63,7 +83,11 @@ const obras = () => {
     <View style={styles.container}>
       {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <SearchBar label={"Pesquisar"} s />
+        <SearchBar
+          label={"Pesquisar"}
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
       </View>
 
       {/* Obras Header */}
@@ -77,7 +101,7 @@ const obras = () => {
       {/* Obras List */}
 
       <FlatList
-        data={DATA} // The data array
+        data={obras} // The data array
         renderItem={renderItem} // Render each item
         keyExtractor={(item) => item.id} // Unique key for each item
         contentContainerStyle={styles.listContent} // Styling the list container
@@ -105,7 +129,7 @@ const obras = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
+    backgroundColor: "#FAFAFA",
     padding: 20,
   },
   searchContainer: {

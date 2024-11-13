@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState } from 'react';
-import { View, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import { Slot } from 'expo-router';
-import FlashMessage from 'react-native-flash-message';
-import TabBar from '@/components/TabBar';
-import PopUp from '@/components/PopUp';
+import React, { createContext, useContext, useState } from "react";
+import { View, StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import { Slot } from "expo-router";
+import FlashMessage from "react-native-flash-message";
+import TabBar from "@/components/TabBar";
+import PopUp from "@/components/PopUp";
 
 // Create a context to manage the PopUp state
 const PopUpContext = createContext();
@@ -13,10 +13,10 @@ export const usePopUp = () => useContext(PopUpContext);
 const Layout = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [popUpConfig, setPopUpConfig] = useState({
-    title: '',
-    message: '',
-    primaryBtn: { label: 'Ok', onPress: () => {} },
-    secondaryBtn: { label: 'Cancel', onPress: () => {} },
+    title: "",
+    message: "",
+    primaryBtn: { label: "Ok", onPress: () => {} },
+    secondaryBtn: { label: "Cancel", onPress: () => {} },
   });
 
   // Function to show PopUp with specific config
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     paddingTop: StatusBar.currentHeight || 0,
-    backgroundColor: '#e9e9e9',
+    backgroundColor: "#e9e9e9",
   },
   container: {
     flex: 1,

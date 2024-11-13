@@ -29,16 +29,12 @@ const DATA = [
 const obraPage = () => {
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
-  console.log("Received id:", id); // Add this line for debugging
   // Function to get obra by obraId
   const fetchObraById = (id) => {
-    console.log("obrasData:", obrasData); // Log to verify the data
     const foundObra = obrasData.find((item) => item.id === id);
     if (foundObra) {
-      console.log("Found obra:", foundObra);
       setObra(foundObra); // Set the obra if found
     } else {
-      console.log("Obra not found!");
       setObra(null); // Reset if obraId is not found
     }
   };
@@ -46,7 +42,6 @@ const obraPage = () => {
   useEffect(() => {
     if (id) {
       const obraId = parseInt(id, 10); // Convert `id` to a number
-      console.log("Fetching obra with id:", obraId);
       fetchObraById(obraId); // This will call fetchObraById with the numeric id
     }
   }, [id]); // Ensure that useEffect watches the id.
@@ -64,7 +59,7 @@ const obraPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push("/Obras/obras")}>
+        <TouchableOpacity onPress={() => router.back()}>
           <Image
             source={require("../../Images/backArrow.png")}
             style={styles.backArrowImage}
@@ -98,7 +93,14 @@ const obraPage = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => router.push("Obras/obraOrcamentoPage")}
+          onPress={() =>
+            router.push({
+              pathname: "Obras/obraOrcamentoPage",
+              params: {
+                id: id, // Pass obra ID to the details page
+              },
+            })
+          }
         >
           <View style={styles.squareButton}>
             <Image
@@ -108,7 +110,16 @@ const obraPage = () => {
             <Text style={styles.buttonText}>Orçamentos</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push("Obras/obraTarefas")}>
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "Obras/obraTarefas",
+              params: {
+                id: id, // Pass obra ID to the details page
+              },
+            })
+          }
+        >
           <View style={styles.squareButton}>
             {/*  <Image
               source={require('../Images/task.png')}
@@ -146,7 +157,7 @@ const obraPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
+    backgroundColor: "#FAFAFA",
     padding: 20,
   },
   header: {

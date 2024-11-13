@@ -12,11 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -42,15 +38,14 @@
       "output": "static",
       "favicon": "./assets/images/capacete2.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-secure-store",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-secure-store", "expo-font"],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
+      "colors": {
+        "bg-white": "#fafafa"
+      },
       "router": {
         "origin": false
       },

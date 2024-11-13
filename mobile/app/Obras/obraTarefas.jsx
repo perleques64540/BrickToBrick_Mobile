@@ -10,7 +10,7 @@ import {
 import ConteinerDelete from "../../components/ConteinerDelete";
 import OrangeButton from "../../components/OrangeButton";
 import OrangeEmptyButton from "../../components/OrangeEmptyButton";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 const DATA = [
   {
@@ -46,6 +46,7 @@ const DATA = [
 
 const obraTarefas = () => {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
 
   const renderTaskItem = ({ item }) => (
     <ConteinerDelete labelTitle={item.title} labelText={item.description} />
@@ -54,7 +55,7 @@ const obraTarefas = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push("Obras/obraPage")}>
+        <TouchableOpacity onPress={() => router.back()}>
           <Image
             source={require("../../Images/backArrow.png")}
             style={styles.backArrowImage}
