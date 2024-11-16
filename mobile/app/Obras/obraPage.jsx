@@ -115,25 +115,36 @@ const obraPage = () => {
             router.push({
               pathname: "Obras/obraTarefas",
               params: {
+                id: id,
+                title: obra.title,
+                state: obra.done,
+              },
+            })
+          }
+        >
+          <View style={styles.squareButton}>
+            <Image
+              source={require("../../Images/Task.png")}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Tarefas</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "Obras/obraFuncionarios",
+              params: {
                 id: id, // Pass obra ID to the details page
               },
             })
           }
         >
           <View style={styles.squareButton}>
-            {/*  <Image
-              source={require('../Images/task.png')}
+            <Image
+              source={require("../../Images/Func.png")}
               style={styles.buttonImage}
-            /> */}
-            <Text style={styles.buttonText}>Tarefas</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <View style={styles.squareButton}>
-            {/*  <Image
-              source={require('../Images/func.png')}
-              style={styles.buttonImage}
-            /> */}
+            />
             <Text style={styles.buttonText}>Funcionários</Text>
           </View>
         </TouchableOpacity>
@@ -157,12 +168,11 @@ const obraPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FAFAFA",
     padding: 20,
   },
   header: {
     alignItems: "center",
-    marginBottom: 20,
+    paddingBottom: 20,
     flexDirection: "row",
   },
   headerPosition: {
@@ -238,7 +248,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   taskTitle: {
     fontWeight: "bold",

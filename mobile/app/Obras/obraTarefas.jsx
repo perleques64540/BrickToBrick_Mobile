@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,42 +11,39 @@ import ConteinerDelete from "../../components/ConteinerDelete";
 import OrangeButton from "../../components/OrangeButton";
 import OrangeEmptyButton from "../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
-
-const DATA = [
-  {
-    id: "1",
-    title: "Substituição de Janela",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "2",
-    title: "Remoção de Telhado",
-    description: "Tarefa concluída por Rui Manel em Rua do poço azul",
-  },
-  {
-    id: "3",
-    title: "Substituição",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "4",
-    title: "Substituição de Janela-2",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "5",
-    title: "Substituição de Janela453223",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-];
+import taskData from "../../data/tasks.json"; // Import your obras data JSON file
 
 const obraTarefas = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
+  const { title } = useLocalSearchParams();
+  const { state } = useLocalSearchParams();
+  const [obras, setObras] = useState([]); // State to hold the obras data
+
+  const fetchTaskById = (id) => {
+    const foundTask = taskData.filter((item) => item.obraId == id);
+    if (foundTask) {
+      setObras(foundTask);
+    } else {
+      setObras(null);
+    }
+  };
+
+  const filterByState = (state) => {
+    const foundTask = taskData.filter(
+      (item) => item.done == state && item.obraId == id
+    );
+    if (foundTask) {
+      setObras(foundTask);
+    } else {
+      setObras(null);
+    }
+  };
+
+  // Load obra data (from local file or API)
+  useEffect(() => {
+    fetchTaskById(id); // Set obras data to state from imported JSON
+  }, []);
 
   const renderTaskItem = ({ item }) => (
     <ConteinerDelete labelTitle={item.title} labelText={item.description} />
@@ -68,8 +65,10 @@ const obraTarefas = () => {
           style={styles.image}
         />
         <View style={styles.headerPosition}>
-          <Text style={styles.headerTitle}>Rua do poço azul</Text>
-          <Text style={styles.headerDescription}>Estado: em progresso</Text>
+          <Text style={styles.headerTitle}>{title}</Text>
+          <Text style={styles.headerDescription}>
+            Estado: {state ? "em progresso" : "concluida"}
+          </Text>
           <Text style={styles.headerDescription}>
             Tarefas concluídas: 12/24
           </Text>
@@ -79,26 +78,27 @@ const obraTarefas = () => {
       <Text style={styles.tasksHeader}>Tarefas</Text>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => router.push("../obraTarefasConcluidas")}
-        >
+        <TouchableOpacity onPress={() => filterByState(true)}>
           <OrangeEmptyButton label={"Concluidas"} width={160} height={45} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => filterByState(false)}>
           <OrangeEmptyButton label={"Por fazer"} width={160} height={45} />
         </TouchableOpacity>
       </View>
       <View style={styles.taskContainer}>
         <FlatList
-          data={DATA}
+          data={obras}
           renderItem={renderTaskItem}
           keyExtractor={(item) => item.id}
         />
       </View>
 
       <View style={styles.bottomButton}>
-        <TouchableOpacity onPress={() => router.push("../obraTarefaAdd")}>
-          <OrangeButton label={"Adicionar tarefa"} width={300} height={50} />
+        <TouchableOpacity onPress={() => router.push("Obras/obraTarefaAdd")}>
+          <OrangeButton
+            label={"Adicionar tarefa"}
+            onPress={() => router.push("Obras/obraTarefaAdd")}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -108,7 +108,6 @@ const obraTarefas = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
     padding: 20,
   },
   header: {
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   bottomButton: {
-    alignItems: "center",
     marginTop: -25,
   },
 });

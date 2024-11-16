@@ -3,6 +3,7 @@
 [
   {
     "id": 1,
+    "obraId": 1,
     "title": "Prepare Monthly Report",
     "description": "Compile and analyze monthly sales data for the report.",
     "employeeId": 101,
@@ -10,6 +11,7 @@
   },
   {
     "id": 2,
+    "obraId": 1,
     "title": "Client Meeting",
     "description": "Discuss project requirements with the client.",
     "employeeId": -1,
@@ -17,6 +19,7 @@
   },
   {
     "id": 3,
+    "obraId": 1,
     "title": "Website Update",
     "description": "Update the company website with the latest news and blog posts.",
     "employeeId": 103,
@@ -24,6 +27,7 @@
   },
   {
     "id": 4,
+    "obraId": 2,
     "title": "Inventory Check",
     "description": "Review and update the current inventory list.",
     "employeeId": 104,
@@ -31,6 +35,7 @@
   },
   {
     "id": 5,
+    "obraId": 2,
     "title": "Create Marketing Plan",
     "description": "Draft a marketing plan for the upcoming quarter.",
     "employeeId": 105,
@@ -38,6 +43,7 @@
   },
   {
     "id": 6,
+    "obraId": 2,
     "title": "Employee Training",
     "description": "Organize and conduct training for new employees.",
     "employeeId": 106,
@@ -45,6 +51,7 @@
   },
   {
     "id": 7,
+    "obraId": 2,
     "title": "Budget Review",
     "description": "Review and adjust budget allocations for the project.",
     "employeeId": 107,
@@ -52,6 +59,7 @@
   },
   {
     "id": 8,
+    "obraId": 1,
     "title": "Customer Feedback Analysis",
     "description": "Analyze recent customer feedback to improve service.",
     "employeeId": 108,
@@ -59,6 +67,7 @@
   },
   {
     "id": 9,
+    "obraId": 1,
     "title": "Social Media Campaign",
     "description": "Plan and launch a new social media campaign.",
     "employeeId": 109,
@@ -66,6 +75,7 @@
   },
   {
     "id": 10,
+    "obraId": 3,
     "title": "Data Backup",
     "description": "Ensure all company data is securely backed up.",
     "employeeId": 110,
@@ -73,6 +83,7 @@
   },
   {
     "id": 11,
+    "obraId": 3,
     "title": "Prepare Presentation",
     "description": "Create a presentation for the upcoming board meeting.",
     "employeeId": 101,
@@ -80,6 +91,7 @@
   },
   {
     "id": 12,
+    "obraId": 4,
     "title": "Customer Support Follow-up",
     "description": "Follow up with customers who had support issues.",
     "employeeId": 102,
