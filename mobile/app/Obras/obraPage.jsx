@@ -237,8 +237,8 @@ const styles = StyleSheet.create({
   taskContainer: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-between",
-    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "space-between"
   },
   taskTitle: {
     fontWeight: "bold",

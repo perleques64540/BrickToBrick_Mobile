@@ -7,21 +7,16 @@ const TextBox = ({
   backgroundColor,
   borderColor,
   textcolor,
+  type,
+  value,
+  onChangeText
 }) => {
-  return (
-    <View>
-      <TextInput
-        style={[styles.input, { width }, { backgroundColor }, { borderColor }]}
-        placeholder={label}
-        placeholderTextColor={textcolor}
-      />
-    </View>
-  );
-};
+
+  const isMultiline = type === "multiline";
 
 const styles = StyleSheet.create({
   input: {
-    height: 50,
+    height: isMultiline ? 100 : 50,
     borderWidth: 1,
     borderRadius: 15,
     borderColor: "#333333",
@@ -29,7 +24,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 13,
     color: "#333333",
+    alignSelf: "flex-start",
   },
 });
+
+  return (
+    <View>
+      <TextInput
+        style={[styles.input, { width }, { backgroundColor }, { borderColor }]}
+        placeholder={label}
+        placeholderTextColor={textcolor}
+        value={value}
+        onChangeText={onChangeText}
+        multiline={type === "multiline"}
+      />
+    </View>
+  );
+};
 
 export default TextBox;

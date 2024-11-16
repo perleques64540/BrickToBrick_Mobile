@@ -78,8 +78,10 @@ const obras = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    flex: 1, // Take up all available space
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column", // Stack children vertically
   },
   searchContainer: {
     flexDirection: "row",
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
-    marginTop: 10,
+    marginTop: 15,
   },
   alignContainers: {
     alignItems: "center",

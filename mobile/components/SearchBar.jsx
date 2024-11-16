@@ -25,13 +25,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#e0e0e0",
-    borderRadius: 20,
     width: "100%",
-    height: 40,
   },
   input: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 16,
     color: "#000",
   },
   searchButton: {

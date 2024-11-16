@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { View, StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { Slot } from "expo-router";
 import FlashMessage from "react-native-flash-message";
 import TabBar from "@/components/TabBar";
@@ -34,7 +35,7 @@ const Layout = () => {
     <SafeAreaView style={styles.safeArea}>
       <PopUpContext.Provider value={{ showPopUp, hidePopUp }}>
         <View style={styles.container}>
-          <StatusBar
+          <StatusBar  translucent={true}
             barStyle={"dark-content"}
             backgroundColor={"#ffffff"}
           ></StatusBar>
@@ -71,11 +72,12 @@ const Layout = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#FAFAFA",
+    height: "100%",
+    backgroundColor: "#FFFFFF",
   },
   container: {
     flex: 1,
-    backgroundColor: "#FAFAFA",
+    backgroundColor: "#FFFFFF",
   },
 });
 

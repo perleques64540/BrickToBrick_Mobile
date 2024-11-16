@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, // Take up all available space
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 50,
     flexDirection: "column", // Stack children vertically
   },
   searchContainer: {
@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: 15,
+    marginTop: 15,
   },
   midContainer: {
     flexDirection: "row",

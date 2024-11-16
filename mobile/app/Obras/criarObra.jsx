@@ -9,18 +9,25 @@ import GreyButton from "../../components/GreyButton";
 import TextBox from "../../components/TextBox";
 import { usePopUp } from "../_layout"; // Import usePopUp
 
+import * as FileSystem from "expo-file-system";
+
 const AddWorkScreen = () => {
   const router = useRouter();
   const { showPopUp } = usePopUp(); // Get showPopUp function
 
+  const [title, setTitle] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
+
   const handleShowPopUp = () => {
     console.log("cancelar clicked");
     showPopUp({
-      title: "Maaucoo",
-      message: "Este serviço já não está disponível",
+      title: "Confirmar",
+      message: "Tem a certeza que deseja criar esta obra?",
       primaryBtn: {
-        label: "Ok",
-        onPress: () => console.log("Ok button pressed"),
+        label: "Sim",
+        onPress: () => handleAddWork(),
       },
       secondaryBtn: {
         label: "Cancelar",
@@ -29,43 +36,96 @@ const AddWorkScreen = () => {
     });
   };
 
+  const handleAddWork = async () => {
+    const filename = `mobile/data/obras.json`;
+  
+    const newWork = {
+      id: Date.now(),
+      title,
+      info: {
+        location: address,
+        hours: "0", // Default hours
+        paid: false, // Default paid status
+      },
+      done: false,
+      quotes: [],
+      tasks: [],
+      employees: [],
+    };
+  
+    try {
+
+      const RNFS = require('react-native-fs');
+      const path = 'mobile/data/obras.json';
+
+      RNFS.writeFile(path, newWork, 'utf8')
+  .then((success) => {
+    console.log('FILE WRITTEN!');
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+  
+      console.log("Work added successfully!");
+      router.push("/Obras/obraPage"); // Redirect to the obra page
+    } catch (error) {
+      console.error("Error adding work:", error);
+    }
+  };
+
+  const handleClearInputs = () => {
+    setTitle("");
+    setClientName("");
+    setAddress("");
+    setDescription("");
+  }
+
   return (
     <View style={styles.container}>
-      <FontAwesomeIcon style={styles.icon} icon={faHammer} size={46} />
+      <FontAwesomeIcon style={styles.icon} icon={faHammer} size={70} />
       <Text style={styles.title}>Adicionar Obra</Text>
 
       <TextBox
         backgroundColor={"white"}
-        label={"Titulo"}
+        label={"Título"}
         width={"100%"}
         textcolor={"#333"}
+        value={title}
+        onChangeText={setTitle}
+      />
+      <TextBox
+        backgroundColor={"white"}
+        label={"Nome Cliente"}
+        width={"100%"}
+        textcolor={"#333"}
+        value={clientName}
+        onChangeText={setClientName}
+      />
+      <TextBox
+        backgroundColor={"white"}
+        label={"Morada"}
+        width={"100%"}
+        textcolor={"#333"}
+        value={address}
+        onChangeText={setAddress}
       />
       <TextBox
         backgroundColor={"white"}
         label={"Descrição"}
         width={"100%"}
         textcolor={"#333"}
-      />
-      <TextBox
-        backgroundColor={"white"}
-        label={"Outras informações"}
-        width={"100%"}
-        textcolor={"#333"}
-      />
-      <TextBox
-        backgroundColor={"white"}
-        label={"Relacionadas com a obra"}
-        width={"100%"}
-        textcolor={"#333"}
+        type={"multiline"}
+        value={description}
+        onChangeText={setDescription}
       />
 
       <OrangeButton
         label={"Confirmar"}
-        onPress={() => router.push("tabs/tasks")}
+        onPress={handleShowPopUp}
       />
       <GreyButton
         label={"Cancelar"}
-        onPress={handleShowPopUp} // Show PopUp on Cancel button press
+        onPress={handleClearInputs}
       />
     </View>
   );
@@ -73,14 +133,12 @@ const AddWorkScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingHorizontal: 25,
     height: "100%",
     width: "100%",
     justifyContent: "center",
   },
   icon: {
-    width: 120,
-    height: 120,
     alignSelf: "center",
     marginBottom: 30,
     color: "#333333",

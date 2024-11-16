@@ -46,12 +46,13 @@ const notifications = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#e7efef',
-    padding: 20,
+    flex: 1, // Take up all available space
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column", // Stack children vertically
   },
   listContent: {
-    paddingBottom: 100, // To avoid being cut off by the bottom tab
+    paddingBottom: 50, // To avoid being cut off by the bottom tab
   },
   bottomContainer: {
     position: 'absolute',
