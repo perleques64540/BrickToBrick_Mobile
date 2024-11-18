@@ -41,7 +41,7 @@ const TabBar = () => {
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => router.push("/User/criarUser")}>
+      <TouchableOpacity onPress={() => router.push("/tabs/tasks")}>
         <FontAwesomeIcon
           icon={faListCheck}
           style={styles.bottomNavButtons}
