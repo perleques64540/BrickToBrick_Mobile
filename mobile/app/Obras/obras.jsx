@@ -53,14 +53,11 @@ const obras = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <SearchBar
-          label={"Pesquisar"}
-          searchText={searchText}
-          setSearchText={setSearchText}
-        />
-      </View>
-
+      <SearchBar
+        label={"Pesquisar"}
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Obras</Text>
       </View>
@@ -82,14 +79,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 50,
     flexDirection: "column", // Stack children vertically
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "space-between",
-    backgroundColor: "#e0e0e0",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
   },
   input: {
     flex: 1,

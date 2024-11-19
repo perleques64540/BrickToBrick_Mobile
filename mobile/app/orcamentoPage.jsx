@@ -9,19 +9,19 @@ import * as DocumentPicker from 'expo-document-picker';
 
 const [data, setData] = useState([
   {
-    id: '1',
-    title: 'Substituição de Janela',
-    description: '230€ qualquer coisa que seja importante.',
+    id: "1",
+    title: "Substituição de Janela",
+    description: "230€ qualquer coisa que seja importante.",
   },
   {
-    id: '2',
-    title: 'Remoção de Telhado',
-    description: 'Uma descrição e um preço talvez',
+    id: "2",
+    title: "Remoção de Telhado",
+    description: "Uma descrição e um preço talvez",
   },
   {
-    id: '3',
-    title: 'Remoção de Telhado',
-    description: 'Uma descrição e um preço talvez',
+    id: "3",
+    title: "Remoção de Telhado",
+    description: "Uma descrição e um preço talvez",
   },
 ]);
 
@@ -89,7 +89,7 @@ const renderNotificationItem = ({ item }) => (
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require('../Images/backArrow.png')}
+            source={require("../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
@@ -97,7 +97,8 @@ const renderNotificationItem = ({ item }) => (
       <View style={styles.headerTextPosition}>
         <Text style={styles.headerTitle}>Substituição de Janela</Text>
         <Text style={styles.headerDescription}>
-          Descrição do orçamento em questão e outras informações que talvez sejam relevantes em relação a este orçamento
+          Descrição do orçamento em questão e outras informações que talvez
+          sejam relevantes em relação a este orçamento
         </Text>
       </View>
 
@@ -133,13 +134,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   headerTitle: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   headerDescription: {
     fontSize: 16,
@@ -147,13 +148,13 @@ const styles = StyleSheet.create({
   headerTextPosition: {
     width: 350,
     height: 90,
-    alignContent: 'center',
-    alignSelf: 'center',
-    alignItems: 'flex-start',
+    alignContent: "center",
+    alignSelf: "center",
+    alignItems: "flex-start",
     marginBottom: 30,
   },
   backArrowImage: {
-    resizeMode: 'contain',
+    resizeMode: "contain",
     height: 20,
     width: 20,
   },
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonContainer: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 });
 

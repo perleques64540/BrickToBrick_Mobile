@@ -25,7 +25,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#e0e0e0",
-    width: "100%",
+    width: "98%",
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginStart: "1%",
+    marginVertical: 5,
+    borderRadius: 15,
   },
   input: {
     flex: 1,

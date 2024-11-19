@@ -6,37 +6,12 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchBar from "../components/SearchBar";
 import ContainerImage from "../components/ContainerImage";
 import { useRouter } from "expo-router";
 import obrasData from "../data/obras.json"; // Import your obras data JSON file
-
-const DATA = [
-  {
-    id: "1",
-    path: require("../Images/House.png"),
-    labelTitle: "Rua do poço azul",
-    labelText: "Outras informações \nTarefas concluídas: 12/24",
-  },
-  {
-    id: "2",
-    path: require("../Images/House.png"),
-    labelTitle: "Rua do Carvalho",
-    labelText: "Outras informações \nTarefas concluídas: 5/20",
-  },
-  {
-    id: "3",
-    path: require("../Images/House.png"),
-    labelTitle: "Avenida das Flores",
-    labelText: "Outras informações \nTarefas concluídas: 8/15",
-  },
-  {
-    id: "4",
-    path: require("../Images/House.png"),
-    labelTitle: "Rua do Sol",
-    labelText: "Outras informações \nTarefas concluídas: 10/22",
-  },
-];
+import tasksData from "../data/tasks.json"; // Import your obras data JSON file
 
 const pathImg = require("../Images/House.png");
 
@@ -44,10 +19,12 @@ const obras = () => {
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
   const [obras, setObras] = useState([]); // State to hold all obras data
+  const [tasks, setTasks] = useState([]); // State to hold all obras data
 
   // Load obra data (from local file or API)
   useEffect(() => {
     setObras(obrasData); // Set obras data to state from imported JSON
+    setTasks(tasksData); // Set tasks data to state from imported JSON
   }, []);
 
   // Filter obras based on search text
@@ -59,6 +36,18 @@ const obras = () => {
     setObras(filteredObras);
     console.log(obras);
   }, [searchText]);
+
+  const TaskItem = ({ title, description, icon, onPress }) => (
+    <TouchableOpacity style={styles.item} onPress={onPress}>
+      <View style={styles.iconContainer}>
+        <Icon name={icon} size={30} color="#fff" />
+      </View>
+      <View style={styles.itemContent}>
+        <Text style={styles.itemTitle}>{title}</Text>
+        <Text style={styles.itemDescription}>{description}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -82,43 +71,49 @@ const obras = () => {
   return (
     <View style={styles.container}>
       {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <SearchBar
-          label={"Pesquisar"}
-          searchText={searchText}
-          setSearchText={setSearchText}
-        />
-      </View>
-
+      <SearchBar
+        label={"Pesquisar"}
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       {/* Obras Header */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Obras</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/Obras/obras")}>
           <Text style={styles.headerLink}>Ver todas</Text>
         </TouchableOpacity>
       </View>
 
       {/* Obras List */}
 
-      <FlatList
-        data={obras} // The data array
-        renderItem={renderItem} // Render each item
-        keyExtractor={(item) => item.id} // Unique key for each item
-        contentContainerStyle={styles.listContent} // Styling the list container
-      />
+      <View style={styles.obrasListContainer}>
+        <FlatList
+          data={obras} // The data array
+          renderItem={renderItem} // Render each item
+          keyExtractor={(item) => item.id} // Unique key for each item
+          contentContainerStyle={styles.listContent} // Styling the list container
+        />
+      </View>
 
       {/* Atualizações Header */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>Atualizações</Text>
-        <TouchableOpacity>
+        <Text style={styles.headerTitle}>Tarefas</Text>
+        <TouchableOpacity onPress={() => router.push("/tabs/tasks")}>
           <Text style={styles.headerLink}>Ver todas</Text>
         </TouchableOpacity>
       </View>
 
       {/* Atualizações List */}
       <FlatList
-        data={DATA}
-        renderItem={renderItem}
+        data={tasks}
+        renderItem={({ item }) => (
+          <TaskItem
+            title={item.title}
+            description={item.description}
+            icon={"task"}
+            onPress={() => alert(`Tarefa selecionada: ${item.id}`)}
+          />
+        )}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
       />
@@ -132,14 +127,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 50,
     flexDirection: "column", // Stack children vertically
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "space-between",
-    backgroundColor: "#e0e0e0",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
   },
   input: {
     flex: 1,
@@ -161,6 +148,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 20,
+  },
+  obrasListContainer: {
+    height: "35%",
   },
   headerTitle: {
     fontSize: 25,
@@ -218,6 +208,41 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   updateDescription: {
+    fontSize: 14,
+    color: "#666",
+  },
+  iconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#FF7900",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  item: {
+    flexDirection: "row",
+    padding: 15,
+    backgroundColor: "white",
+    borderRadius: 10,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  itemContent: {
+    flex: 1,
+  },
+  itemTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 5,
+  },
+  itemDescription: {
     fontSize: 14,
     color: "#666",
   },

@@ -18,14 +18,14 @@ const obraTarefas = () => {
   const { id } = useLocalSearchParams();
   const { title } = useLocalSearchParams();
   const { state } = useLocalSearchParams();
-  const [obras, setObras] = useState([]); // State to hold the obras data
+  const [task, setTask] = useState([]); // State to hold the obras data
 
   const fetchTaskById = (id) => {
     const foundTask = taskData.filter((item) => item.obraId == id);
     if (foundTask) {
-      setObras(foundTask);
+      setTask(foundTask);
     } else {
-      setObras(null);
+      setTask(null);
     }
   };
 
@@ -34,9 +34,9 @@ const obraTarefas = () => {
       (item) => item.done == state && item.obraId == id
     );
     if (foundTask) {
-      setObras(foundTask);
+      setTask(foundTask);
     } else {
-      setObras(null);
+      setTask(null);
     }
   };
 
@@ -87,7 +87,7 @@ const obraTarefas = () => {
       </View>
       <View style={styles.taskContainer}>
         <FlatList
-          data={obras}
+          data={task}
           renderItem={renderTaskItem}
           keyExtractor={(item) => item.id}
         />
