@@ -1,9 +1,9 @@
 import { View, Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
 
-const ConteinerImage = ({ path, labelTitle, labelText }) => {
+const ContainerImage = ({ path, labelTitle, labelText }) => {
   return (
-    <View style={styles.ConteinerImage}>
+    <View style={styles.ContainerImage}>
       <Image
         source={typeof path === 'string' ? { uri: path } : path} // Handles both remote and local images
         style={styles.Image}
@@ -17,7 +17,7 @@ const ConteinerImage = ({ path, labelTitle, labelText }) => {
 };
 
 const styles = StyleSheet.create({
-  ConteinerImage: {
+  ContainerImage: {
     backgroundColor: '#D3D3D3',
     padding: 10,
     borderRadius: 13,
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ConteinerImage;
+export default ContainerImage;

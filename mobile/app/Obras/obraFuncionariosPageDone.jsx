@@ -22,7 +22,7 @@ const obraFuncionariosPageDone = () => {
 
         <Text style={styles.subTitle}>Funcionário adicionado com sucesso.</Text>
 
-        <View style={styles.buttonConteiner}>  
+        <View style={styles.buttonContainer}>  
             <TouchableOpacity onPress={() => router.push('../obraFuncionariosPage')}>
                 <OrangeButton
                     width={360}
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 40,
   },
-  buttonConteiner:{
+  buttonContainer:{
     width: 390,
     height: 120,
     alignContent: 'center',

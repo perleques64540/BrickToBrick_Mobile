@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 3,
   },
-  buttonConteiner: {
+  buttonContainer: {
     width: 390,
     height: 125,
     alignContent:'center',

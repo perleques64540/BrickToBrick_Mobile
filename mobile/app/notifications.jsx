@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import ConteinerDelete from '../components/ConteinerDelete';
+import ContainerDelete from '../components/ContainerDelete';
 
 const notifications = () => {
   const [data, setData] = useState([
@@ -20,7 +20,7 @@ const notifications = () => {
   };
 
   const renderNotificationItem = ({ item }) => (
-    <ConteinerDelete
+    <ContainerDelete
       labelTitle={item.title}
       labelText={item.description}
       onPress={() => handleDeleteItem(item.id)}  // Call the delete handler on press

@@ -7,7 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import SearchBar from "../components/SearchBar";
-import ConteinerImage from "../components/ConteinerImage";
+import ContainerImage from "../components/ContainerImage";
 import { useRouter } from "expo-router";
 import obrasData from "../data/obras.json"; // Import your obras data JSON file
 
@@ -71,7 +71,7 @@ const obras = () => {
         })
       }
     >
-      <ConteinerImage
+      <ContainerImage
         path={pathImg}
         labelTitle={item.title}
         labelText={item.title}

@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import Conteiner from "../../components/Conteiner";
+import Container from "../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const DATA = [
   {
@@ -32,12 +33,12 @@ const obraOrcamentoPage = () => {
       style={styles.orcamento}
       onPress={() => router.push("../orcamentoPage")}
     >
-      <Conteiner labelTitle={item.title} labelText={item.description} />
+      <Container labelTitle={item.title} labelText={item.description} />
     </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
@@ -62,7 +63,7 @@ const obraOrcamentoPage = () => {
 
       <Text style={styles.budgetsHeader}>Orçamentos</Text>
 
-      <View style={styles.alignConteiners}>
+      <View style={styles.alignContainers}>
         <FlatList
           data={DATA}
           style={styles.orcamento}
@@ -71,14 +72,16 @@ const obraOrcamentoPage = () => {
         />
       </View>
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column",
   },
   image: {
     height: 90,
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
-  alignConteiners: {
+  alignContainers: {
     alignItems: "center",
     alignContent: "center",
     alignSelf: "center",

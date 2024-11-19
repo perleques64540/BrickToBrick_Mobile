@@ -22,7 +22,7 @@ const obraFuncionariosPage = () => {
 
         <Text style={styles.title}>Adicionar Funcionário</Text>
 
-        <View style={styles.textInputConteiner}>        
+        <View style={styles.textInputContainer}>        
             <TextBox
                 label ={'Email ou nº telemóvel'}
                 width={360}
@@ -32,7 +32,7 @@ const obraFuncionariosPage = () => {
             />
         </View>
 
-        <View style={styles.buttonConteiner}>  
+        <View style={styles.buttonContainer}>  
             <TouchableOpacity onPress={() => router.push('../obraFuncionariosPageDone')}>
                 <OrangeButton
                     width={360}
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  textInputConteiner:{
+  textInputContainer:{
     width: 390,
     height: 90,
     alignContent: 'center',
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 40,
   },
-  buttonConteiner:{
+  buttonContainer:{
     width: 390,
     height: 120,
     alignContent: 'center',

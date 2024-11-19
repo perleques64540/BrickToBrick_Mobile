@@ -3,9 +3,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const ConteinerDelete = ({labelTitle,labelText,...rest}) => {
+const ContainerDelete = ({labelTitle,labelText,...rest}) => {
     return (
-        <View style={styles.ConteinerDelete}> 
+        <View style={styles.ContainerDelete}> 
             <View style={styles.content}>
                 <Text style={styles.TitleText}>
                     {labelTitle}
@@ -22,7 +22,7 @@ const ConteinerDelete = ({labelTitle,labelText,...rest}) => {
 }
 
 const styles = StyleSheet.create({
-    ConteinerDelete: {
+    ContainerDelete: {
         backgroundColor: '#D3D3D3',
         padding: 10,
         borderRadius: 15,
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ConteinerDelete;
+export default ContainerDelete;

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import ConteinerDelete from '../components/ConteinerDelete';
+import ContainerDelete from '../components/ContainerDelete';
 import OrangeButton from '../components/OrangeButton';
 import { useRouter } from 'expo-router';
+import { usePopUp } from "./_layout"; // Import usePopUp
+import * as DocumentPicker from 'expo-document-picker';
 
-const DATA = [
+
+const [data, setData] = useState([
   {
     id: '1',
     title: 'Substituição de Janela',
@@ -20,27 +23,71 @@ const DATA = [
     title: 'Remoção de Telhado',
     description: 'Uma descrição e um preço talvez',
   },
-];
+]);
 
 const orcamentoPage = () => {
   const router = useRouter();
+  const { showPopUp } = usePopUp(); // Get showPopUp function
 
   // Calculate container height based on number of items (e.g., 100px per item, up to a max of 300px)
-  const containerHeight = Math.min(DATA.length * 125);
+  const containerHeight = Math.min(data.length * 125);
 
   const renderBudgetItem = ({ item }) => (
     <TouchableOpacity>
-      <ConteinerDelete
+      <ContainerDelete
         labelTitle={item.title}
         labelText={item.description}
       /> 
     </TouchableOpacity>
   );
 
+  const [selectedFile, setSelectedFile] = React.useState(null);
+
+const handleShowPopUp = () => {
+  showPopUp({
+    title: "Adicionar Documento",
+    message: "Escolha um ficheiro do seu dispositivo.",
+    primaryBtn: {
+      label: "Selecionar Ficheiro",
+      onPress: async () => {
+        const result = await DocumentPicker.getDocumentAsync({
+          type: "*/*",//se calhar só devíamos aceitar pdfs
+          copyToCacheDirectory: true,
+        });
+
+        if (result.type === "success") {
+          setSelectedFile(result);
+          console.log("File selected:", result);
+        } else {
+          console.log("File selection canceled");
+        }
+      },
+    },
+    secondaryBtn: {
+      label: "Cancelar",
+      onPress: () => console.log("Cancel button pressed"),
+    },
+  });
+};
+
+const handleDeleteItem = (itemId) => {
+  // Remove the item from the list by filtering it out
+  const updatedData = data.filter(item => item.id !== itemId);
+  setData(updatedData);
+};
+
+const renderNotificationItem = ({ item }) => (
+  <ContainerDelete
+    labelTitle={item.title}
+    labelText={item.description}
+    onPress={() => handleDeleteItem(item.id)}  // Call the delete handler on press
+  />
+);  
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('../obraOrcamentoPage')}>
+        <TouchableOpacity onPress={() => router.back()}>
           <Image
             source={require('../Images/backArrow.png')}
             style={styles.backArrowImage}
@@ -56,10 +103,10 @@ const orcamentoPage = () => {
 
       <Text style={styles.headerTitle}>Documentos</Text>
 
-      <View style={[styles.alignConteiners, { height: containerHeight }]}>
+      <View style={[styles.alignContainers, { height: containerHeight }]}>
         <FlatList
-          data={DATA}
-          renderItem={renderBudgetItem}
+          data={data}
+          renderItem={renderNotificationItem}
           keyExtractor={(item) => item.id}
         />
       </View>
@@ -70,6 +117,7 @@ const orcamentoPage = () => {
             width={250}
             height={50}
             label={'Adicionar documento'}
+            onPress={handleShowPopUp}
           />
         </TouchableOpacity>
       </View>
@@ -80,8 +128,9 @@ const orcamentoPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f8f8',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column",
   },
   header: {
     alignItems: 'center',
@@ -108,12 +157,12 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
-  alignConteiners: {
-    alignItems: 'center',
-    alignSelf: 'center',
+  alignContainers: {
+    alignItems: "center",
+    alignContent: "center",
+    alignSelf: "center",
+    width: "100%",
     marginTop: 10,
-    paddingHorizontal: 10,
-    width: 390,
   },
   buttonContainer: {
     alignSelf: 'center',

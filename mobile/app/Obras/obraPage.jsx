@@ -7,8 +7,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ConteinerDelete from "../../components/ConteinerDelete";
-import Conteiner from "../../components/Conteiner";
+import ContainerDelete from "../../components/ContainerDelete";
+import Container from "../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import obrasData from "../../data/obras.json";
 
@@ -49,7 +49,7 @@ const obraPage = () => {
   const router = useRouter();
 
   const renderTaskItem = ({ item }) => (
-    <ConteinerDelete labelTitle={item.title} labelText={item.description} />
+    <ContainerDelete labelTitle={item.title} labelText={item.description} />
   );
 
   if (!obra) {
@@ -83,7 +83,7 @@ const obraPage = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Conteiner
+        <Container
           labelTitle={"Informações"}
           labelText={`Morada: ${obra.info.location} \nHoras despendidas: ${
             obra.info.hours
@@ -168,7 +168,9 @@ const obraPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column"
   },
   header: {
     alignItems: "center",

@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ConteinerDelete from "../../components/ConteinerDelete";
+import ContainerDelete from "../../components/ContainerDelete";
 import OrangeButton from "../../components/OrangeButton";
 import OrangeEmptyButton from "../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -46,7 +46,7 @@ const obraTarefas = () => {
   }, []);
 
   const renderTaskItem = ({ item }) => (
-    <ConteinerDelete labelTitle={item.title} labelText={item.description} />
+    <ContainerDelete labelTitle={item.title} labelText={item.description} />
   );
 
   return (
@@ -108,7 +108,9 @@ const obraTarefas = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column"
   },
   header: {
     alignItems: "center",
@@ -141,6 +143,7 @@ const styles = StyleSheet.create({
   taskContainer: {
     marginTop: -20,
     alignItems: "center",
+    flex: 1,
     height: 450,
   },
   buttonContainer: {
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   bottomButton: {
-    marginTop: -25,
+    marginBottom: 20,
   },
 });
 

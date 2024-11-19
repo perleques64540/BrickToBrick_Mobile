@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import Conteiner from "../../components/Conteiner";
+import Container from "../../components/Container";
 import OrangeButton from "../../components/OrangeButton";
 import { useRouter } from "expo-router";
 import { YellowBox } from "react-native-web";
@@ -43,7 +43,7 @@ const obraFuncionarios = () => {
   const router = useRouter();
 
   const renderItem = ({ item }) => (
-    <Conteiner
+    <Container
       path={item.path}
       labelTitle={item.title}
       labelText={item.description}
@@ -78,7 +78,7 @@ const obraFuncionarios = () => {
 
       <Text style={styles.headerTitle}>Funcionários</Text>
 
-      <View style={styles.listconteiner}>
+      <View style={styles.listContainer}>
         <FlatList
           data={DATA}
           renderItem={renderItem}
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 5,
   },
-  listconteiner: {
+  listContainer: {
     width: 390,
     height: 450,
     alignSelf: "center",

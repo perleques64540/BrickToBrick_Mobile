@@ -1,9 +1,9 @@
 import { View, StyleSheet, Text } from "react-native";
 import React from "react";
 
-const Conteiner = ({ labelTitle, labelText }) => {
+const Container = ({ labelTitle, labelText }) => {
   return (
-    <View style={[styles.Conteiner]}>
+    <View style={[styles.Container]}>
       <Text style={styles.TitleText}>{labelTitle}</Text>
       <Text style={styles.Text}>{labelText}</Text>
     </View>
@@ -11,7 +11,7 @@ const Conteiner = ({ labelTitle, labelText }) => {
 };
 
 const styles = StyleSheet.create({
-  Conteiner: {
+  Container: {
     backgroundColor: "#D3D3D3",
     borderRadius: 15,
     width: "100%",
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Conteiner;
+export default Container;

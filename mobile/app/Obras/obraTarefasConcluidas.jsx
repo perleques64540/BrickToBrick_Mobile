@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ConteinerDelete from "../../components/ConteinerDelete";
+import ContainerDelete from "../../components/ContainerDelete";
 import OrangeButton from "../../components/OrangeButton";
 import OrangeEmptyButton from "../../components/OrangeEmptyButton";
 import { useRouter } from "expo-router";
@@ -30,7 +30,7 @@ const obraTarefasConcluidas = () => {
   const router = useRouter();
 
   const renderTaskItem = ({ item }) => (
-    <ConteinerDelete labelTitle={item.title} labelText={item.description} />
+    <ContainerDelete labelTitle={item.title} labelText={item.description} />
   );
 
   return (
