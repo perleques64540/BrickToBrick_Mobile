@@ -97,7 +97,16 @@ const obraTarefas = () => {
         <TouchableOpacity>
           <OrangeButton
             label={"Adicionar tarefa"}
-            onPress={() => router.push("Pages/Obras/Tarefas/obraTarefaAdd")}
+            onPress={() =>
+              router.push({
+                pathname: "/Pages/Obras/Tarefas/obraTarefaAdd",
+                params: {
+                  id: id, // Pass obra ID to the details page
+                  title: title,
+                  state: state,
+                },
+              })
+            }
           />
         </TouchableOpacity>
       </View>

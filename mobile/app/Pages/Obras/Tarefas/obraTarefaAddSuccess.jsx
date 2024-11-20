@@ -1,10 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 const obraTarefaAddSuccess = () => {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
+  const { title } = useLocalSearchParams();
+  const { state } = useLocalSearchParams();
+
 
   return (
     <View style={styles.container}>
@@ -27,7 +31,16 @@ const obraTarefaAddSuccess = () => {
               label={"Voltar"}
               width={330}
               height={50}
-              onPress={() => router.push("Pages/Obras/Tarefas/obraTarefas")}
+              onPress={() =>
+                router.push({
+                  pathname: "/Pages/Obras/Tarefas/obraTarefas",
+                  params: {
+                    id: id, // Pass obra ID to the details page
+                    title: title,
+                    state: state,
+                  },
+                })
+              }
             />
           </TouchableOpacity>
         </View>

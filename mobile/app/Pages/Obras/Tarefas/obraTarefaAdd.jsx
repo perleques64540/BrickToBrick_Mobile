@@ -3,10 +3,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 const obraTarefaAdd = () => {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
+  const { title } = useLocalSearchParams();
+  const { state } = useLocalSearchParams();
 
   return (
     <View style={styles.container}>
@@ -43,7 +46,14 @@ const obraTarefaAdd = () => {
             width={330}
             height={50}
             onPress={() =>
-              router.push("Pages/Obras/Tarefas/obraTarefaAddSuccess")
+              router.push({
+                pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
+                params: {
+                  id: id, // Pass obra ID to the details page
+                  title: title,
+                  state: state,
+                },
+              })
             }
           />
         </TouchableOpacity>
@@ -54,7 +64,16 @@ const obraTarefaAdd = () => {
             label={"Cancelar"}
             width={330}
             height={50}
-            onPress={() => router.push("Pages/Obras/Tarefas/obraTarefas")}
+            onPress={() =>
+              router.push({
+                pathname: "/Pages/Obras/Tarefas/obraTarefas",
+                params: {
+                  id: id, // Pass obra ID to the details page
+                  title: title,
+                  state: state,
+                },
+              })
+            }
           />
         </TouchableOpacity>
       </View>
