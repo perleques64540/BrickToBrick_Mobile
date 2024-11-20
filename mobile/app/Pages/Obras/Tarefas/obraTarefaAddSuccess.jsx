@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import { useRouter } from "expo-router";
 
-const obraTarefaAddSucess = () => {
+const obraTarefaAddSuccess = () => {
   const router = useRouter();
 
   return (
@@ -14,16 +14,23 @@ const obraTarefaAddSucess = () => {
           source={require("../../../../Images/tasksIcon.png")}
         />
       </View>
-      <View style={styles.headerPosition}>
-        <Text style={styles.headerTitle}>Feito!</Text>
-        <Text style={styles.subHeaderTitle}>
-          Tarefa adicionada com sucesso.
-        </Text>
-      </View>
-      <View style={styles.bottomButton}>
-        <TouchableOpacity onPress={() => router.push("../obraTarefas")}>
-          <OrangeButton label={"Voltar"} width={330} height={50} />
-        </TouchableOpacity>
+      <View style={styles.textAndButton}>
+        <View style={styles.headerPosition}>
+          <Text style={styles.headerTitle}>Feito!</Text>
+          <Text style={styles.subHeaderTitle}>
+            Tarefa adicionada com sucesso.
+          </Text>
+        </View>
+        <View style={styles.bottomButton}>
+          <TouchableOpacity onPress={() => router.push("../obraTarefas")}>
+            <OrangeButton
+              label={"Voltar"}
+              width={330}
+              height={50}
+              onPress={() => router.push("Pages/Obras/Tarefas/obraTarefas")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -59,9 +66,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   bottomButton: {
-    alignItems: "center",
     marginBottom: 15,
+  },
+  textAndButton: {
+    marginTop: 20,
   },
 });
 
-export default obraTarefaAddSucess;
+export default obraTarefaAddSuccess;

@@ -37,15 +37,25 @@ const obraTarefaAdd = () => {
       </View>
 
       <View style={styles.bottomButton}>
-        <TouchableOpacity
-          onPress={() => router.push("../obraTarefaAddSuccess")}
-        >
-          <OrangeButton label={"Confirmar"} width={330} height={50} />
+        <TouchableOpacity>
+          <OrangeButton
+            label={"Confirmar"}
+            width={330}
+            height={50}
+            onPress={() =>
+              router.push("Pages/Obras/Tarefas/obraTarefaAddSuccess")
+            }
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.bottomButton}>
-        <TouchableOpacity onPress={() => router.push("../obraTarefas")}>
-          <GreyButton label={"Cancelar"} width={330} height={50} />
+        <TouchableOpacity>
+          <GreyButton
+            label={"Cancelar"}
+            width={330}
+            height={50}
+            onPress={() => router.push("Pages/Obras/Tarefas/obraTarefas")}
+          />
         </TouchableOpacity>
       </View>
     </View>

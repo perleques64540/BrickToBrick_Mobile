@@ -94,10 +94,10 @@ const obraTarefas = () => {
       </View>
 
       <View style={styles.bottomButton}>
-        <TouchableOpacity onPress={() => router.push("Obras/obraTarefaAdd")}>
+        <TouchableOpacity>
           <OrangeButton
             label={"Adicionar tarefa"}
-            onPress={() => router.push("Obras/obraTarefaAdd")}
+            onPress={() => router.push("Pages/Obras/Tarefas/obraTarefaAdd")}
           />
         </TouchableOpacity>
       </View>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 50,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   header: {
     alignItems: "center",
