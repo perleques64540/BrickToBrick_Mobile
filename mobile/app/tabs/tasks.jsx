@@ -9,7 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import tasksData from "../../data/tasks.json"; // Import your tasks data JSON file
+import tasksData from "../../data/tasks.json";
 import SearchBar from "../../components/SearchBar";
 import OrangeEmptyButton from "../../components/OrangeEmptyButton";
 
@@ -27,33 +27,30 @@ const TaskItem = ({ title, description, icon, onPress }) => (
 
 const App = () => {
   const [searchText, setSearchText] = useState("");
-  const [task, setTask] = useState(tasksData); // Initialize with all tasks
+  const [tasks, setTasks] = useState(tasksData);
   const [selectedFilter, setSelectedFilter] = useState(null);
 
-  const filteredTasks = tasksData.filter((task) =>
-    task.description.toLowerCase().includes(searchText.toLowerCase())
-  );
+  useEffect(() => {
+    let filteredTasks = tasksData.filter((task) =>
+      task.description.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    if (selectedFilter !== null) {
+      filteredTasks = filteredTasks.filter((task) => task.done === selectedFilter);
+    }
+
+    setTasks(filteredTasks);
+  }, [searchText, selectedFilter]);
 
   const filterByState = (state) => {
-    if (selectedFilter === state) {
-      setTask(tasksData); // Reset to all tasks
-      setSelectedFilter(null); // Deselect filter
-    } else {
-      const foundTask = tasksData.filter((item) => item.done === state);
-      setTask(foundTask);
-      setSelectedFilter(state); // Set selected filter
-    }
+    // If the same filter is selected, deselect it
+    setSelectedFilter(selectedFilter === state ? null : state);
   };
-
-  useEffect(() => {
-    setTask(filteredTasks);
-  }, [searchText]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Text style={styles.title}>Tarefas</Text>
-        {/* Search Bar */}
         <SearchBar
           label={"Pesquisar"}
           searchText={searchText}
@@ -62,36 +59,30 @@ const App = () => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => filterByState(true)}
-            style={[
-              styles.button,
-              selectedFilter === true,
-            ]}
+            style={styles.button}
           >
             <OrangeEmptyButton
-              label={"Concluidas"}
-              width={160}
+              label={"Concluídas"}
+              width={150}
               height={45}
-              selected={ !selectedFilter }
+              selected={selectedFilter === true}
             />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => filterByState(false)}
-            style={[
-              styles.button,
-              selectedFilter === false,
-            ]}
+            style={styles.button}
           >
             <OrangeEmptyButton
-              label={"Por fazer"}
-              width={160}
+              label={"Por fazer"} 
+              width={150}
               height={45}
-              selected={ selectedFilter }
+              selected={selectedFilter === false}
             />
           </TouchableOpacity>
         </View>
         <FlatList
           style={styles.listStyle}
-          data={task}
+          data={tasks}
           contentContainerStyle={styles.flatListContent}
           renderItem={({ item }) => (
             <TaskItem
@@ -120,42 +111,14 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight || 0,
     paddingHorizontal: 16,
   },
-  header: {
-    padding: 20,
-    alignItems: "center",
-    marginBottom: 20,
-  },
   title: {
     fontSize: 36,
     fontWeight: "bold",
     textAlign: "center",
     marginVertical: 10,
   },
-  addButton: {
-    width: "80%",
-    backgroundColor: "#3498db",
-    paddingVertical: 15,
-    borderRadius: 25,
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  addButtonText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "600",
-  },
-  subTitle: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "black",
-    alignSelf: "flex-start",
-    marginBottom: 10,
-  },
   button: {
     borderRadius: 5,
-  },
-  selectedButton: {
-    backgroundColor: "orange",
   },
   listStyle: {
     marginBottom: 20,

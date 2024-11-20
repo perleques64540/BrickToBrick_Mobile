@@ -18,32 +18,22 @@ const obraTarefas = () => {
   const { id } = useLocalSearchParams();
   const { title } = useLocalSearchParams();
   const { state } = useLocalSearchParams();
-  const [task, setTask] = useState([]); // State to hold the obras data
-
-  const fetchTaskById = (id) => {
-    const foundTask = taskData.filter((item) => item.obraId == id);
-    if (foundTask) {
-      setTask(foundTask);
-    } else {
-      setTask(null);
-    }
-  };
-
-  const filterByState = (state) => {
-    const foundTask = taskData.filter(
-      (item) => item.done == state && item.obraId == id
-    );
-    if (foundTask) {
-      setTask(foundTask);
-    } else {
-      setTask(null);
-    }
-  };
+  const [task, setTasks] = useState(taskData.filter((item) => item.obraId == id)); // State to hold the obras data
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   // Load obra data (from local file or API)
   useEffect(() => {
-    fetchTaskById(id); // Set obras data to state from imported JSON
-  }, []);
+    let aux = taskData.filter((item) => item.obraId == id);
+    if (selectedFilter !== null) {
+      aux = aux.filter((task) => task.done === selectedFilter);
+    }
+    setTasks(aux);
+  }, [selectedFilter]);
+
+  const filterByState = (state) => {
+    // If the same filter is selected, deselect it
+    setSelectedFilter(selectedFilter === state ? null : state);
+  };
 
   const renderTaskItem = ({ item }) => (
     <ContainerDelete labelTitle={item.title} labelText={item.description} />
@@ -67,7 +57,7 @@ const obraTarefas = () => {
         <View style={styles.headerPosition}>
           <Text style={styles.headerTitle}>{title}</Text>
           <Text style={styles.headerDescription}>
-            Estado: {state ? "em progresso" : "concluida"}
+            Estado: {state ? "em progresso" : "concluída"}
           </Text>
           <Text style={styles.headerDescription}>
             Tarefas concluídas: 12/24
@@ -79,10 +69,20 @@ const obraTarefas = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => filterByState(true)}>
-          <OrangeEmptyButton label={"Concluidas"} width={160} height={45} />
+          <OrangeEmptyButton
+            label={"Concluídas"}
+            width={160}
+            height={45}
+            selected= {selectedFilter === true}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => filterByState(false)}>
-          <OrangeEmptyButton label={"Por fazer"} width={160} height={45} />
+          <OrangeEmptyButton
+            label={"Por fazer"}
+            width={160}
+            height={45}
+            selected= {selectedFilter === false}
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.taskContainer}>
