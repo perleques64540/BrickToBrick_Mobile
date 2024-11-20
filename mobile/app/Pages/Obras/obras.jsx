@@ -6,12 +6,12 @@ import {
   FlatList,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../components/SearchBar";
-import ContainerImage from "../../components/ContainerImage";
+import SearchBar from "../../../components/SearchBar";
+import ContainerImage from "../../../components/ContainerImage";
 import { useRouter } from "expo-router";
-import obrasData from "../../data/obras.json"; // Import your obras data JSON file
+import obrasData from "../../../data/obras.json"; // Import your obras data JSON file
 
-const pathImg = require("../../Images/House.png");
+const pathImg = require("../../../Images/House.png");
 const obras = () => {
   const [searchText, setSearchText] = useState("");
   const [obras, setObras] = useState([]); // State to hold the obras data
@@ -36,7 +36,7 @@ const obras = () => {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: "Obras/obraPage",
+          pathname: "Pages/Obras/obraPage",
           params: {
             id: item.id, // Pass obra ID to the details page
           },

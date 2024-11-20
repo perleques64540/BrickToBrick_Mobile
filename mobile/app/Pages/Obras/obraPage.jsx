@@ -7,10 +7,10 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ContainerDelete from "../../components/ContainerDelete";
-import Container from "../../components/Container";
+import ContainerDelete from "../../../components/ContainerDelete";
+import Container from "../../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import obrasData from "../../data/obras.json";
+import obrasData from "../../../data/obras.json";
 
 const DATA = [
   {
@@ -61,14 +61,14 @@ const obraPage = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require("../../Images/backArrow.png")}
+            source={require("../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.header}>
         <Image
-          source={require("../../Images/House.png")}
+          source={require("../../../Images/House.png")}
           style={styles.image}
         />
         <View style={styles.headerPosition}>
@@ -95,7 +95,7 @@ const obraPage = () => {
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "Obras/obraOrcamentoPage",
+              pathname: "/Pages/Obras/Orcamentos/obraOrcamentoPage", 
               params: {
                 id: id, // Pass obra ID to the details page
               },
@@ -104,7 +104,7 @@ const obraPage = () => {
         >
           <View style={styles.squareButton}>
             <Image
-              source={require("../../Images/orcamento.png")}
+              source={require("../../../Images/orcamento.png")}
               style={styles.buttonImage}
             />
             <Text style={styles.buttonText}>Orçamentos</Text>
@@ -113,7 +113,7 @@ const obraPage = () => {
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "Obras/obraTarefas",
+              pathname: "/Pages/Obras/Tarefas/obraTarefas",
               params: {
                 id: id,
                 title: obra.title,
@@ -124,7 +124,7 @@ const obraPage = () => {
         >
           <View style={styles.squareButton}>
             <Image
-              source={require("../../Images/Task.png")}
+              source={require("../../../Images/Task.png")}
               style={styles.buttonImage}
             />
             <Text style={styles.buttonText}>Tarefas</Text>
@@ -133,7 +133,7 @@ const obraPage = () => {
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "Obras/obraFuncionarios",
+              pathname: "/Pages/Obras/Funcionarios/obraFuncionarios",
               params: {
                 id: id, // Pass obra ID to the details page
               },
@@ -142,7 +142,7 @@ const obraPage = () => {
         >
           <View style={styles.squareButton}>
             <Image
-              source={require("../../Images/Func.png")}
+              source={require("../../../Images/Func.png")}
               style={styles.buttonImage}
             />
             <Text style={styles.buttonText}>Funcionários</Text>

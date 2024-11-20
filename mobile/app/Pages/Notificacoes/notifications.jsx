@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import ContainerDelete from '../components/ContainerDelete';
+import ContainerDelete from '../../../components/ContainerDelete';
 
 const notifications = () => {
   const [data, setData] = useState([

@@ -7,9 +7,12 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import Container from "../../components/Container";
+import Container from "../../../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useState, useEffect } from "react";
+
+import obrasData from "../../../../data/obras.json";
+import orcamentosData from "../../../../data/quotes.json";
 
 const DATA = [
   {
@@ -25,13 +28,56 @@ const DATA = [
 ];
 
 const obraOrcamentoPage = () => {
-  const { id } = useLocalSearchParams(); // Fetch the id of the obra from URL params
   const router = useRouter();
+
+  const { id } = useLocalSearchParams(); // Fetch the id from URL params
+  const [obra, setObra] = useState(null); // State to hold the obra data
+  // Function to get obra by obraId
+  const fetchObraById = (id) => {
+    const foundObra = obrasData.find((item) => item.id == id);
+    if (foundObra) {
+      setObra(foundObra); // Set the obra if found
+    } else {
+      setObra(null); // Reset if obraId is not found
+    }
+  };
+
+  const [orcamentos, setOrcamentos] = useState([]); // State to hold the obra data
+  const fetchOrcamentosObra = (id) => {
+    const orcamentosTmp = orcamentosData.filter((item) => item.obraId == id);
+    if (orcamentos) {
+      setOrcamentos(orcamentosTmp); // Set the obra if found
+    } else {
+      setOrcamentos(null); // Reset if obraId is not found
+    }
+  };
+  
+
+  useEffect(() => {
+    if (id) {
+      const obraId = parseInt(id, 10); // Convert `id` to a number
+      fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      fetchOrcamentosObra(obraId);
+    }
+  }, [id]); // Ensure that useEffect watches the id.
+
+  if (!obra) {
+    return <Text>Loading...</Text>; // Display loading message until obra is fetched
+  }
 
   const renderBudgetItem = ({ item }) => (
     <TouchableOpacity
       style={styles.orcamento}
-      onPress={() => router.push("../orcamentoPage")}
+      onPress={() => {
+        router.push({
+          pathname: "/Pages/Obras/Orcamentos/orcamentoPage",
+          params: {
+            id: item.id
+          },
+        });
+      }}
+      
+
     >
       <Container labelTitle={item.title} labelText={item.description} />
     </TouchableOpacity>
@@ -42,18 +88,18 @@ const obraOrcamentoPage = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require("../../Images/backArrow.png")}
+            source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.header}>
         <Image
-          source={require("../../Images/House.png")}
+          source={require("../../../../Images/House.png")}
           style={styles.image}
         />
         <View style={styles.headerPosition}>
-          <Text style={styles.headerTitle}>Rua do poço azul</Text>
+          <Text style={styles.headerTitle}>{obra.title}</Text>
           <Text style={styles.headerDescription}>Estado: em progresso</Text>
           <Text style={styles.headerDescription}>
             Tarefas concluídas: 12/24
@@ -65,7 +111,7 @@ const obraOrcamentoPage = () => {
 
       <View style={styles.alignContainers}>
         <FlatList
-          data={DATA}
+          data={orcamentos}
           style={styles.orcamento}
           renderItem={renderBudgetItem}
           keyExtractor={(item) => item.id}

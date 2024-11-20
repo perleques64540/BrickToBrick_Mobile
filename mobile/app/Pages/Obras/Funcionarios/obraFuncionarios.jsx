@@ -7,8 +7,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import Container from "../../components/Container";
-import OrangeButton from "../../components/OrangeButton";
+import Container from "../../../../components/Container";
+import OrangeButton from "../../../../components/OrangeButton";
 import { useRouter } from "expo-router";
 import { YellowBox } from "react-native-web";
 
@@ -56,7 +56,7 @@ const obraFuncionarios = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require("../../Images/backArrow.png")}
+            source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
@@ -64,7 +64,7 @@ const obraFuncionarios = () => {
 
       <View style={styles.header}>
         <Image
-          source={require("../../Images/House.png")}
+          source={require("../../../../Images/House.png")}
           style={styles.image}
         />
         <View style={styles.headerPosition}>

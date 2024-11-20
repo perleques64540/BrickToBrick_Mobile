@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "app/Obras/criarObra.jsx", "app/tabs/lista.jsx", "app/_layout.jsx"  ]
+, "app/Pages/Obras/criarObra.jsx", "app/tabs/lista.jsx", "app/_layout.jsx"  ]
 }

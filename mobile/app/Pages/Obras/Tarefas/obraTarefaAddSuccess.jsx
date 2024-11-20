@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import OrangeButton from "../../components/OrangeButton";
+import OrangeButton from "../../../../components/OrangeButton";
 import { useRouter } from "expo-router";
 
 const obraTarefaAddSucess = () => {
@@ -11,7 +11,7 @@ const obraTarefaAddSucess = () => {
       <View style={styles.imagePostion}>
         <Image
           style={styles.imagestyle}
-          source={require("../../Images/tasksIcon.png")}
+          source={require("../../../../Images/tasksIcon.png")}
         />
       </View>
       <View style={styles.headerPosition}>

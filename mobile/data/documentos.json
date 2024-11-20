@@ -1,0 +1,115 @@
+[
+    {
+      "id": 1,
+      "orcamentoId": 1,
+      "title": "Fatura Janelas",
+      "description": "Fatura referente a compra de janelas para a obra",
+      "approved": true
+    },
+    {
+      "id": 2,
+      "orcamentoId": 1,
+      "title": "Contrato de Prestação de Serviços",
+      "description": "Contrato de prestação de serviços de mão de obra",
+      "approved": true
+    },
+    {
+      "id": 5,
+      "orcamentoId": 1,
+      "title": "Compra de Materiais",
+      "description": "Compra de cimento, areia e outros materiais para construção",
+      "approved": false
+    },
+    {
+      "id": 6,
+      "orcamentoId": 1,
+      "title": "Fatura de Ferramentas",
+      "description": "Fatura de ferramentas adquiridas para o trabalho de construção",
+      "approved": true
+    },
+    {
+      "id": 7,
+      "orcamentoId": 3,
+      "title": "Plumbing Installation",
+      "description": "Orçamento para instalação de sistema hidráulico no novo edifício",
+      "approved": false
+    },
+    {
+      "id": 8,
+      "orcamentoId": 3,
+      "title": "Electricity Wiring",
+      "description": "Custo estimado para a fiação elétrica em todo o edifício",
+      "approved": true
+    },
+    {
+      "id": 9,
+      "orcamentoId": 2,
+      "title": "Desenho Arquitetônico",
+      "description": "Custo do desenho arquitetônico para a obra",
+      "approved": false
+    },
+    {
+      "id": 10,
+      "orcamentoId": 2,
+      "title": "Reparos de Estrutura",
+      "description": "Orçamento para reparos estruturais no edifício",
+      "approved": true
+    },
+    {
+      "id": 11,
+      "orcamentoId": 4,
+      "title": "Fatura do Engenheiro",
+      "description": "Pagamento pelos serviços prestados pelo engenheiro responsável",
+      "approved": true
+    },
+    {
+      "id": 12,
+      "orcamentoId": 4,
+      "title": "Permissão de Construção",
+      "description": "Pagamento pela licença de construção necessária para o projeto",
+      "approved": false
+    },
+    {
+      "id": 13,
+      "orcamentoId": 5,
+      "title": "Fatura de Transporte",
+      "description": "Custo com transporte de materiais para o local da obra",
+      "approved": true
+    },
+    {
+      "id": 14,
+      "orcamentoId": 5,
+      "title": "Aluguel de Equipamento",
+      "description": "Custo do aluguel de equipamentos pesados para a construção",
+      "approved": true
+    },
+    {
+      "id": 15,
+      "orcamentoId": 6,
+      "title": "Fatura de Pintura",
+      "description": "Pagamento pela pintura interna e externa do edifício",
+      "approved": true
+    },
+    {
+      "id": 16,
+      "orcamentoId": 6,
+      "title": "Fatura de Piso",
+      "description": "Compra e instalação de piso cerâmico para os quartos",
+      "approved": false
+    },
+    {
+      "id": 17,
+      "orcamentoId": 7,
+      "title": "Instalação de Ar-Condicionado",
+      "description": "Custo estimado para a instalação de sistema de ar-condicionado no edifício",
+      "approved": true
+    },
+    {
+      "id": 18,
+      "orcamentoId": 7,
+      "title": "Sistema de Segurança",
+      "description": "Orçamento para a instalação de sistemas de segurança e câmeras de vigilância",
+      "approved": true
+    }
+  ]
+  

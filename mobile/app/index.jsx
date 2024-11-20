@@ -53,7 +53,7 @@ const obras = () => {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: "Obras/obraPage",
+          pathname: "/Pages/Obras/obraPage",
           params: {
             id: item.id,
           },
@@ -79,7 +79,7 @@ const obras = () => {
       {/* Obras Header */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Obras</Text>
-        <TouchableOpacity onPress={() => router.push("/Obras/obras")}>
+        <TouchableOpacity onPress={() => router.push("/Pages/Obras/obras")}>
           <Text style={styles.headerLink}>Ver todas</Text>
         </TouchableOpacity>
       </View>

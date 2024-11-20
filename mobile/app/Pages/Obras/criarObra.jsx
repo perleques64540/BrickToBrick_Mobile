@@ -4,12 +4,13 @@ import { useRouter } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHammer } from "@fortawesome/free-solid-svg-icons";
 
-import OrangeButton from "../../components/OrangeButton";
-import GreyButton from "../../components/GreyButton";
-import TextBox from "../../components/TextBox";
-import { usePopUp } from "../_layout"; // Import usePopUp
+import OrangeButton from "../../../components/OrangeButton";
+import GreyButton from "../../../components/GreyButton";
+import TextBox from "../../../components/TextBox";
+import { usePopUp } from "../../_layout"; // Import usePopUp
 
-import * as FileSystem from "expo-file-system";
+import obrasData from '../../../data/obras.json';
+//import * as ReactNFS from 'react-native-fs';
 
 const AddWorkScreen = () => {
   const router = useRouter();
@@ -21,7 +22,6 @@ const AddWorkScreen = () => {
   const [description, setDescription] = useState("");
 
   const handleShowPopUp = () => {
-    console.log("cancelar clicked");
     showPopUp({
       title: "Confirmar",
       message: "Tem a certeza que deseja criar esta obra?",
@@ -36,9 +36,7 @@ const AddWorkScreen = () => {
     });
   };
 
-  const handleAddWork = async () => {
-    const filename = `mobile/data/obras.json`;
-  
+  const handleAddWork = async () => {  
     const newWork = {
       id: Date.now(),
       title,
@@ -52,27 +50,35 @@ const AddWorkScreen = () => {
       tasks: [],
       employees: [],
     };
-  
-    try {
 
-      const RNFS = require('react-native-fs');
-      const path = 'mobile/data/obras.json';
-
-      RNFS.writeFile(path, newWork, 'utf8')
-  .then((success) => {
-    console.log('FILE WRITTEN!');
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+    /*
+    //var path = '../../../data/obras.json';
+    var path = ReactNFS.DocumentDirectoryPath + '/obras.json';
   
-      console.log("Work added successfully!");
-      router.push("/Obras/obraPage"); // Redirect to the obra page
-    } catch (error) {
-      console.error("Error adding work:", error);
-    }
+    ReactNFS.writeFile(path, JSON.stringify(newWork), 'utf8')
+    .then((success) => {
+      console.log('FILE WRITTEN!');
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+    */
+      
+      //readFile();
+  
+      router.push("/Obras/obraPage"); 
   };
 
+  const readFile = async () => {
+    try {
+      console.log("Current File Content:", obrasData);
+    } catch (error) {
+      console.error("Error reading file:", error);
+    }
+  };
+  
+  //readFile();
+  
   const handleClearInputs = () => {
     setTitle("");
     setClientName("");

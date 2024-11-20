@@ -7,11 +7,11 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ContainerDelete from "../../components/ContainerDelete";
-import OrangeButton from "../../components/OrangeButton";
-import OrangeEmptyButton from "../../components/OrangeEmptyButton";
+import ContainerDelete from "../../../../components/ContainerDelete";
+import OrangeButton from "../../../../components/OrangeButton";
+import OrangeEmptyButton from "../../../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import taskData from "../../data/tasks.json"; // Import your obras data JSON file
+import taskData from "../../../../data/tasks.json"; // Import your obras data JSON file
 
 const obraTarefas = () => {
   const router = useRouter();
@@ -54,14 +54,14 @@ const obraTarefas = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require("../../Images/backArrow.png")}
+            source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.header}>
         <Image
-          source={require("../../Images/House.png")}
+          source={require("../../../../Images/House.png")}
           style={styles.image}
         />
         <View style={styles.headerPosition}>

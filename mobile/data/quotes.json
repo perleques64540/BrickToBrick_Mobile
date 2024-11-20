@@ -1,15 +1,17 @@
 [
   {
     "id": 1,
-    "obraId": 1001,
+    "obraId": 1,
     "amount": 15000,
+    "title": "Marketing Budget",
     "description": "Marketing budget for Q1 campaign",
     "approved": true
   },
   {
     "id": 2,
-    "obraId": 1002,
+    "obraId": 1,
     "amount": 25000,
+    "title": "Product Development",
     "description": "Research and development for new product line",
     "approved": false
   },

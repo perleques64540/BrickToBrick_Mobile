@@ -21,7 +21,7 @@ const TabBar = () => {
           size={26}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push("/Obras/obras")}>
+      <TouchableOpacity onPress={() => router.push("/Pages/Obras/obras")}>
         <FontAwesomeIcon
           icon={faHammer}
           style={styles.bottomNavButtons}
@@ -31,7 +31,7 @@ const TabBar = () => {
       <View style={styles.addContainer}>
         <TouchableOpacity
           style={styles.bottomNavButtonsCenter}
-          onPress={() => router.push("/Obras/criarObra")}
+          onPress={() => router.push("/Pages/Obras/criarObra")}
         >
           <Image
             source={{
@@ -48,7 +48,7 @@ const TabBar = () => {
           size={26}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push("/notifications")}>
+      <TouchableOpacity onPress={() => router.push("/Pages/Notificacoes/notifications")}>
         <FontAwesomeIcon
           icon={faBell}
           style={styles.bottomNavButtons}

@@ -7,9 +7,9 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ContainerDelete from "../../components/ContainerDelete";
-import OrangeButton from "../../components/OrangeButton";
-import OrangeEmptyButton from "../../components/OrangeEmptyButton";
+import ContainerDelete from "../../../../components/ContainerDelete";
+import OrangeButton from "../../../../components/OrangeButton";
+import OrangeEmptyButton from "../../../../components/OrangeEmptyButton";
 import { useRouter } from "expo-router";
 
 const DATA = [
@@ -38,13 +38,13 @@ const obraTarefasConcluidas = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.push("../obraPage")}>
           <Image
-            source={require("../../Images/backArrow.png")}
+            source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.header}>
-        <Image source={require("../../Images/House.png")} style={styles.image} />
+        <Image source={require("../../../../Images/House.png")} style={styles.image} />
         <Text style={styles.headerTitle}>Rua do poço azul</Text>
         <Text style={styles.headerStatus}>Estado: em progresso</Text>
         <Text style={styles.headerTasks}>Tarefas concluídas: 12/24</Text>

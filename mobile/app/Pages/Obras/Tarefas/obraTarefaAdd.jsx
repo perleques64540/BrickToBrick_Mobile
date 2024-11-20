@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import OrangeButton from "../../components/OrangeButton";
-import GreyButton from "../../components/GreyButton";
-import TextBox from "../../components/TextBox";
+import OrangeButton from "../../../../components/OrangeButton";
+import GreyButton from "../../../../components/GreyButton";
+import TextBox from "../../../../components/TextBox";
 import { useRouter } from "expo-router";
 
 const obraTarefaAdd = () => {
@@ -13,7 +13,7 @@ const obraTarefaAdd = () => {
       <View style={styles.imagePostion}>
         <Image
           style={styles.imagestyle}
-          source={require("../../Images/tasksIcon.png")}
+          source={require("../../../../Images/tasksIcon.png")}
         />
       </View>
       <View style={styles.headerPosition}>

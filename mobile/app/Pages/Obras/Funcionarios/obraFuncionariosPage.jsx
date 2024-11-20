@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import OrangeButton from '../../components/OrangeButton';
+import OrangeButton from '../../../../components/OrangeButton';
+import GreyButton from '../../../../components/GreyButton';
+import TextBox from '../../../../components/TextBox';
 import { useRouter } from 'expo-router';
 import { YellowBox } from 'react-native-web';
 
 
-const obraFuncionariosPageDone = () => {
+const obraFuncionariosPage = () => {
   const router = useRouter();
 
   return (
@@ -13,21 +15,36 @@ const obraFuncionariosPageDone = () => {
 
         <View style={styles.image}>
             <Image
-                source={require('../../Images/personaIcon.png')}
+                source={require('../../../../Images/personaIcon.png')}
                 style={styles.backArrowImage}
             />
         </View>
 
-        <Text style={styles.title}>Feito!</Text>
+        <Text style={styles.title}>Adicionar Funcionário</Text>
 
-        <Text style={styles.subTitle}>Funcionário adicionado com sucesso.</Text>
+        <View style={styles.textInputContainer}>        
+            <TextBox
+                label ={'Email ou nº telemóvel'}
+                width={360}
+                textcolor={'black'}
+                borderColor={'black'}
+                backgroundColor={'white'}
+            />
+        </View>
 
         <View style={styles.buttonContainer}>  
-            <TouchableOpacity onPress={() => router.push('../obraFuncionariosPage')}>
+            <TouchableOpacity onPress={() => router.push('../obraFuncionariosPageDone')}>
                 <OrangeButton
                     width={360}
                     height={55}
-                    label={'Voltar'}
+                    label={'Confirmar'}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => alert(`bbbbbb`)}>
+                <GreyButton
+                    width={360}
+                    height={55}
+                    label={'Cancelar'}
                 />
             </TouchableOpacity>
         </View>
@@ -39,7 +56,7 @@ const obraFuncionariosPageDone = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e7efef',
+    backgroundColor: '#f0f8f8',
   },
   image: {
     height: 200,
@@ -56,13 +73,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  subTitle: {
-    fontSize: 18,
+  textInputContainer:{
+    width: 390,
+    height: 90,
     alignContent: 'center',
-    alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 40,
+    alignSelf: 'center',
+    marginTop: 40,
   },
   buttonContainer:{
     width: 390,
@@ -74,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default obraFuncionariosPageDone;
+export default obraFuncionariosPage;
