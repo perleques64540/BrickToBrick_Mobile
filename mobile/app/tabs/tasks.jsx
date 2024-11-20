@@ -9,10 +9,9 @@ import {
   FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import taskData from "../../data/tasks.json"; // Import your obras data JSON file
-import { set } from "@cloudinary/url-gen/actions/variable";
+import tasksData from "../../data/tasks.json"; // Import your tasks data JSON file
 import SearchBar from "../../components/SearchBar";
-import tasksData from "../../data/tasks.json"; // Import your obras data JSON file
+import OrangeEmptyButton from "../../components/OrangeEmptyButton";
 
 const TaskItem = ({ title, description, icon, onPress }) => (
   <TouchableOpacity style={styles.item} onPress={onPress}>
@@ -28,14 +27,26 @@ const TaskItem = ({ title, description, icon, onPress }) => (
 
 const App = () => {
   const [searchText, setSearchText] = useState("");
-  const [tasks, setTasks] = useState([]); // State to hold all obras data
+  const [task, setTask] = useState(tasksData); // Initialize with all tasks
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   const filteredTasks = tasksData.filter((task) =>
     task.description.toLowerCase().includes(searchText.toLowerCase())
   );
 
+  const filterByState = (state) => {
+    if (selectedFilter === state) {
+      setTask(tasksData); // Reset to all tasks
+      setSelectedFilter(null); // Deselect filter
+    } else {
+      const foundTask = tasksData.filter((item) => item.done === state);
+      setTask(foundTask);
+      setSelectedFilter(state); // Set selected filter
+    }
+  };
+
   useEffect(() => {
-    setTasks(filteredTasks);
+    setTask(filteredTasks);
   }, [searchText]);
 
   return (
@@ -43,15 +54,44 @@ const App = () => {
       <View style={styles.container}>
         <Text style={styles.title}>Tarefas</Text>
         {/* Search Bar */}
-
         <SearchBar
           label={"Pesquisar"}
           searchText={searchText}
           setSearchText={setSearchText}
         />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => filterByState(true)}
+            style={[
+              styles.button,
+              selectedFilter === true,
+            ]}
+          >
+            <OrangeEmptyButton
+              label={"Concluidas"}
+              width={160}
+              height={45}
+              selected={ !selectedFilter }
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => filterByState(false)}
+            style={[
+              styles.button,
+              selectedFilter === false,
+            ]}
+          >
+            <OrangeEmptyButton
+              label={"Por fazer"}
+              width={160}
+              height={45}
+              selected={ selectedFilter }
+            />
+          </TouchableOpacity>
+        </View>
         <FlatList
           style={styles.listStyle}
-          data={tasks}
+          data={task}
           contentContainerStyle={styles.flatListContent}
           renderItem={({ item }) => (
             <TaskItem
@@ -111,6 +151,12 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginBottom: 10,
   },
+  button: {
+    borderRadius: 5,
+  },
+  selectedButton: {
+    backgroundColor: "orange",
+  },
   listStyle: {
     marginBottom: 20,
   },
@@ -151,6 +197,12 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     paddingBottom: 80,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    alignItems: "center",
   },
 });
 
