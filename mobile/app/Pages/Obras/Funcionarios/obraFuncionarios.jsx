@@ -87,17 +87,15 @@ const obraFuncionarios = () => {
       </View>
 
       <View>
-        <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "Obras/obraFuncionariosPage",
-              params: {
-                id: id,
-              },
-            })
-          }
-        >
-          <OrangeButton label={"Adicionar Funcionário"} />
+        <TouchableOpacity>
+          <OrangeButton
+            label={"Adicionar Funcionário"}
+            onPress={() =>
+              router.push({
+                pathname: "Pages/Obras/Funcionarios/obraFuncionariosPage",
+              })
+            }
+          />
         </TouchableOpacity>
       </View>
     </View>
