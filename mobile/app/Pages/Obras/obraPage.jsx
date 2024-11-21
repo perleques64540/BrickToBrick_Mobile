@@ -59,7 +59,7 @@ const obraPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push({ pathname: "../../inde "})}>
+        <TouchableOpacity onPress={() => router.back()}>
           <Image
             source={require("../../../Images/backArrow.png")}
             style={styles.backArrowImage}
