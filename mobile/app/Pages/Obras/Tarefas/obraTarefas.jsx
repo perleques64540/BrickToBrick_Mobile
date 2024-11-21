@@ -42,7 +42,14 @@ const obraTarefas = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
+        <TouchableOpacity onPress={() =>
+          router.push({ pathname: "Pages/Obras/obraPage",
+            params: {
+              id: id,
+              title: title,
+              state: state,
+            }
+        })}>
           <Image
             source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
