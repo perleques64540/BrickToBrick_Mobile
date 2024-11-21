@@ -15,13 +15,6 @@ const obraFuncionariosPageDone = () => {
           style={styles.backArrowImage}
         />
       </View>
-
-      <View style={styles.image}>
-        <Image
-          source={require("../../../../Images/personaIcon.png")}
-          style={styles.backArrowImage}
-        />
-      </View>
       <Text style={styles.title}>Feito!</Text>
 
       <Text style={styles.subTitle}>Funcionário adicionado com sucesso.</Text>
@@ -30,7 +23,9 @@ const obraFuncionariosPageDone = () => {
         <TouchableOpacity>
           <OrangeButton
             label={"Voltar"}
-            onPress={() => router.push("Obras/obraFuncionarios")}
+            onPress={() =>
+              router.push("Pages/Obras/Funcionarios/obraFuncionarios")
+            }
           />
         </TouchableOpacity>
       </View>

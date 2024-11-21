@@ -31,13 +31,25 @@ const obraFuncionariosPage = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => router.push("../obraFuncionariosPageDone")}
-        >
-          <OrangeButton width={360} height={55} label={"Confirmar"} />
+        <TouchableOpacity>
+          <OrangeButton
+            width={360}
+            height={55}
+            label={"Confirmar"}
+            onPress={() =>
+              router.push("Pages/Obras/Funcionarios/obraFuncionariosPageDone")
+            }
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => alert(`bbbbbb`)}>
-          <GreyButton width={360} height={55} label={"Cancelar"} />
+          <GreyButton
+            width={360}
+            height={55}
+            label={"Cancelar"}
+            onPress={() =>
+              router.push("Pages/Obras/Funcionarios/obraFuncionarios")
+            }
+          />
         </TouchableOpacity>
       </View>
     </View>
