@@ -52,8 +52,9 @@ const obraTarefaAddSuccess = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column"
   },
   imagePostion: {
     alignContent: "center",

@@ -10,7 +10,6 @@ import TextBox from "../../../components/TextBox";
 import { usePopUp } from "../../_layout"; // Import usePopUp
 
 import obrasData from '../../../data/obras.json';
-//import * as ReactNFS from 'react-native-fs';
 
 const AddWorkScreen = () => {
   const router = useRouter();
@@ -50,41 +49,11 @@ const AddWorkScreen = () => {
       tasks: [],
       employees: [],
     };
-
-    /*
-    //var path = '../../../data/obras.json';
-    var path = ReactNFS.DocumentDirectoryPath + '/obras.json';
+    
+    obrasData.push(newWork);
   
-    ReactNFS.writeFile(path, JSON.stringify(newWork), 'utf8')
-    .then((success) => {
-      console.log('FILE WRITTEN!');
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-    */
-      
-      //readFile();
-  
-      router.push("/Obras/obraPage"); 
+    router.push("/Pages/Obras/obraPage"); 
   };
-
-  const readFile = async () => {
-    try {
-      console.log("Current File Content:", obrasData);
-    } catch (error) {
-      console.error("Error reading file:", error);
-    }
-  };
-  
-  //readFile();
-  
-  const handleClearInputs = () => {
-    setTitle("");
-    setClientName("");
-    setAddress("");
-    setDescription("");
-  }
 
   return (
     <View style={styles.container}>
@@ -131,7 +100,7 @@ const AddWorkScreen = () => {
       />
       <GreyButton
         label={"Cancelar"}
-        onPress={handleClearInputs}
+        onPress={router.back}
       />
     </View>
   );

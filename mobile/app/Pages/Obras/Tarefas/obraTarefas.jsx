@@ -12,14 +12,33 @@ import OrangeButton from "../../../../components/OrangeButton";
 import OrangeEmptyButton from "../../../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import taskData from "../../../../data/tasks.json"; // Import your obras data JSON file
+import obrasData from "../../../../data/obras.json";
 
 const obraTarefas = () => {
   const router = useRouter();
-  const { id } = useLocalSearchParams();
-  const { title } = useLocalSearchParams();
-  const { state } = useLocalSearchParams();
+  const { id } = useLocalSearchParams(); // Fetch the id from URL params
+  const [obra, setObra] = useState(null); // State to hold the obra data
+
+  // Function to get obra by obraId
+  const fetchObraById = (id) => {
+    const foundObra = obrasData.find((item) => item.id == id);
+    if (foundObra) {
+      setObra(foundObra); // Set the obra if found
+    } else {
+      setObra(null); // Reset if obraId is not found
+    }
+  };
+
+
   const [task, setTasks] = useState(taskData.filter((item) => item.obraId == id)); // State to hold the obras data
   const [selectedFilter, setSelectedFilter] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      const obraId = parseInt(id, 10); // Convert `id` to a number
+      fetchObraById(obraId); // This will call fetchObraById with the numeric id
+    }
+  }, [id]); // Ensure that useEffect watches the id.
 
   // Load obra data (from local file or API)
   useEffect(() => {
@@ -39,15 +58,17 @@ const obraTarefas = () => {
     <ContainerDelete labelTitle={item.title} labelText={item.description} />
   );
 
+  if (!obra) {
+    return <Text>Loading...</Text>; // Display loading message until obra is fetched
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() =>
           router.push({ pathname: "Pages/Obras/obraPage",
             params: {
-              id: id,
-              title: title,
-              state: state,
+              id: id
             }
         })}>
           <Image
@@ -62,12 +83,12 @@ const obraTarefas = () => {
           style={styles.image}
         />
         <View style={styles.headerPosition}>
-          <Text style={styles.headerTitle}>{title}</Text>
+          <Text style={styles.headerTitle}>{obra.title}</Text>
           <Text style={styles.headerDescription}>
-            Estado: {state ? "em progresso" : "concluída"}
+            Estado: {obra.done ? "Concluida" : "Em progresso"}
           </Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: 12/24
+            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
           </Text>
         </View>
       </View>
@@ -108,9 +129,7 @@ const obraTarefas = () => {
               router.push({
                 pathname: "/Pages/Obras/Tarefas/obraTarefaAdd",
                 params: {
-                  id: id, // Pass obra ID to the details page
-                  title: title,
-                  state: state,
+                  id: id
                 },
               })
             }
@@ -130,13 +149,14 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: "center",
-    marginBottom: 20,
+    paddingBottom: 20,
     flexDirection: "row",
   },
   headerPosition: {
     width: 250,
     height: 80,
     marginLeft: 15,
+    marginBottom: 15,
   },
   image: {
     height: 90,
@@ -148,8 +168,15 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
+  buttonImage: {
+    height: 50,
+    width: 50,
+    alignItems: "center",
+    alignSelf: "center",
+    alignContent: "center",
+  },
   headerTitle: {
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: "bold",
   },
   headerDescription: {

@@ -4,12 +4,30 @@ import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { usePopUp } from "../../../_layout"; // Import usePopUp
 
 const obraTarefaAdd = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const { title } = useLocalSearchParams();
   const { state } = useLocalSearchParams();
+
+  const { showPopUp } = usePopUp(); // Get showPopUp function
+
+  const handleShowPopUp = (itemId) => {
+    showPopUp({
+      title: "Apagar Notificação?",
+      message: "Tem a certeza que deseja apagar esta notificação?",
+      primaryBtn: {
+        label: "Sim",
+        onPress: () => handleDeleteItem(itemId),
+      },
+      secondaryBtn: {
+        label: "Não",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -84,8 +102,9 @@ const obraTarefaAdd = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column"
   },
   imagePostion: {
     alignContent: "center",

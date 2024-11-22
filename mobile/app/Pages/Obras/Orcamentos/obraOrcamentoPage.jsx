@@ -14,24 +14,13 @@ import { useState, useEffect } from "react";
 import obrasData from "../../../../data/obras.json";
 import orcamentosData from "../../../../data/quotes.json";
 
-const DATA = [
-  {
-    id: "1",
-    title: "Substituição de Janela",
-    description: "230€ qualquer coisa que seja importante.",
-  },
-  {
-    id: "2",
-    title: "Remoção de Telhado",
-    description: "Uma descrição e um preço talvez",
-  },
-];
 
 const obraOrcamentoPage = () => {
   const router = useRouter();
 
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
+
   // Function to get obra by obraId
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id == id);
@@ -45,13 +34,12 @@ const obraOrcamentoPage = () => {
   const [orcamentos, setOrcamentos] = useState([]); // State to hold the obra data
   const fetchOrcamentosObra = (id) => {
     const orcamentosTmp = orcamentosData.filter((item) => item.obraId == id);
-    if (orcamentos) {
+    if (orcamentosTmp) {
       setOrcamentos(orcamentosTmp); // Set the obra if found
     } else {
-      setOrcamentos(null); // Reset if obraId is not found
+      setOrcamentos([]); // Reset if obraId is not found
     }
   };
-  
 
   useEffect(() => {
     if (id) {
@@ -72,26 +60,26 @@ const obraOrcamentoPage = () => {
         router.push({
           pathname: "/Pages/Obras/Orcamentos/orcamentoPage",
           params: {
-            id: item.id
+            id: item.id,
           },
         });
       }}
-      
-
     >
       <Container labelTitle={item.title} labelText={item.description} />
     </TouchableOpacity>
   );
 
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
+      <View style={styles.backArrowContainer}>
+          <TouchableOpacity onPress={() => router.push('/')}>
           <Image
             source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.header}>
         <Image
@@ -100,9 +88,11 @@ const obraOrcamentoPage = () => {
         />
         <View style={styles.headerPosition}>
           <Text style={styles.headerTitle}>{obra.title}</Text>
-          <Text style={styles.headerDescription}>Estado: em progresso</Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: 12/24
+            Estado: {obra.done ? "Concluida" : "Em progresso"}
+          </Text>
+          <Text style={styles.headerDescription}>
+            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
           </Text>
         </View>
       </View>
@@ -118,7 +108,6 @@ const obraOrcamentoPage = () => {
         />
       </View>
     </View>
-    
   );
 };
 
@@ -129,23 +118,36 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     flexDirection: "column",
   },
-  image: {
-    height: 90,
-    width: 90,
-    borderRadius: 15,
-  },
   header: {
     alignItems: "center",
-    marginBottom: 20,
+    paddingBottom: 20,
     flexDirection: "row",
   },
   headerPosition: {
     width: 250,
     height: 80,
     marginLeft: 15,
+    marginBottom: 15,
+  },
+  image: {
+    height: 90,
+    width: 90,
+    borderRadius: 15,
+  },
+  backArrowContainer: {
+    height: 50,
+    width: 50,
+    justifyContent: "center",
+  },
+  buttonImage: {
+    height: 50,
+    width: 50,
+    alignItems: "center",
+    alignSelf: "center",
+    alignContent: "center",
   },
   headerTitle: {
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: "bold",
   },
   headerDescription: {

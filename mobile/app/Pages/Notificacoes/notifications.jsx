@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import ContainerDelete from '../../../components/ContainerDelete';
+import { usePopUp } from "../../_layout"; // Import usePopUp
 
 const notifications = () => {
   const [data, setData] = useState([
@@ -13,17 +14,34 @@ const notifications = () => {
     { id: '6', title: 'Armando concluiu uma nova tarefa_6', description: 'Clique para analisar resultados.' },
   ]);
 
+  const { showPopUp } = usePopUp(); // Get showPopUp function
+
+  const handleShowPopUp = (itemId) => {
+    showPopUp({
+      title: "Apagar Notificação?",
+      message: "Tem a certeza que deseja apagar esta notificação?",
+      primaryBtn: {
+        label: "Sim",
+        onPress: () => handleDeleteItem(itemId),
+      },
+      secondaryBtn: {
+        label: "Não",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
+
   const handleDeleteItem = (itemId) => {
     // Remove the item from the list by filtering it out
     const updatedData = data.filter(item => item.id !== itemId);
-    setData(updatedData);
+    setData(updatedData);//TODO: mudar para dar push do updatedData para um notificações.json
   };
 
   const renderNotificationItem = ({ item }) => (
     <ContainerDelete
       labelTitle={item.title}
       labelText={item.description}
-      onPress={() => handleDeleteItem(item.id)}  // Call the delete handler on press
+      onPress={() => handleShowPopUp(item.id)}  // Call the delete handler on press
     />
   );
 

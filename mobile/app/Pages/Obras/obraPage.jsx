@@ -11,6 +11,7 @@ import ContainerDelete from "../../../components/ContainerDelete";
 import Container from "../../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import obrasData from "../../../data/obras.json";
+import { Dimensions } from 'react-native';
 
 const DATA = [
   {
@@ -27,6 +28,11 @@ const DATA = [
 ];
 
 const obraPage = () => {
+  const {width, height } = Dimensions.get('window');
+
+  const guidelineBaseWidth = 375;
+  const guidelineBaseHeight = 812;
+
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
   // Function to get obra by obraId
@@ -59,12 +65,15 @@ const obraPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('/')}>
+        <View style={styles.backArrowContainer}>
+          <TouchableOpacity onPress={() => router.push('/')}>
           <Image
             source={require("../../../Images/backArrow.png")}
             style={styles.backArrowImage}
           />
         </TouchableOpacity>
+        </View>
+        
       </View>
       <View style={styles.header}>
         <Image
@@ -115,9 +124,7 @@ const obraPage = () => {
             router.push({
               pathname: "/Pages/Obras/Tarefas/obraTarefas",
               params: {
-                id: id,
-                title: obra.title,
-                state: obra.done,
+                id: id
               },
             })
           }
@@ -188,10 +195,10 @@ const styles = StyleSheet.create({
     width: 90,
     borderRadius: 15,
   },
-  backArrowImage: {
-    resizeMode: "contain",
-    height: 20,
-    width: 20,
+  backArrowContainer: {
+    height: 50,
+    width: 50,
+    justifyContent: "center",
   },
   buttonImage: {
     height: 50,
@@ -201,7 +208,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   headerTitle: {
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: "bold",
   },
   headerDescription: {
@@ -213,15 +220,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     alignItems: "center",
-  },
-  infoHeader: {
-    fontWeight: "bold",
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  infoText: {
-    fontSize: 14,
-    marginBottom: 5,
   },
   buttonContainer: {
     flexDirection: "row",

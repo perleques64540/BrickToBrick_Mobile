@@ -66,8 +66,7 @@ const obras = () => {
       <FlatList
         data={obras} // Use the state to render data
         renderItem={renderItem} // Render each item
-        keyExtractor={(item) => item.id.toString()} // Make sure id is unique, convert to string if necessary
-        contentContainerStyle={styles.listContent} // Styling the list container
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );
