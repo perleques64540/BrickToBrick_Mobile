@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { usePopUp } from "../../../_layout"; // Import usePopUp
+import taskData from "../../../../data/tasks.json";
 
 const obraTarefaAdd = () => {
   const router = useRouter();
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const { id } = useLocalSearchParams();
   const { title } = useLocalSearchParams();
   const { state } = useLocalSearchParams();
@@ -16,11 +19,11 @@ const obraTarefaAdd = () => {
 
   const handleShowPopUp = (itemId) => {
     showPopUp({
-      title: "Apagar Notificação?",
-      message: "Tem a certeza que deseja apagar esta notificação?",
+      title: "Criar Tarefa?",
+      message: "Tem a certeza que deseja criar esta tarefa?",
       primaryBtn: {
         label: "Sim",
-        onPress: () => handleDeleteItem(itemId),
+        onPress: () => handleCreateTask(),
       },
       secondaryBtn: {
         label: "Não",
@@ -28,6 +31,25 @@ const obraTarefaAdd = () => {
       },
     });
   };
+
+  const handleCreateTask = () => {
+    const newTask = {
+      id: Date.now(),
+      obraId: id,
+      title: taskTitle,
+      description: taskDescription,
+      employeeId: "",
+      done: false
+    };
+    taskData.push(newTask);
+
+    router.push({
+      pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
+      params: {
+        id: id
+      },
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -47,6 +69,8 @@ const obraTarefaAdd = () => {
           textcolor={"black"}
           width={330}
           height={50}
+          value={taskTitle}
+          onChangeText={setTaskTitle}
         />
         <TextBox
           label={"Descrição"}
@@ -54,6 +78,8 @@ const obraTarefaAdd = () => {
           textcolor={"black"}
           width={330}
           height={50}
+          value = {taskDescription}
+          onChangeText={setTaskDescription}
         />
       </View>
 
@@ -64,14 +90,7 @@ const obraTarefaAdd = () => {
             width={330}
             height={50}
             onPress={() =>
-              router.push({
-                pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
-                params: {
-                  id: id, // Pass obra ID to the details page
-                  title: title,
-                  state: state,
-                },
-              })
+              handleShowPopUp()
             }
           />
         </TouchableOpacity>
