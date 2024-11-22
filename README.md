@@ -4,6 +4,8 @@
 
 João Perleques 93041719
 
+* First of all you need to create an account in expo and log in from the cli (expo login) and the expo go app * 
+
 1º Install expo go app in your phone
 
 2º inside of the folder that have app.json run npm i
