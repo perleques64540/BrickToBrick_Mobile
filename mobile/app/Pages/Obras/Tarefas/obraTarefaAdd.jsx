@@ -1,15 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import taskData from "../../../../data/tasks.json";
 
 const obraTarefaAdd = () => {
   const router = useRouter();
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const { id } = useLocalSearchParams();
   const { title } = useLocalSearchParams();
   const { state } = useLocalSearchParams();
+
+  /**
+   * {
+    "id": 1,
+    "obraId": 1,
+    "title": "Prepare Monthly Report",
+    "description": "Compile and analyze monthly sales data for the report.",
+    "employeeId": 101,
+    "done": false
+  },
+   */
+
+  const handleOnPress = () => {
+    const newTask = {
+      id: Date.now(),
+      obraId: id,
+      title: taskTitle,
+      description: taskDescription,
+      employeeId: "",
+      done: false
+    };
+    taskData.push(newTask);
+
+    router.push({
+      pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
+      params: {
+        id: id, // Pass obra ID to the details page
+        title: title,
+        state: state,
+      },
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -29,6 +64,8 @@ const obraTarefaAdd = () => {
           textcolor={"black"}
           width={330}
           height={50}
+          value={taskTitle}
+          onChangeText={setTaskTitle}
         />
         <TextBox
           label={"Descrição"}
@@ -36,6 +73,8 @@ const obraTarefaAdd = () => {
           textcolor={"black"}
           width={330}
           height={50}
+          value = {taskDescription}
+          onChangeText={setTaskDescription}
         />
       </View>
 
@@ -46,14 +85,7 @@ const obraTarefaAdd = () => {
             width={330}
             height={50}
             onPress={() =>
-              router.push({
-                pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
-                params: {
-                  id: id, // Pass obra ID to the details page
-                  title: title,
-                  state: state,
-                },
-              })
+              handleOnPress()
             }
           />
         </TouchableOpacity>
