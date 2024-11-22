@@ -5,9 +5,13 @@
 João Perleques 93041719
 
 1º Install expo go app in your phone
+
 2º inside of the folder that have app.json run npm i
+
 3º After npm i, run npx expo
+
 4º If you have iPhone scan with the camera app if you have android use the scanner inside expo go app
+
 5º Have fun :)
 
 # Welcome to your Expo app 👋
