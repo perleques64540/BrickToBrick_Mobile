@@ -14,15 +14,17 @@ import { useState, useEffect } from "react";
 import obrasData from "../../../../data/obras.json";
 import tasksData from "../../../../data/tasks.json";
 import orcamentosData from "../../../../data/quotes.json";
-
+import EmptyList from "../../../../components/EmptyList";
 
 const obraOrcamentoPage = () => {
   const router = useRouter();
 
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
-  const [tasks, setTasks] = useState(tasksData.filter((item) => item.obraId == id));
-  const [doneTasks, setDoneTasks] = useState([])
+  const [tasks, setTasks] = useState(
+    tasksData.filter((item) => item.obraId == id)
+  );
+  const [doneTasks, setDoneTasks] = useState([]);
 
   // Function to get obra by obraId
   const fetchObraById = (id) => {
@@ -42,12 +44,12 @@ const obraOrcamentoPage = () => {
     } else {
       setTasks([]);
     }
-  }
+  };
 
   const countDoneTasks = () => {
     const doneTasksTmp = tasks.filter((item) => item.done == true);
     setDoneTasks(doneTasksTmp);
-  }
+  };
 
   const [orcamentos, setOrcamentos] = useState([]); // State to hold the obra data
   const fetchOrcamentosObra = (id) => {
@@ -91,13 +93,13 @@ const obraOrcamentoPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-      <View style={styles.backArrowContainer}>
-          <TouchableOpacity onPress={() => router.push('/')}>
-          <Image
-            source={require("../../../../Images/backArrow.png")}
-            style={styles.backArrowImage}
-          />
-        </TouchableOpacity>
+        <View style={styles.backArrowContainer}>
+          <TouchableOpacity onPress={() => router.push("/")}>
+            <Image
+              source={require("../../../../Images/backArrow.png")}
+              style={styles.backArrowImage}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.header}>
@@ -124,6 +126,7 @@ const obraOrcamentoPage = () => {
           style={styles.orcamento}
           renderItem={renderBudgetItem}
           keyExtractor={(item) => item.id}
+          ListEmptyComponent={<EmptyList message="Orçamentos" />}
         />
       </View>
     </View>

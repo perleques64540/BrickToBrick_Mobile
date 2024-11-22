@@ -13,6 +13,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState, useEffect } from "react";
 import obrasData from "../../../../data/obras.json";
 import tasksData from "../../../../data/tasks.json";
+import EmptyList from "../../../../components/EmptyList";
 
 const DATA = [
   {
@@ -130,6 +131,7 @@ const obraFuncionarios = () => {
           data={DATA}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
+          ListEmptyComponent={<EmptyList message="Funcionários" />}
         />
       </View>
 
@@ -216,7 +218,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "red",
+    //backgroundColor: "red",
   },
   buttonContainer: {
     alignSelf: "center",

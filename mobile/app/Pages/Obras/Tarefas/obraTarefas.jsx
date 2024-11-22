@@ -14,6 +14,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import tasksData from "../../../../data/tasks.json"; // Import your obras data JSON file
 import obrasData from "../../../../data/obras.json";
 import { usePopUp } from "../../../_layout"; // Import usePopUp
+import EmptyList from "../../../../components/EmptyList";
 
 const obraTarefas = () => {
   const router = useRouter();
@@ -170,6 +171,7 @@ const obraTarefas = () => {
           data={tasks}
           renderItem={renderTaskItem}
           keyExtractor={(item) => item.id}
+          ListEmptyComponent={<EmptyList message="tarefas" />}
         />
       </View>
 
@@ -254,6 +256,22 @@ const styles = StyleSheet.create({
   },
   bottomButton: {
     marginBottom: 20,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 140,
+  },
+  emptyMessage: {
+    fontSize: 18,
+    color: "gray",
+    textAlign: "center",
+  },
+  imageStyle: {
+    height: 100,
+    width: 100,
+    resizeMode: "contain",
   },
 });
 

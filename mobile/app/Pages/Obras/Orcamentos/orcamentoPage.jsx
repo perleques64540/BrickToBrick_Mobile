@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import ContainerDelete from '../../../../components/ContainerDelete';
-import OrangeButton from '../../../../components/OrangeButton';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import ContainerDelete from "../../../../components/ContainerDelete";
+import OrangeButton from "../../../../components/OrangeButton";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { usePopUp } from "../../../_layout"; // Import usePopUp
-import * as DocumentPicker from 'expo-document-picker';
-import orcamentosData from '../../../../data/quotes.json';
-import documentosData from '../../../../data/documentos.json';
+import * as DocumentPicker from "expo-document-picker";
+import orcamentosData from "../../../../data/quotes.json";
+import documentosData from "../../../../data/documentos.json";
+import EmptyList from "../../../../components/EmptyList";
 
 const orcamentoPage = () => {
   const router = useRouter();
@@ -14,7 +22,9 @@ const orcamentoPage = () => {
   const { id } = useLocalSearchParams();
   const [documentos, setDocumentos] = useState([]);
   const fetchDocumentosById = (id) => {
-    const foundDocumentos = documentosData.filter((item) => item.orcamentoId == id);
+    const foundDocumentos = documentosData.filter(
+      (item) => item.orcamentoId == id
+    );
     if (foundDocumentos) {
       setDocumentos(foundDocumentos);
     } else {
@@ -23,7 +33,7 @@ const orcamentoPage = () => {
   };
 
   const { showPopUp } = usePopUp(); // Use pop-up for file selection
-  
+
   const [orcamento, setOrcamento] = useState(null);
   const [data, setData] = useState([
     {
@@ -47,7 +57,9 @@ const orcamentoPage = () => {
 
   // Fetch specific orcamento by id
   const fetchOrcamentoById = (orcamentoId) => {
-    const foundOrcamento = orcamentosData.find((item) => item.id == orcamentoId);
+    const foundOrcamento = orcamentosData.find(
+      (item) => item.id == orcamentoId
+    );
     setOrcamento(foundOrcamento || null);
   };
 
@@ -128,6 +140,7 @@ const orcamentoPage = () => {
           data={documentos}
           renderItem={renderNotificationItem}
           keyExtractor={(item) => item.id}
+          ListEmptyComponent={<EmptyList message="Documentos" />}
         />
       </View>
 

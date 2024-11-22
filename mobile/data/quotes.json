@@ -16,6 +16,14 @@
     "approved": false
   },
   {
+    "id": 50,
+    "obraId": 2,
+    "amount": 25000,
+    "title": "Product Development",
+    "description": "Research and development for new product line",
+    "approved": false
+  },
+  {
     "id": 3,
     "obraId": 1003,
     "amount": 10000,
