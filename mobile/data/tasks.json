@@ -1,99 +1,97 @@
-//-1 means no employee assigned
-
 [
   {
     "id": 1,
     "obraId": 1,
-    "title": "Prepare Monthly Report",
-    "description": "Compile and analyze monthly sales data for the report.",
+    "title": "Inspecionar Trabalho de Fundação",
+    "description": "Garantir que a fundação está corretamente executada e cumpre os padrões de segurança.",
     "employeeId": 101,
     "done": false
   },
   {
     "id": 2,
     "obraId": 1,
-    "title": "Client Meeting",
-    "description": "Discuss project requirements with the client.",
+    "title": "Coordenação de Entrega de Materiais",
+    "description": "Organizar e confirmar a entrega de betão e vigas de aço.",
     "employeeId": 101,
     "done": true
   },
   {
     "id": 3,
     "obraId": 1,
-    "title": "Website Update",
-    "description": "Update the company website with the latest news and blog posts.",
+    "title": "Atualizar Planos do Local",
+    "description": "Incorporar alterações recentes nos planos do local de construção.",
     "employeeId": 103,
     "done": false
   },
   {
     "id": 4,
     "obraId": 2,
-    "title": "Inventory Check",
-    "description": "Review and update the current inventory list.",
+    "title": "Verificação de Inventário de Equipamentos",
+    "description": "Verificar a disponibilidade e condição dos equipamentos de construção.",
     "employeeId": 104,
     "done": true
   },
   {
     "id": 5,
     "obraId": 2,
-    "title": "Create Marketing Plan",
-    "description": "Draft a marketing plan for the upcoming quarter.",
+    "title": "Elaborar Diretrizes de Segurança",
+    "description": "Preparar protocolos de segurança atualizados para o local de trabalho.",
     "employeeId": 105,
     "done": false
   },
   {
     "id": 6,
     "obraId": 2,
-    "title": "Employee Training",
-    "description": "Organize and conduct training for new employees.",
+    "title": "Realizar Formação no Local",
+    "description": "Fornecer formação em segurança e operações para novos trabalhadores de construção.",
     "employeeId": 106,
     "done": true
   },
   {
     "id": 7,
     "obraId": 2,
-    "title": "Budget Review",
-    "description": "Review and adjust budget allocations for the project.",
+    "title": "Revisão da Alocação do Orçamento",
+    "description": "Reavaliar e ajustar o orçamento para as fases em curso da construção.",
     "employeeId": 107,
     "done": false
   },
   {
     "id": 8,
     "obraId": 1,
-    "title": "Customer Feedback Analysis",
-    "description": "Analyze recent customer feedback to improve service.",
+    "title": "Analisar Feedback dos Empreiteiros",
+    "description": "Rever o feedback dos empreiteiros para melhorar os fluxos de trabalho.",
     "employeeId": 108,
     "done": true
   },
   {
     "id": 9,
     "obraId": 1,
-    "title": "Social Media Campaign",
-    "description": "Plan and launch a new social media campaign.",
+    "title": "Planejar Horário de Lançamento de Betão",
+    "description": "Organizar o horário para lançamento de betão em diferentes secções.",
     "employeeId": 109,
     "done": false
   },
   {
     "id": 10,
     "obraId": 3,
-    "title": "Data Backup",
-    "description": "Ensure all company data is securely backed up.",
+    "title": "Fazer Cópia de Segurança dos Registos da Construção",
+    "description": "Fazer uma cópia de segurança dos projetos e documentação do projeto.",
     "employeeId": 110,
     "done": true
   },
   {
     "id": 11,
     "obraId": 3,
-    "title": "Prepare Presentation",
-    "description": "Create a presentation for the upcoming board meeting.",
+    "title": "Preparar Relatório de Progresso",
+    "description": "Compilar atualizações de progresso para a próxima reunião de revisão do projeto.",
     "employeeId": 101,
     "done": false
   },
   {
     "id": 12,
     "obraId": 4,
-    "title": "Customer Support Follow-up",
-    "description": "Follow up with customers who had support issues.",
+    "title": "Acompanhar Problemas no Local de Trabalho",
+    "description": "Resolver problemas pendentes relatados no local de construção.",
     "employeeId": 102,
     "done": true
   }

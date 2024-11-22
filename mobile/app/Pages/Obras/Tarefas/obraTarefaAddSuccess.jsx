@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState, useEffect } from "react";
 import tasksData from "../../../../data/tasks.json";
 import EmployeesPopup from "../../../../components/EmployeesPop";
+import GreyButton from "../../../../components/GreyButton";
 
 const obraTarefaAddSuccess = () => {
   const router = useRouter();
@@ -83,16 +84,16 @@ const obraTarefaAddSuccess = () => {
         />
 
         <View style={styles.bottomButton}>
-          <TouchableOpacity onPress={() => router.push("../obraTarefas")}>
-            <OrangeButton
-              label={"Voltar"}
+          <TouchableOpacity>
+            <GreyButton
+              label={"Mais Tarde"}
               width={330}
               height={50}
               onPress={() =>
                 router.push({
                   pathname: "/Pages/Obras/Tarefas/obraTarefas",
                   params: {
-                    //id: id
+                    id: id
                   },
                 })
               }
