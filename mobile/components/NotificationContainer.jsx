@@ -28,13 +28,14 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 15,
+        gap: 10,
       },
       content:{
         padding: 10,
-        width: '90%'
+        width: '85%',
       },
     TitleText:{   
         textAlign: 'left',

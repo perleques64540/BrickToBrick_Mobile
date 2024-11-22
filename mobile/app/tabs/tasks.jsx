@@ -43,7 +43,6 @@ const App = () => {
   }, [searchText, selectedFilter]);
 
   const filterByState = (state) => {
-    // If the same filter is selected, deselect it
     setSelectedFilter(selectedFilter === state ? null : state);
   };
 
@@ -89,7 +88,6 @@ const App = () => {
               title={item.title}
               description={item.description}
               icon={"task"}
-              onPress={() => alert(`Tarefa selecionada: ${item.id}`)}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -101,10 +99,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Take up all available space
+    flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 50,
-    flexDirection: "column", // Stack children vertically
+    flexDirection: "column",
   },
   safeArea: {
     flex: 1,

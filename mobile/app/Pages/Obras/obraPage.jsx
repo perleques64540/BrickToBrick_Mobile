@@ -7,45 +7,28 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ContainerDelete from "../../../components/ContainerDelete";
+import BasicTaskContainer from "../../../components/BasicTaskContainer";
 import Container from "../../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import obrasData from "../../../data/obras.json";
 import tasksData from "../../../data/tasks.json";
-import { Dimensions } from 'react-native';
 
-const DATA = [
-  {
-    id: "1",
-    title: "Substituição de Janela",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "2",
-    title: "Remoção de Telhado",
-    description: "Tarefa concluída por Rui Manel em Rua do poço azul",
-  },
-];
+
 
 const obraPage = () => {
-  const {width, height } = Dimensions.get('window');
 
-  const guidelineBaseWidth = 375;
-  const guidelineBaseHeight = 812;
-
-  const { id } = useLocalSearchParams(); // Fetch the id from URL params
-  const [obra, setObra] = useState(null); // State to hold the obra data
+  const { id } = useLocalSearchParams();
+  const [obra, setObra] = useState(null); 
   const [tasks, setTasks] = useState(tasksData.filter((item) => item.obraId == id));
   const [doneTasks, setDoneTasks] = useState([])
 
-  // Function to get obra by obraId
+
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id === id);
     if (foundObra) {
-      setObra(foundObra); // Set the obra if found
+      setObra(foundObra);
     } else {
-      setObra(null); // Reset if obraId is not found
+      setObra(null);
     }
   };
 
@@ -66,20 +49,20 @@ const obraPage = () => {
 
   useEffect(() => {
     if (id) {
-      const obraId = parseInt(id, 10); // Convert `id` to a number
-      fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      const obraId = parseInt(id, 10); 
+      fetchObraById(obraId); 
       fetchObraTasks(obraId);
     }
-  }, [id]); // Ensure that useEffect watches the id.
+  }, [id]);
 
   const router = useRouter();
 
   const renderTaskItem = ({ item }) => (
-    <ContainerDelete labelTitle={item.title} labelText={item.description} />
+    <BasicTaskContainer labelTitle={item.title} labelText={item.description} />
   );
 
   if (!obra) {
-    return <Text>Loading...</Text>; // Display loading message until obra is fetched
+    return <Text>Loading...</Text>; 
   }
 
   return (
@@ -126,7 +109,7 @@ const obraPage = () => {
             router.push({
               pathname: "/Pages/Obras/Orcamentos/obraOrcamentoPage", 
               params: {
-                id: id, // Pass obra ID to the details page
+                id: id, 
               },
             })
           }
@@ -162,7 +145,7 @@ const obraPage = () => {
             router.push({
               pathname: "/Pages/Obras/Funcionarios/obraFuncionarios",
               params: {
-                id: id, // Pass obra ID to the details page
+                id: id, 
               },
             })
           }
@@ -184,7 +167,7 @@ const obraPage = () => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={DATA}
+        data={tasks.slice(0, 2)}
         renderItem={renderTaskItem}
         keyExtractor={(item) => item.id}
       />

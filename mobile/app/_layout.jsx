@@ -6,7 +6,6 @@ import FlashMessage from "react-native-flash-message";
 import TabBar from "@/components/TabBar";
 import PopUp from "@/components/PopUp";
 
-// Create a context to manage the PopUp state
 const PopUpContext = createContext();
 
 export const usePopUp = () => useContext(PopUpContext);
@@ -20,13 +19,11 @@ const Layout = () => {
     secondaryBtn: { label: "Cancel", onPress: () => {} },
   });
 
-  // Function to show PopUp with specific config
   const showPopUp = (config) => {
     setPopUpConfig(config);
     setIsPopUpVisible(true);
   };
 
-  // Function to hide PopUp
   const hidePopUp = () => {
     setIsPopUpVisible(false);
   };
@@ -35,7 +32,8 @@ const Layout = () => {
     <SafeAreaView style={styles.safeArea}>
       <PopUpContext.Provider value={{ showPopUp, hidePopUp }}>
         <View style={styles.container}>
-          <StatusBar  translucent={true}
+          <StatusBar
+            translucent={true}
             barStyle={"dark-content"}
             backgroundColor={"#ffffff"}
           ></StatusBar>
@@ -43,7 +41,6 @@ const Layout = () => {
           <FlashMessage position="top" />
           <TabBar />
 
-          {/* Render PopUp and pass `isVisible` prop */}
           <PopUp
             title={popUpConfig.title}
             message={popUpConfig.message}
@@ -51,17 +48,17 @@ const Layout = () => {
               label: popUpConfig.primaryBtn.label,
               onPress: () => {
                 popUpConfig.primaryBtn.onPress();
-                hidePopUp(); // Hide PopUp after primary button press
+                hidePopUp();
               },
             }}
             secondaryBtn={{
               label: popUpConfig.secondaryBtn.label,
               onPress: () => {
                 popUpConfig.secondaryBtn.onPress();
-                hidePopUp(); // Hide PopUp after secondary button press
+                hidePopUp();
               },
             }}
-            isVisible={isPopUpVisible} // Control visibility with this prop
+            isVisible={isPopUpVisible}
           />
         </View>
       </PopUpContext.Provider>

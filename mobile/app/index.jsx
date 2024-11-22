@@ -10,24 +10,24 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchBar from "../components/SearchBar";
 import ContainerImage from "../components/ContainerImage";
 import { useRouter } from "expo-router";
-import obrasData from "../data/obras.json"; // Import your obras data JSON file
-import tasksData from "../data/tasks.json"; // Import your obras data JSON file
+import obrasData from "../data/obras.json";
+import tasksData from "../data/tasks.json";
 
 const pathImg = require("../Images/House.png");
 
 const obras = () => {
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
-  const [obras, setObras] = useState([]); // State to hold all obras data
-  const [tasks, setTasks] = useState([]); // State to hold all obras data
+  const [obras, setObras] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-  // Load obra data (from local file or API)
+
   useEffect(() => {
-    setObras(obrasData); // Set obras data to state from imported JSON
-    setTasks(tasksData); // Set tasks data to state from imported JSON
+    setObras(obrasData); 
+    setTasks(tasksData); 
   }, []);
 
-  // Filter obras based on search text
+
   const filteredObras = obrasData.filter((obra) =>
     obra.title.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -70,13 +70,11 @@ const obras = () => {
 
   return (
     <View style={styles.container}>
-      {/* Search Bar */}
       <SearchBar
         label={"Pesquisar"}
         searchText={searchText}
         setSearchText={setSearchText}
       />
-      {/* Obras Header */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Obras</Text>
         <TouchableOpacity onPress={() => router.push("/Pages/Obras/obras")}>
@@ -84,18 +82,14 @@ const obras = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Obras List */}
-
       <View style={styles.obrasListContainer}>
         <FlatList
-          data={obras} // The data array
-          renderItem={renderItem} // Render each item
-          keyExtractor={(item) => item.id} // Unique key for each item
-          contentContainerStyle={styles.listContent} // Styling the list container
+          data={obras}
+          renderItem={renderItem} 
+          keyExtractor={(item) => item.id}
         />
       </View>
 
-      {/* Atualizações Header */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Tarefas</Text>
         <TouchableOpacity onPress={() => router.push("/tabs/tasks")}>
@@ -103,7 +97,6 @@ const obras = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Atualizações List */}
       <FlatList
         data={tasks}
         renderItem={({ item }) => (
@@ -111,7 +104,6 @@ const obras = () => {
             title={item.title}
             description={item.description}
             icon={"task"}
-            onPress={() => alert(`Tarefa selecionada: ${item.id}`)}
           />
         )}
         keyExtractor={(item) => item.id}
@@ -123,10 +115,10 @@ const obras = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Take up all available space
+    flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 50,
-    flexDirection: "column", // Stack children vertically
+    flexDirection: "column",
   },
   input: {
     flex: 1,

@@ -7,13 +7,13 @@ import { faHammer } from "@fortawesome/free-solid-svg-icons";
 import OrangeButton from "../../../components/OrangeButton";
 import GreyButton from "../../../components/GreyButton";
 import TextBox from "../../../components/TextBox";
-import { usePopUp } from "../../_layout"; // Import usePopUp
+import { usePopUp } from "../../_layout";
 
-import obrasData from '../../../data/obras.json';
+import obrasData from "../../../data/obras.json";
 
 const AddWorkScreen = () => {
   const router = useRouter();
-  const { showPopUp } = usePopUp(); // Get showPopUp function
+  const { showPopUp } = usePopUp();
 
   const [title, setTitle] = useState("");
   const [clientName, setClientName] = useState("");
@@ -54,36 +54,34 @@ const AddWorkScreen = () => {
     if (title == "" || clientName == "" || address == "" || description == "") {
       console.log("Invalid input");
       handleInvalidInput();
-    }
-    else{
+    } else {
       handleShowPopUp();
     }
-  }
+  };
 
-  const handleAddWork = async () => {  
-      const newWork = {
-        id: Date.now(),
-        title,
-        info: {
-          location: address,
-          hours: "0",
-          paid: false,
-        },
-        done: false,
-        quotes: [],
-        tasks: [],
-        employees: [],
-      };
-      
-      obrasData.push(newWork);
-    
-      router.push({
-        pathname: "Pages/Obras/obraPage",
-        params: {
-          id: newWork.id,
-        },
-      })
-    
+  const handleAddWork = async () => {
+    const newWork = {
+      id: Date.now(),
+      title,
+      info: {
+        location: address,
+        hours: "0",
+        paid: false,
+      },
+      done: false,
+      quotes: [],
+      tasks: [],
+      employees: [],
+    };
+
+    obrasData.push(newWork);
+
+    router.push({
+      pathname: "Pages/Obras/obraPage",
+      params: {
+        id: newWork.id,
+      },
+    });
   };
 
   return (
@@ -125,14 +123,8 @@ const AddWorkScreen = () => {
         onChangeText={setDescription}
       />
 
-      <OrangeButton
-        label={"Confirmar"}
-        onPress={handleConfirmButtonPress}
-      />
-      <GreyButton
-        label={"Cancelar"}
-        onPress={router.back}
-      />
+      <OrangeButton label={"Confirmar"} onPress={handleConfirmButtonPress} />
+      <GreyButton label={"Cancelar"} onPress={router.back} />
     </View>
   );
 };

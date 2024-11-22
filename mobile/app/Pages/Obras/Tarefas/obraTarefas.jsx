@@ -7,14 +7,13 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ContainerDelete from "../../../../components/ContainerDelete";
 import TaskContainer from "../../../../components/TaskContainer";
 import OrangeButton from "../../../../components/OrangeButton";
 import OrangeEmptyButton from "../../../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import tasksData from "../../../../data/tasks.json"; // Import your obras data JSON file
+import tasksData from "../../../../data/tasks.json";
 import obrasData from "../../../../data/obras.json";
-import { usePopUp } from "../../../_layout"; // Import usePopUp
+import { usePopUp } from "../../../_layout";
 import EmptyList from "../../../../components/EmptyList";
 import EmployeesPopup from "../../../../components/EmployeesPop";
 
@@ -39,7 +38,7 @@ const obraTarefas = () => {
   const { showPopUp } = usePopUp();
 
   const handleAddPersonPopUp = () => {
-    setPopupVisible(true);    
+    setPopupVisible(true);
   };
 
   const handleAssignTask = (selectedEmployeeIds) => {
@@ -54,7 +53,6 @@ const obraTarefas = () => {
     }
     setPopupVisible(false);
   };
-
 
   const handleDeletePopUp = (itemId) => {
     showPopUp({
@@ -197,14 +195,14 @@ const obraTarefas = () => {
       <Text style={styles.tasksHeader}>Tarefas</Text>
 
       <EmployeesPopup
-          visible={popupVisible}
-          id={id}
-          onConfirm={(selectedEmployeeIds) => {
-            console.log("Selected Employee IDs:", selectedEmployeeIds);
-            handleAssignTask(selectedEmployeeIds);
-          }}
-          onClose={() => setPopupVisible(false)}
-        />
+        visible={popupVisible}
+        id={id}
+        onConfirm={(selectedEmployeeIds) => {
+          console.log("Selected Employee IDs:", selectedEmployeeIds);
+          handleAssignTask(selectedEmployeeIds);
+        }}
+        onClose={() => setPopupVisible(false)}
+      />
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => filterByState(true)}>

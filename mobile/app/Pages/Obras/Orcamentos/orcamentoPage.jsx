@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import ContainerDelete from "../../../../components/ContainerDelete";
+import NotificationContainer from "../../../../components/NotificationContainer";
 import OrangeButton from "../../../../components/OrangeButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { usePopUp } from "../../../_layout"; // Import usePopUp
@@ -104,7 +104,7 @@ const orcamentoPage = () => {
   };
 
   const renderNotificationItem = ({ item }) => (
-    <ContainerDelete
+    <NotificationContainer
       labelTitle={item.title}
       labelText={item.description}
       onPress={() => handleDeleteItem(item.id)} // Call the delete handler on press
