@@ -25,7 +25,7 @@ const obraTarefaAddSuccess = () => {
   const handleAssignTask = (selectedEmployeeIds) => {
     const obraId = parseInt(id, 10);
     const taskIndex = tasksData.findIndex((task) => task.id === obraId);
-  
+
     if (taskIndex !== -1) {
       tasksData[taskIndex].employeeId = selectedEmployeeIds;
       router.back();
@@ -35,7 +35,6 @@ const obraTarefaAddSuccess = () => {
     }
     setPopupVisible(false);
   };
-  
 
   useEffect(() => {
     if (id) {
@@ -80,7 +79,7 @@ const obraTarefaAddSuccess = () => {
             console.log("Selected Employee IDs:", selectedEmployeeIds);
             handleAssignTask(selectedEmployeeIds);
           }}
-          onClose={() => setPopupVisible(false)} 
+          onClose={() => setPopupVisible(false)}
         />
 
         <View style={styles.bottomButton}>
@@ -89,14 +88,10 @@ const obraTarefaAddSuccess = () => {
               label={"Mais Tarde"}
               width={330}
               height={50}
-              onPress={() =>
-                router.push({
-                  pathname: "/Pages/Obras/Tarefas/obraTarefas",
-                  params: {
-                    id: id
-                  },
-                })
-              }
+              onPress={() => {
+                router.back();
+                router.back();
+              }}
             />
           </TouchableOpacity>
         </View>

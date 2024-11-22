@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import obrasData from "../../../../data/obras.json";
 import tasksData from "../../../../data/tasks.json";
 import EmptyList from "../../../../components/EmptyList";
+import employeesData from "../../../../data/employees.json";
 
 const DATA = [
   {
@@ -45,21 +46,30 @@ const DATA = [
 const obraFuncionarios = () => {
   const router = useRouter();
 
-  const { id } = useLocalSearchParams(); // Fetch the id from URL params
-  const [obra, setObra] = useState(null); // State to hold the obra data
+  const { id } = useLocalSearchParams(); 
+  const [obra, setObra] = useState(null); 
   const [tasks, setTasks] = useState(
     tasksData.filter((item) => item.obraId == id)
   );
   const [doneTasks, setDoneTasks] = useState([]);
+  const [employees, setEmployees] = useState([]);
 
-  // Function to get obra by obraId
+
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id === id);
     if (foundObra) {
-      setObra(foundObra); // Set the obra if found
+      setObra(foundObra); 
     } else {
-      setObra(null); // Reset if obraId is not found
+      setObra(null); 
     }
+  };
+
+
+  const fetchEmployees = () => {
+    const result = employeesData.filter((employee) =>
+      employee.obrasIds.includes(id)
+    );
+    setEmployees(result);
   };
 
   const fetchObraTasks = (id) => {
@@ -79,23 +89,19 @@ const obraFuncionarios = () => {
 
   useEffect(() => {
     if (id) {
-      const obraId = parseInt(id, 10); // Convert `id` to a number
-      fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      const obraId = parseInt(id, 10); 
+      fetchObraById(obraId); 
       fetchObraTasks(obraId);
+      fetchEmployees();
     }
-  }, [id]); // Ensure that useEffect watches the id.
+  }, [id]); 
 
   const renderItem = ({ item }) => (
-    <Container
-      path={item.path}
-      labelTitle={item.title}
-      labelText={item.description}
-      height={90}
-    />
+    <Container labelTitle={item.name} labelText={item.contact} height={90} />
   );
 
   if (!obra) {
-    return <Text>Loading...</Text>; // Display loading message until obra is fetched
+    return <Text>Loading...</Text>; 
   }
 
   return (
@@ -128,7 +134,7 @@ const obraFuncionarios = () => {
 
       <View style={styles.listContainer}>
         <FlatList
-          data={DATA}
+          data={employees}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           ListEmptyComponent={<EmptyList message="Funcionários" />}

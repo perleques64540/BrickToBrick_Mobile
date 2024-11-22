@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import ContainerDelete from "../../../../components/ContainerDelete";
+import TaskContainer from "../../../../components/TaskContainer";
 import OrangeButton from "../../../../components/OrangeButton";
 import OrangeEmptyButton from "../../../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -15,29 +16,47 @@ import tasksData from "../../../../data/tasks.json"; // Import your obras data J
 import obrasData from "../../../../data/obras.json";
 import { usePopUp } from "../../../_layout"; // Import usePopUp
 import EmptyList from "../../../../components/EmptyList";
+import EmployeesPopup from "../../../../components/EmployeesPop";
 
 const obraTarefas = () => {
   const router = useRouter();
-  const { id } = useLocalSearchParams(); // Fetch the id from URL params
-  const [obra, setObra] = useState(null); // State to hold the obra data
+  const { id } = useLocalSearchParams();
+  const [obra, setObra] = useState(null);
   const [tasks, setTasks] = useState(
     tasksData.filter((item) => item.obraId == id)
   );
   const [doneTasks, setDoneTasks] = useState([]);
 
-  // Function to get obra by obraId
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id == id);
     if (foundObra) {
-      setObra(foundObra); // Set the obra if found
+      setObra(foundObra);
     } else {
-      setObra(null); // Reset if obraId is not found
+      setObra(null);
     }
   };
 
-  const { showPopUp } = usePopUp(); // Get showPopUp function
+  const { showPopUp } = usePopUp();
 
-  const handleShowPopUp = (itemId) => {
+  const handleAddPersonPopUp = () => {
+    setPopupVisible(true);    
+  };
+
+  const handleAssignTask = (selectedEmployeeIds) => {
+    const obraId = parseInt(id, 10);
+    const taskIndex = tasksData.findIndex((task) => task.id === obraId);
+
+    if (taskIndex !== -1) {
+      tasksData[taskIndex].employeeId = selectedEmployeeIds;
+      console.log(tasksData[taskIndex]);
+    } else {
+      console.log("Task not found with ID:", obraId);
+    }
+    setPopupVisible(false);
+  };
+
+
+  const handleDeletePopUp = (itemId) => {
     showPopUp({
       title: "Apagar Tarefa?",
       message: "Tem a certeza que deseja apagar esta tarefa?",
@@ -53,38 +72,66 @@ const obraTarefas = () => {
   };
 
   const handleDeleteItem = (itemId) => {
-    // Remove the item from the list by filtering it out
-    const updatedData = fetchObraTasks(itemId); //lista de tasks sem a task que queremos apagar
-    //TODO: dar delete da task no json das tasks
-    setTasks(updatedData); //TODO: mudar para dar push do updatedData para um notificações.json
+    const updatedData = tasks.filter((item) => item.id !== itemId);
+    setTasks(updatedData);
+    const taskIndex = tasksData.findIndex((item) => item.id === itemId);
+    if (taskIndex !== -1) {
+      tasksData.splice(taskIndex, 1);
+    }
+    countDoneTasks(updatedData);
+  };
+
+  const handleCheckPopUp = (itemId) => {
+    showPopUp({
+      title: "Definir tarefa como concluída?",
+      message: "Tem a certeza que deseja dar como concluída esta tarefa?",
+      primaryBtn: {
+        label: "Sim",
+        onPress: () => handleMarkAsDone(itemId),
+      },
+      secondaryBtn: {
+        label: "Não",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
+
+  const handleMarkAsDone = (itemId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === itemId ? { ...task, done: !task.done } : task
+    );
+
+    tasksData.forEach((task) => {
+      if (task.id === itemId) {
+        task.done = true;
+      }
+    });
+    setTasks(updatedTasks);
+    countDoneTasks(updatedTasks);
   };
 
   const fetchObraTasks = (id) => {
-    const taskTmp = tasksData.filter((item) => item.obraId == id);
-    if (taskTmp) {
-      setTasks(taskTmp);
-      countDoneTasks();
-    } else {
-      setTasks([]);
-    }
+    return tasksData.filter((item) => item.obraId == id);
   };
 
-  const countDoneTasks = () => {
-    const doneTasksTmp = tasks.filter((item) => item.done == true);
+  const countDoneTasks = (taskList) => {
+    const doneTasksTmp = taskList.filter((item) => item.done === true);
     setDoneTasks(doneTasksTmp);
   };
 
   const [selectedFilter, setSelectedFilter] = useState(null);
 
+  const [popupVisible, setPopupVisible] = useState(false);
+
   useEffect(() => {
     if (id) {
-      const obraId = parseInt(id, 10); // Convert `id` to a number
-      fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      const obraId = parseInt(id, 10);
+      fetchObraById(obraId);
       fetchObraTasks(obraId);
+      countDoneTasks(tasks);
     }
-  }, [id]); // Ensure that useEffect watches the id.
+  }, [id]);
 
-  // Load obra data (from local file or API)
   useEffect(() => {
     let aux = tasksData.filter((item) => item.obraId == id);
     if (selectedFilter !== null) {
@@ -94,20 +141,22 @@ const obraTarefas = () => {
   }, [selectedFilter]);
 
   const filterByState = (state) => {
-    // If the same filter is selected, deselect it
     setSelectedFilter(selectedFilter === state ? null : state);
   };
 
   const renderTaskItem = ({ item }) => (
-    <ContainerDelete
+    <TaskContainer
       labelTitle={item.title}
       labelText={item.description}
-      onPress={() => handleShowPopUp(item.id)}
+      onAddPersonPress={() => handleAddPersonPopUp(item.id)}
+      onTrashPress={() => handleDeletePopUp(item.id)}
+      onCheckPress={() => handleCheckPopUp(item.id)}
+      done={item.done}
     />
   );
 
   if (!obra) {
-    return <Text>Loading...</Text>; // Display loading message until obra is fetched
+    return <Text>Loading...</Text>;
   }
 
   return (
@@ -146,6 +195,16 @@ const obraTarefas = () => {
       </View>
 
       <Text style={styles.tasksHeader}>Tarefas</Text>
+
+      <EmployeesPopup
+          visible={popupVisible}
+          id={id}
+          onConfirm={(selectedEmployeeIds) => {
+            console.log("Selected Employee IDs:", selectedEmployeeIds);
+            handleAssignTask(selectedEmployeeIds);
+          }}
+          onClose={() => setPopupVisible(false)}
+        />
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => filterByState(true)}>

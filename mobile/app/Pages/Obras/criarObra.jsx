@@ -66,8 +66,8 @@ const AddWorkScreen = () => {
         title,
         info: {
           location: address,
-          hours: "0", // Default hours
-          paid: false, // Default paid status
+          hours: "0",
+          paid: false,
         },
         done: false,
         quotes: [],
@@ -77,7 +77,12 @@ const AddWorkScreen = () => {
       
       obrasData.push(newWork);
     
-      router.push("/Pages/Obras/obraPage"); 
+      router.push({
+        pathname: "Pages/Obras/obraPage",
+        params: {
+          id: newWork.id,
+        },
+      })
     
   };
 

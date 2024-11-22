@@ -4,42 +4,32 @@ import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { usePopUp } from "../../../_layout"; // Import usePopUp
+import { usePopUp } from "../../../_layout";
 import obrasData from "../../../../data/obras.json";
 import tasksData from "../../../../data/tasks.json";
-//import CheckBox from "@react-native-community/checkbox";
-import SelectDropdown from "react-native-select-dropdown";
-import EmployeesPopup from "../../../../components/EmployeesPop";
 
-const testData = [
-  { title: "opção 1" },
-  { title: "opção 2" },
-  { title: "opção 3" },
-];
 
 const obraTarefaAdd = () => {
   const router = useRouter();
 
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
-  const [isChecked, setChecked] = useState(false);
 
   const { id } = useLocalSearchParams();
 
-  const [obra, setObra] = useState(null); // State to hold the obra data
+  const [obra, setObra] = useState(null);
   const [tasks, setTasks] = useState(
     tasksData.filter((item) => item.obraId == id)
   );
 
-  const { showPopUp } = usePopUp(); // Get showPopUp function
+  const { showPopUp } = usePopUp(); 
 
-  // Function to get obra by obraId
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id === id);
     if (foundObra) {
-      setObra(foundObra); // Set the obra if found
+      setObra(foundObra);
     } else {
-      setObra(null); // Reset if obraId is not found
+      setObra(null);
     }
   };
 
@@ -59,6 +49,30 @@ const obraTarefaAdd = () => {
       fetchObraTasks(obraId);
     }
   }, [id]);
+
+  const handleConfirmButtonPress = () => {
+    if (taskTitle == "" || taskDescription == "") {
+      handleInvalidInput();
+    }
+    else{
+      handleShowPopUp();
+    }
+  }
+
+  const handleInvalidInput = () => {
+    showPopUp({
+      title: "Dados Inválidos",
+      message: "Por favor preencha todos os campos.",
+      primaryBtn: {
+        label: "Ok",
+        onPress: () => console.log("Ok button pressed"),
+      },
+      secondaryBtn: {
+        label: "",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
 
 
   const handleShowPopUp = () => {
@@ -86,9 +100,6 @@ const obraTarefaAdd = () => {
     };
 
     tasksData.push(newTask);
-    //console.log("Tasks Data: ", tasksData);
-
-    console.log("New task: ", newTask);
 
     router.push({
       pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
@@ -137,7 +148,7 @@ const obraTarefaAdd = () => {
             label={"Confirmar"}
             width={330}
             height={50}
-            onPress={() => handleShowPopUp()}
+            onPress={() => handleConfirmButtonPress()}
           />
         </TouchableOpacity>
       </View>

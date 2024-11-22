@@ -1,54 +1,80 @@
 [
   {
     "id": "e101",
-    "name": "António Ferreira"
+    "name": "António Ferreira",
+    "obrasIds": ["1"],
+    "contact": "+351 913456789"
   },
   {
     "id": "e102",
-    "name": "Bruno Silva"
+    "name": "Bruno Silva",
+    "obrasIds": ["1"],
+    "contact": "+351 926789012"
   },
   {
     "id": "e103",
-    "name": "Carlos Oliveira"
+    "name": "Carlos Oliveira",
+    "obrasIds": ["1"],
+    "contact": "+351 933456123"
   },
   {
     "id": "e104",
-    "name": "Diogo Costa"
+    "name": "Diogo Costa",
+    "obrasIds": ["1"],
+    "contact": "+351 968123456"
   },
   {
     "id": "e105",
-    "name": "Eduardo Santos"
+    "name": "Eduardo Santos",
+    "obrasIds": ["2", "3"],
+    "contact": "+351 912345678"
   },
   {
     "id": "e106",
-    "name": "Fábio Rodrigues"
+    "name": "Fábio Rodrigues",
+    "obrasIds": ["2", "3"],
+    "contact": "+351 927654321"
   },
   {
     "id": "e107",
-    "name": "Gonçalo Pereira"
+    "name": "Gonçalo Pereira",
+    "obrasIds": ["2", "3", "4"],
+    "contact": "+351 939876543"
   },
   {
     "id": "e108",
-    "name": "Hugo Sousa"
+    "name": "Hugo Sousa",
+    "obrasIds": [],
+    "contact": "+351 963210987"
   },
   {
     "id": "e109",
-    "name": "Ivan Torres"
+    "name": "Ivan Torres",
+    "obrasIds": [],
+    "contact": "+351 914567890"
   },
   {
     "id": "e110",
-    "name": "João Almeida"
+    "name": "João Almeida",
+    "obrasIds": [],
+    "contact": "+351 928765432"
   },
   {
     "id": "e111",
-    "name": "Jacinto Trincado"
+    "name": "Jacinto Trincado",
+    "obrasIds": [],
+    "contact": "+351 937654890"
   },
   {
     "id": "e112",
-    "name": "Paulo Duarte"
+    "name": "Paulo Duarte",
+    "obrasIds": [],
+    "contact": "+351 967123456"
   },
   {
     "id": "e113",
-    "name": "Manuel Mendes"
+    "name": "Manuel Mendes",
+    "obrasIds": [],
+    "contact": "+351 911234567"
   }
 ]
