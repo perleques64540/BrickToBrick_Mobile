@@ -11,13 +11,18 @@ import ContainerDelete from "../../../../components/ContainerDelete";
 import OrangeButton from "../../../../components/OrangeButton";
 import OrangeEmptyButton from "../../../../components/OrangeEmptyButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import taskData from "../../../../data/tasks.json"; // Import your obras data JSON file
+import tasksData from "../../../../data/tasks.json"; // Import your obras data JSON file
 import obrasData from "../../../../data/obras.json";
+import { usePopUp } from "../../../_layout"; // Import usePopUp
 
 const obraTarefas = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
+  const [tasks, setTasks] = useState(
+    tasksData.filter((item) => item.obraId == id)
+  );
+  const [doneTasks, setDoneTasks] = useState([]);
 
   // Function to get obra by obraId
   const fetchObraById = (id) => {
@@ -29,22 +34,60 @@ const obraTarefas = () => {
     }
   };
 
+  const { showPopUp } = usePopUp(); // Get showPopUp function
 
-  const [task, setTasks] = useState(taskData.filter((item) => item.obraId == id)); // State to hold the obras data
+  const handleShowPopUp = (itemId) => {
+    showPopUp({
+      title: "Apagar Tarefa?",
+      message: "Tem a certeza que deseja apagar esta tarefa?",
+      primaryBtn: {
+        label: "Sim",
+        onPress: () => handleDeleteItem(itemId),
+      },
+      secondaryBtn: {
+        label: "Não",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
+
+  const handleDeleteItem = (itemId) => {
+    // Remove the item from the list by filtering it out
+    const updatedData = fetchObraTasks(itemId); //lista de tasks sem a task que queremos apagar
+    //TODO: dar delete da task no json das tasks
+    setTasks(updatedData); //TODO: mudar para dar push do updatedData para um notificações.json
+  };
+
+  const fetchObraTasks = (id) => {
+    const taskTmp = tasksData.filter((item) => item.obraId == id);
+    if (taskTmp) {
+      setTasks(taskTmp);
+      countDoneTasks();
+    } else {
+      setTasks([]);
+    }
+  };
+
+  const countDoneTasks = () => {
+    const doneTasksTmp = tasks.filter((item) => item.done == true);
+    setDoneTasks(doneTasksTmp);
+  };
+
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   useEffect(() => {
     if (id) {
       const obraId = parseInt(id, 10); // Convert `id` to a number
       fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      fetchObraTasks(obraId);
     }
   }, [id]); // Ensure that useEffect watches the id.
 
   // Load obra data (from local file or API)
   useEffect(() => {
-    let aux = taskData.filter((item) => item.obraId == id);
+    let aux = tasksData.filter((item) => item.obraId == id);
     if (selectedFilter !== null) {
-      aux = aux.filter((task) => task.done === selectedFilter);
+      aux = aux.filter((tasks) => tasks.done === selectedFilter);
     }
     setTasks(aux);
   }, [selectedFilter]);
@@ -55,7 +98,11 @@ const obraTarefas = () => {
   };
 
   const renderTaskItem = ({ item }) => (
-    <ContainerDelete labelTitle={item.title} labelText={item.description} />
+    <ContainerDelete
+      labelTitle={item.title}
+      labelText={item.description}
+      onPress={() => handleShowPopUp(item.id)}
+    />
   );
 
   if (!obra) {
@@ -65,12 +112,16 @@ const obraTarefas = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() =>
-          router.push({ pathname: "Pages/Obras/obraPage",
-            params: {
-              id: id
-            }
-        })}>
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "Pages/Obras/obraPage",
+              params: {
+                id: id,
+              },
+            })
+          }
+        >
           <Image
             source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
@@ -88,7 +139,7 @@ const obraTarefas = () => {
             Estado: {obra.done ? "Concluida" : "Em progresso"}
           </Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
+            Tarefas concluídas: {doneTasks.length}/{tasks.length}
           </Text>
         </View>
       </View>
@@ -101,7 +152,7 @@ const obraTarefas = () => {
             label={"Concluídas"}
             width={160}
             height={45}
-            selected= {selectedFilter === true}
+            selected={selectedFilter === true}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => filterByState(false)}>
@@ -109,13 +160,14 @@ const obraTarefas = () => {
             label={"Por fazer"}
             width={160}
             height={45}
-            selected= {selectedFilter === false}
+            selected={selectedFilter === false}
           />
         </TouchableOpacity>
       </View>
+
       <View style={styles.taskContainer}>
         <FlatList
-          data={task}
+          data={tasks}
           renderItem={renderTaskItem}
           keyExtractor={(item) => item.id}
         />
@@ -129,7 +181,7 @@ const obraTarefas = () => {
               router.push({
                 pathname: "/Pages/Obras/Tarefas/obraTarefaAdd",
                 params: {
-                  id: id
+                  id: id,
                 },
               })
             }

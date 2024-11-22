@@ -1,23 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { usePopUp } from "../../../_layout"; // Import usePopUp
-import taskData from "../../../../data/tasks.json";
+import obrasData from "../../../../data/obras.json";
+import tasksData from "../../../../data/tasks.json";
+//import CheckBox from "@react-native-community/checkbox";
+import SelectDropdown from "react-native-select-dropdown";
+import EmployeesPopup from "../../../../components/EmployeesPop";
+
+const testData = [
+  { title: "opção 1" },
+  { title: "opção 2" },
+  { title: "opção 3" },
+];
 
 const obraTarefaAdd = () => {
   const router = useRouter();
+
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [isChecked, setChecked] = useState(false);
+
   const { id } = useLocalSearchParams();
-  const { title } = useLocalSearchParams();
-  const { state } = useLocalSearchParams();
+
+  const [obra, setObra] = useState(null); // State to hold the obra data
+  const [tasks, setTasks] = useState(
+    tasksData.filter((item) => item.obraId == id)
+  );
 
   const { showPopUp } = usePopUp(); // Get showPopUp function
 
-  const handleShowPopUp = (itemId) => {
+  // Function to get obra by obraId
+  const fetchObraById = (id) => {
+    const foundObra = obrasData.find((item) => item.id === id);
+    if (foundObra) {
+      setObra(foundObra); // Set the obra if found
+    } else {
+      setObra(null); // Reset if obraId is not found
+    }
+  };
+
+  const fetchObraTasks = (id) => {
+    const taskTmp = tasksData.filter((item) => item.obraId == id);
+    if (taskTmp) {
+      setTasks(taskTmp);
+    } else {
+      setTasks([]);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      const obraId = parseInt(id, 10);
+      fetchObraById(obraId);
+      fetchObraTasks(obraId);
+    }
+  }, [id]);
+
+
+  const handleShowPopUp = () => {
     showPopUp({
       title: "Criar Tarefa?",
       message: "Tem a certeza que deseja criar esta tarefa?",
@@ -26,8 +70,7 @@ const obraTarefaAdd = () => {
         onPress: () => handleCreateTask(),
       },
       secondaryBtn: {
-        label: "Não",
-        onPress: () => console.log("Cancel button pressed"),
+        label: "Não"
       },
     });
   };
@@ -35,21 +78,25 @@ const obraTarefaAdd = () => {
   const handleCreateTask = () => {
     const newTask = {
       id: Date.now(),
-      obraId: id,
+      obraId: obra.id,
       title: taskTitle,
       description: taskDescription,
       employeeId: "",
-      done: false
+      done: false,
     };
-    taskData.push(newTask);
+
+    tasksData.push(newTask);
+    //console.log("Tasks Data: ", tasksData);
+
+    console.log("New task: ", newTask);
 
     router.push({
       pathname: "/Pages/Obras/Tarefas/obraTarefaAddSuccess",
       params: {
-        id: id
+        id: newTask.id,
       },
     });
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -72,13 +119,14 @@ const obraTarefaAdd = () => {
           value={taskTitle}
           onChangeText={setTaskTitle}
         />
+
         <TextBox
           label={"Descrição"}
           backgroundColor={"white"}
           textcolor={"black"}
           width={330}
           height={50}
-          value = {taskDescription}
+          value={taskDescription}
           onChangeText={setTaskDescription}
         />
       </View>
@@ -89,9 +137,7 @@ const obraTarefaAdd = () => {
             label={"Confirmar"}
             width={330}
             height={50}
-            onPress={() =>
-              handleShowPopUp()
-            }
+            onPress={() => handleShowPopUp()}
           />
         </TouchableOpacity>
       </View>
@@ -105,9 +151,7 @@ const obraTarefaAdd = () => {
               router.push({
                 pathname: "/Pages/Obras/Tarefas/obraTarefas",
                 params: {
-                  id: id, // Pass obra ID to the details page
-                  title: title,
-                  state: state,
+                  id: id,
                 },
               })
             }
@@ -123,7 +167,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 50,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   imagePostion: {
     alignContent: "center",

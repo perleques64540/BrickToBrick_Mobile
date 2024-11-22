@@ -12,6 +12,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState, useEffect } from "react";
 
 import obrasData from "../../../../data/obras.json";
+import tasksData from "../../../../data/tasks.json";
 import orcamentosData from "../../../../data/quotes.json";
 
 
@@ -20,6 +21,8 @@ const obraOrcamentoPage = () => {
 
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
+  const [tasks, setTasks] = useState(tasksData.filter((item) => item.obraId == id));
+  const [doneTasks, setDoneTasks] = useState([])
 
   // Function to get obra by obraId
   const fetchObraById = (id) => {
@@ -30,6 +33,21 @@ const obraOrcamentoPage = () => {
       setObra(null); // Reset if obraId is not found
     }
   };
+
+  const fetchObraTasks = (id) => {
+    const taskTmp = tasksData.filter((item) => item.obraId == id);
+    if (taskTmp) {
+      setTasks(taskTmp);
+      countDoneTasks();
+    } else {
+      setTasks([]);
+    }
+  }
+
+  const countDoneTasks = () => {
+    const doneTasksTmp = tasks.filter((item) => item.done == true);
+    setDoneTasks(doneTasksTmp);
+  }
 
   const [orcamentos, setOrcamentos] = useState([]); // State to hold the obra data
   const fetchOrcamentosObra = (id) => {
@@ -45,6 +63,7 @@ const obraOrcamentoPage = () => {
     if (id) {
       const obraId = parseInt(id, 10); // Convert `id` to a number
       fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      fetchObraTasks(obraId);
       fetchOrcamentosObra(obraId);
     }
   }, [id]); // Ensure that useEffect watches the id.
@@ -92,7 +111,7 @@ const obraOrcamentoPage = () => {
             Estado: {obra.done ? "Concluida" : "Em progresso"}
           </Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
+            Tarefas concluídas: {doneTasks.length}/{tasks.length}
           </Text>
         </View>
       </View>

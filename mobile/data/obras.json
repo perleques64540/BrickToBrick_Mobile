@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "title": "New York, 5th Avenue",
+    "title": "Construção de Edifício Comercial",
     "info": {
-      "location": "New York, 5th Avenue",
+      "location": "Lisboa, Avenida da Liberdade",
       "hours": "10",
       "paid": true
     },
@@ -13,9 +13,9 @@
   },
   {
     "id": 2,
-    "title": "Los Angeles, Sunset Boulevard",
+    "title": "Reforma de Residência",
     "info": {
-      "location": "Los Angeles, Sunset Boulevard",
+      "location": "Porto, Rua de Santa Catarina",
       "hours": "8",
       "paid": false
     },
@@ -25,9 +25,9 @@
   },
   {
     "id": 3,
-    "title": "Chicago, Michigan Avenue",
+    "title": "Construção de Shopping Center",
     "info": {
-      "location": "Chicago, Michigan Avenue",
+      "location": "Coimbra, Avenida Fernão de Magalhães",
       "hours": "12",
       "paid": true
     },
@@ -37,9 +37,9 @@
   },
   {
     "id": 4,
-    "title": "Miami, Ocean Drive",
+    "title": "Construção de Parque Residencial",
     "info": {
-      "location": "Miami, Ocean Drive",
+      "location": "Faro, Rua de Santo António",
       "hours": "9",
       "paid": false
     },
@@ -49,9 +49,9 @@
   },
   {
     "id": 5,
-    "title": "Houston, Main Street",
+    "title": "Construção de Escritórios Corporativos",
     "info": {
-      "location": "Houston, Main Street",
+      "location": "Braga, Avenida Central",
       "hours": "11",
       "paid": true
     },
@@ -61,9 +61,9 @@
   },
   {
     "id": 6,
-    "title": "San Francisco, Market Street",
+    "title": "Construção de Centro Tecnológico",
     "info": {
-      "location": "San Francisco, Market Street",
+      "location": "Sintra, Estrada de Monserrate",
       "hours": "10",
       "paid": true
     },
@@ -73,9 +73,9 @@
   },
   {
     "id": 7,
-    "title": "Seattle, Pike Place",
+    "title": "Reforma de Mercado Público",
     "info": {
-      "location": "Seattle, Pike Place",
+      "location": "Funchal, Mercado dos Lavradores",
       "hours": "8",
       "paid": false
     },
@@ -85,9 +85,9 @@
   },
   {
     "id": 8,
-    "title": "Boston, Beacon Hill",
+    "title": "Construção de Complexo Habitacional",
     "info": {
-      "location": "Boston, Beacon Hill",
+      "location": "Guimarães, Rua da Rainha",
       "hours": "12",
       "paid": true
     },
@@ -97,9 +97,9 @@
   },
   {
     "id": 9,
-    "title": "Denver, Cherry Creek",
+    "title": "Construção de Centro Comercial",
     "info": {
-      "location": "Denver, Cherry Creek",
+      "location": "Aveiro, Cais da Fonte Nova",
       "hours": "9",
       "paid": true
     },
@@ -109,9 +109,9 @@
   },
   {
     "id": 10,
-    "title": "Atlanta, Peachtree Street",
+    "title": "Reforma de Prédio Residencial",
     "info": {
-      "location": "Atlanta, Peachtree Street",
+      "location": "Cascais, Alameda dos Combatentes",
       "hours": "10",
       "paid": false
     },

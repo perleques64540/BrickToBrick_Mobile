@@ -9,8 +9,8 @@ const ContainerImage = ({ path, labelTitle, labelText }) => {
         style={styles.Image}
       />
       <View style={styles.content}>
-      <Text style={styles.TextTitle}>{labelTitle}</Text>
-      <Text style={styles.TextBody}>{labelText}</Text>
+      <Text style={styles.TextTitle} numberOfLines={1}>{labelTitle}</Text>
+      <Text style={styles.TextBody} numberOfLines={2}>{labelText}</Text>
       </View>
     </View>
   );
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     marginBottom: 10,
   },
-  content:{
-    marginLeft:10,
+  content: {
+    marginLeft: 10,
+    flex: 1, // Ensures text shrinks instead of overflowing the container
   },
   Image: {
     width: 90,

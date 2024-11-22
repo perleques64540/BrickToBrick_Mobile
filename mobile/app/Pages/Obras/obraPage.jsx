@@ -11,6 +11,7 @@ import ContainerDelete from "../../../components/ContainerDelete";
 import Container from "../../../components/Container";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import obrasData from "../../../data/obras.json";
+import tasksData from "../../../data/tasks.json";
 import { Dimensions } from 'react-native';
 
 const DATA = [
@@ -35,6 +36,9 @@ const obraPage = () => {
 
   const { id } = useLocalSearchParams(); // Fetch the id from URL params
   const [obra, setObra] = useState(null); // State to hold the obra data
+  const [tasks, setTasks] = useState(tasksData.filter((item) => item.obraId == id));
+  const [doneTasks, setDoneTasks] = useState([])
+
   // Function to get obra by obraId
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id === id);
@@ -45,10 +49,26 @@ const obraPage = () => {
     }
   };
 
+  const fetchObraTasks = (id) => {
+    const taskTmp = tasksData.filter((item) => item.obraId == id);
+    if (taskTmp) {
+      setTasks(taskTmp);
+      countDoneTasks();
+    } else {
+      setTasks([]);
+    }
+  }
+
+  const countDoneTasks = () => {
+    const doneTasksTmp = tasks.filter((item) => item.done == true);
+    setDoneTasks(doneTasksTmp);
+  }
+
   useEffect(() => {
     if (id) {
       const obraId = parseInt(id, 10); // Convert `id` to a number
       fetchObraById(obraId); // This will call fetchObraById with the numeric id
+      fetchObraTasks(obraId);
     }
   }, [id]); // Ensure that useEffect watches the id.
 
@@ -86,7 +106,7 @@ const obraPage = () => {
             Estado: {obra.done ? "Concluida" : "Em progresso"}
           </Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: 12/24 {/*TODO: necessário?*/}
+            Tarefas concluídas: {doneTasks.length}/{tasks.length}
           </Text>
         </View>
       </View>

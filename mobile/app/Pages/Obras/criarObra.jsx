@@ -35,24 +35,50 @@ const AddWorkScreen = () => {
     });
   };
 
-  const handleAddWork = async () => {  
-    const newWork = {
-      id: Date.now(),
-      title,
-      info: {
-        location: address,
-        hours: "0", // Default hours
-        paid: false, // Default paid status
+  const handleInvalidInput = () => {
+    showPopUp({
+      title: "Dados Inválidos",
+      message: "Por favor preencha todos os campos.",
+      primaryBtn: {
+        label: "Ok",
+        onPress: () => console.log("Ok button pressed"),
       },
-      done: false,
-      quotes: [],
-      tasks: [],
-      employees: [],
-    };
+      secondaryBtn: {
+        label: "",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
+
+  const handleConfirmButtonPress = () => {
+    if (title == "" || clientName == "" || address == "" || description == "") {
+      console.log("Invalid input");
+      handleInvalidInput();
+    }
+    else{
+      handleShowPopUp();
+    }
+  }
+
+  const handleAddWork = async () => {  
+      const newWork = {
+        id: Date.now(),
+        title,
+        info: {
+          location: address,
+          hours: "0", // Default hours
+          paid: false, // Default paid status
+        },
+        done: false,
+        quotes: [],
+        tasks: [],
+        employees: [],
+      };
+      
+      obrasData.push(newWork);
     
-    obrasData.push(newWork);
-  
-    router.push("/Pages/Obras/obraPage"); 
+      router.push("/Pages/Obras/obraPage"); 
+    
   };
 
   return (
@@ -96,7 +122,7 @@ const AddWorkScreen = () => {
 
       <OrangeButton
         label={"Confirmar"}
-        onPress={handleShowPopUp}
+        onPress={handleConfirmButtonPress}
       />
       <GreyButton
         label={"Cancelar"}
