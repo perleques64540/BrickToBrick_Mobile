@@ -192,10 +192,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     width: "100%",
-    marginTop: 10,
+    paddingTop: 10,
+    flex: 1,
+    paddingBottom: 20
   },
   buttonContainer: {
     alignSelf: "center",
+    width: "80%",
+    marginBottom: 30,
   },
 });
 

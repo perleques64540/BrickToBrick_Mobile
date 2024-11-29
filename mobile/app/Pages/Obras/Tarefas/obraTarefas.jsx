@@ -136,7 +136,7 @@ const obraTarefas = () => {
       aux = aux.filter((tasks) => tasks.done === selectedFilter);
     }
     setTasks(aux);
-  }, [selectedFilter]);
+  }, [selectedFilter, tasks]);
 
   const filterByState = (state) => {
     setSelectedFilter(selectedFilter === state ? null : state);
@@ -187,7 +187,8 @@ const obraTarefas = () => {
             Estado: {obra.done ? "Concluida" : "Em progresso"}
           </Text>
           <Text style={styles.headerDescription}>
-            Tarefas concluídas: {doneTasks.length}/{tasks.length}
+            {selectedFilter ? "Tarefas Concluídas" : selectedFilter === null ? "Tarefas" : "Tarefas Pendentes"}
+            : {tasks.length}
           </Text>
         </View>
       </View>
@@ -215,7 +216,7 @@ const obraTarefas = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => filterByState(false)}>
           <OrangeEmptyButton
-            label={"Por fazer"}
+            label={"Pendentes"}
             width={160}
             height={45}
             selected={selectedFilter === false}
@@ -295,16 +296,18 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   taskContainer: {
-    marginTop: -20,
     alignItems: "center",
+    alignContent: "center",
+    alignSelf: "center",
+    width: "100%",
     flex: 1,
-    height: 450,
+    paddingTop: 10,
+    paddingBottom: 20
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20,
-    alignItems: "center",
+    marginTop: 10
   },
   tasksHeader: {
     fontSize: 24,
@@ -312,7 +315,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   bottomButton: {
-    marginBottom: 20,
+    marginBottom:30,
   },
   emptyContainer: {
     flex: 1,

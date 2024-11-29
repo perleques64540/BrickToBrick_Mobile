@@ -3,7 +3,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const ContainerDelete = ({labelTitle,labelText,...rest}) => {
+const NotificationContainer = ({labelTitle,labelText,...rest}) => {
     return (
         <View style={styles.ContainerDelete}> 
             <View style={styles.content}>
@@ -50,8 +50,6 @@ const styles = StyleSheet.create({
         marginTop: 2,
         fontSize: 14,      
     },
-    BinImage:{
-    },
 });
 
-export default ContainerDelete;
+export default NotificationContainer;

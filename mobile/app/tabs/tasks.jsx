@@ -72,7 +72,7 @@ const App = () => {
             style={styles.button}
           >
             <OrangeEmptyButton
-              label={"Por fazer"} 
+              label={"Pendentes"} 
               width={150}
               height={45}
               selected={selectedFilter === false}

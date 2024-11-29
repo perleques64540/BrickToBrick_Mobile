@@ -94,7 +94,7 @@ const obraOrcamentoPage = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.backArrowContainer}>
-          <TouchableOpacity onPress={() => router.push("/")}>
+          <TouchableOpacity onPress={() => router.back()}>//NOT SURE, acho que há um caso que tem de ser push
             <Image
               source={require("../../../../Images/backArrow.png")}
               style={styles.backArrowImage}

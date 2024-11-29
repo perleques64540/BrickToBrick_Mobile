@@ -162,7 +162,15 @@ const obraPage = () => {
 
       <View style={styles.taskContainer}>
         <Text style={styles.headerTitle}>Últimas tarefas</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() =>
+          router.push({
+            pathname: "/Pages/Obras/Tarefas/obraTarefas",
+            params: {
+              id: id
+            },
+          })
+        }>
           <Text style={styles.viewAllText}>Ver todas</Text>
         </TouchableOpacity>
       </View>

@@ -62,7 +62,7 @@ const obraTarefasConcluidas = () => {
           />
         </TouchableOpacity>
         <TouchableOpacity>
-          <OrangeEmptyButton label={"Por fazer"} width={160} height={45} />
+          <OrangeEmptyButton label={"Pendentes"} width={160} height={45} />
         </TouchableOpacity>
       </View>
       <View style={styles.taskContainer}>
