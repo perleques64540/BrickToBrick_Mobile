@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faPersonCirclePlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPersonCirclePlus, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 
 const TaskContainer = ({
   labelTitle,
@@ -9,6 +9,7 @@ const TaskContainer = ({
   onAddPersonPress,
   onTrashPress,
   onCheckPress,
+  onXmarkPress,
   done,
 }) => {
   return (
@@ -27,6 +28,11 @@ const TaskContainer = ({
         {!done && (
           <TouchableOpacity onPress={onCheckPress}>
             <FontAwesomeIcon icon={faCheck} color="#333333" size={23} />
+          </TouchableOpacity>
+        )}
+        {done && (
+          <TouchableOpacity onPress={onXmarkPress}>
+            <FontAwesomeIcon icon={faXmark} color="#333333" size={23} />
           </TouchableOpacity>
         )}
       </View>

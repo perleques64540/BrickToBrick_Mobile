@@ -94,6 +94,35 @@ const obraTarefas = () => {
     });
   };
 
+  const handleXmarkPopUp = (itemId) => {
+    showPopUp({
+      title: "Definir tarefa como pendente?",
+      message: "Tem a certeza que deseja dar como pendente esta tarefa?",
+      primaryBtn: {
+        label: "Sim",
+        onPress: () => handleMarkAsUndone(itemId),
+      },
+      secondaryBtn: {
+        label: "Não",
+        onPress: () => console.log("Cancel button pressed"),
+      },
+    });
+  };
+
+  const handleMarkAsUndone = (itemId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === itemId ? { ...task, done: !task.done } : task
+    );
+
+    tasksData.forEach((task) => {
+      if (task.id === itemId) {
+        task.done = false;
+      }
+    });
+    setTasks(updatedTasks);
+    countDoneTasks(updatedTasks);
+  };
+
   const handleMarkAsDone = (itemId) => {
     const updatedTasks = tasks.map((task) =>
       task.id === itemId ? { ...task, done: !task.done } : task
@@ -149,6 +178,7 @@ const obraTarefas = () => {
       onAddPersonPress={() => handleAddPersonPopUp(item.id)}
       onTrashPress={() => handleDeletePopUp(item.id)}
       onCheckPress={() => handleCheckPopUp(item.id)}
+      onXmarkPress={() => handleXmarkPopUp(item.id)}
       done={item.done}
     />
   );
