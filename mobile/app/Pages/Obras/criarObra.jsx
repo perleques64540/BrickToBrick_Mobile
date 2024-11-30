@@ -43,10 +43,6 @@ const AddWorkScreen = () => {
         label: "Ok",
         onPress: () => console.log("Ok button pressed"),
       },
-      secondaryBtn: {
-        label: "",
-        onPress: () => console.log("Cancel button pressed"),
-      },
     });
   };
 

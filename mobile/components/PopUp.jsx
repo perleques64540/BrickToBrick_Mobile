@@ -54,10 +54,12 @@ const PopUp = ({ title, message, primaryBtn, secondaryBtn, isVisible }) => {
           label={primaryBtn?.label || 'Ok'}
           onPress={primaryBtn?.onPress || (() => {})}
         />
-        <GreyButton
+        {secondaryBtn && (
+          <GreyButton
           label={secondaryBtn?.label || 'Cancelar'}
           onPress={secondaryBtn?.onPress || (() => {})}
         />
+        )}
       </Animated.View>
     </Animated.View>
   );

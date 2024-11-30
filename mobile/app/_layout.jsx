@@ -16,7 +16,7 @@ const Layout = () => {
     title: "",
     message: "",
     primaryBtn: { label: "Ok", onPress: () => {} },
-    secondaryBtn: { label: "Cancel", onPress: () => {} },
+    //secondaryBtn: { label: "Cancel", onPress: () => {} },
   });
 
   const showPopUp = (config) => {
@@ -51,13 +51,15 @@ const Layout = () => {
                 hidePopUp();
               },
             }}
-            secondaryBtn={{
-              label: popUpConfig.secondaryBtn.label,
-              onPress: () => {
-                popUpConfig.secondaryBtn.onPress();
-                hidePopUp();
+            secondaryBtn={
+              popUpConfig.secondaryBtn && {
+                label: popUpConfig.secondaryBtn.label,
+                onPress: () => {
+                  popUpConfig.secondaryBtn.onPress();
+                  hidePopUp();
               },
-            }}
+            }
+          }
             isVisible={isPopUpVisible}
           />
         </View>
