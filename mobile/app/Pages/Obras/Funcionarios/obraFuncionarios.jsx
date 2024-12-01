@@ -16,33 +16,6 @@ import tasksData from "../../../../data/tasks.json";
 import EmptyList from "../../../../components/EmptyList";
 import employeesData from "../../../../data/employees.json";
 
-const DATA = [
-  {
-    id: "1",
-    title: "Zé Manel da Silva",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "2",
-    title: "Zé Manel da Silva",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "3",
-    title: "Zé Manel da Silva",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-  {
-    id: "4",
-    title: "Zé Manel da Silva",
-    description:
-      "Tarefa concluída por Quim Roscas em Rua de esquina com farmácia",
-  },
-];
-
 const obraFuncionarios = () => {
   const router = useRouter();
 
@@ -107,7 +80,14 @@ const obraFuncionarios = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
+        <TouchableOpacity onPress={() =>
+              router.push({
+                pathname: "/Pages/Obras/obraPage",
+                params: {
+                  id: id, 
+                },
+              })
+            }>
           <Image
             source={require("../../../../Images/backArrow.png")}
             style={styles.backArrowImage}
@@ -148,6 +128,9 @@ const obraFuncionarios = () => {
             onPress={() =>
               router.push({
                 pathname: "Pages/Obras/Funcionarios/obraFuncionariosPage",
+                params: {
+                  id: id,
+                },
               })
             }
           />

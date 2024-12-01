@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { YellowBox } from "react-native-web";
 
 const obraFuncionariosPageDone = () => {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
 
   return (
     <View style={styles.container}>
@@ -24,7 +25,12 @@ const obraFuncionariosPageDone = () => {
           <OrangeButton
             label={"Voltar"}
             onPress={() =>
-              router.push("Pages/Obras/Funcionarios/obraFuncionarios")
+              router.push({
+                pathname: "/Pages/Obras/Funcionarios/obraFuncionarios",
+                params: {
+                  id: id, 
+                },
+              })
             }
           />
         </TouchableOpacity>

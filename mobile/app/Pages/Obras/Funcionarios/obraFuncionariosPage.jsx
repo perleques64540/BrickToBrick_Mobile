@@ -3,11 +3,55 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import GreyButton from "../../../../components/GreyButton";
 import TextBox from "../../../../components/TextBox";
-import { useRouter } from "expo-router";
-import { YellowBox } from "react-native-web";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import employeesData from "../../../../data/employees.json";
+import { useState } from "react";
+import { usePopUp } from "../../../_layout";
 
 const obraFuncionariosPage = () => {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
+  const [funcionarioName, setFuncionarioName] = useState("");
+  const [funcionarioContact, setFuncionarioContact] = useState("");
+  const { showPopUp } = usePopUp();
+
+
+  const handleCreateFuncionario = () => {
+    const newFuncionario = {
+      id: Date.now(),
+      name: funcionarioName,
+      obrasIds: [id],
+      contact: funcionarioContact,
+    };
+
+    employeesData.push(newFuncionario);
+
+    router.push({
+      pathname: "Pages/Obras/Funcionarios/obraFuncionariosPageDone",
+      params: {
+        id: id,
+      },
+    });
+  }
+
+  const handleInvalidInput = () => {
+    showPopUp({
+      title: "Dados Inválidos",
+      message: "Por favor preencha todos os campos.",
+      primaryBtn: {
+        label: "Ok",
+        onPress: () => console.log("Ok button pressed"),
+      },
+    });
+  };
+
+  const handleConfirmButtonPress = () => {
+    if (funcionarioName == "" || funcionarioContact == "") {
+      handleInvalidInput();
+    } else {
+      handleCreateFuncionario();
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -20,13 +64,27 @@ const obraFuncionariosPage = () => {
 
       <Text style={styles.title}>Adicionar Funcionário</Text>
 
-      <View style={styles.textInputContainer}>
+      <View>
+        <TextBox
+          label={"Nome"}
+          width={360}
+          textcolor={"black"}
+          borderColor={"black"}
+          backgroundColor={"white"}
+          value={funcionarioName}
+          onChangeText={setFuncionarioName}
+        />
+      </View>
+
+      <View>
         <TextBox
           label={"Email ou nº telemóvel"}
           width={360}
           textcolor={"black"}
           borderColor={"black"}
           backgroundColor={"white"}
+          value={funcionarioContact}
+          onChangeText={setFuncionarioContact}
         />
       </View>
 
@@ -37,7 +95,7 @@ const obraFuncionariosPage = () => {
             height={55}
             label={"Confirmar"}
             onPress={() =>
-              router.push("Pages/Obras/Funcionarios/obraFuncionariosPageDone")
+              handleConfirmButtonPress()
             }
           />
         </TouchableOpacity>
@@ -47,7 +105,7 @@ const obraFuncionariosPage = () => {
             height={55}
             label={"Cancelar"}
             onPress={() =>
-              router.push("Pages/Obras/Funcionarios/obraFuncionarios")
+              router.back()
             }
           />
         </TouchableOpacity>
@@ -75,6 +133,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     alignItems: "center",
+    marginBottom: 20,
   },
   textInputContainer: {
     width: 390,
