@@ -157,6 +157,8 @@ const obraTarefas = () => {
       fetchObraTasks(obraId);
       countDoneTasks(tasks);
     }
+    console.log("fetching tasks in obra tarefa page!");
+    console.log("updated tasks:", tasks);
   }, [id]);
 
   useEffect(() => {
@@ -217,7 +219,11 @@ const obraTarefas = () => {
             Estado: {obra.done ? "Concluida" : "Em progresso"}
           </Text>
           <Text style={styles.headerDescription}>
-            {selectedFilter ? "Tarefas Concluídas" : selectedFilter === null ? "Tarefas" : "Tarefas Pendentes"}
+            {selectedFilter
+              ? "Tarefas Concluídas"
+              : selectedFilter === null
+              ? "Tarefas"
+              : "Tarefas Pendentes"}
             : {tasks.length}
           </Text>
         </View>
@@ -332,12 +338,12 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10
+    marginTop: 10,
   },
   tasksHeader: {
     fontSize: 24,
@@ -345,7 +351,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   bottomButton: {
-    marginBottom:30,
+    marginBottom: 30,
   },
   emptyContainer: {
     flex: 1,

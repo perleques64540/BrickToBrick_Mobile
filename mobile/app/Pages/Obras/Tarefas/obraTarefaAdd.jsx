@@ -8,7 +8,6 @@ import { usePopUp } from "../../../_layout";
 import obrasData from "../../../../data/obras.json";
 import tasksData from "../../../../data/tasks.json";
 
-
 const obraTarefaAdd = () => {
   const router = useRouter();
 
@@ -22,7 +21,7 @@ const obraTarefaAdd = () => {
     tasksData.filter((item) => item.obraId == id)
   );
 
-  const { showPopUp } = usePopUp(); 
+  const { showPopUp } = usePopUp();
 
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id === id);
@@ -53,11 +52,10 @@ const obraTarefaAdd = () => {
   const handleConfirmButtonPress = () => {
     if (taskTitle == "" || taskDescription == "") {
       handleInvalidInput();
-    }
-    else{
+    } else {
       handleShowPopUp();
     }
-  }
+  };
 
   const handleInvalidInput = () => {
     showPopUp({
@@ -74,7 +72,6 @@ const obraTarefaAdd = () => {
     });
   };
 
-
   const handleShowPopUp = () => {
     showPopUp({
       title: "Criar Tarefa?",
@@ -84,7 +81,7 @@ const obraTarefaAdd = () => {
         onPress: () => handleCreateTask(),
       },
       secondaryBtn: {
-        label: "Não"
+        label: "Não",
       },
     });
   };

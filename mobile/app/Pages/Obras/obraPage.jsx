@@ -13,15 +13,13 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import obrasData from "../../../data/obras.json";
 import tasksData from "../../../data/tasks.json";
 
-
-
 const obraPage = () => {
-
   const { id } = useLocalSearchParams();
-  const [obra, setObra] = useState(null); 
-  const [tasks, setTasks] = useState(tasksData.filter((item) => item.obraId == id));
-  const [doneTasks, setDoneTasks] = useState([])
-
+  const [obra, setObra] = useState(null);
+  const [tasks, setTasks] = useState(
+    tasksData.filter((item) => item.obraId == id)
+  );
+  const [doneTasks, setDoneTasks] = useState([]);
 
   const fetchObraById = (id) => {
     const foundObra = obrasData.find((item) => item.id === id);
@@ -40,18 +38,20 @@ const obraPage = () => {
     } else {
       setTasks([]);
     }
-  }
+  };
 
   const countDoneTasks = () => {
     const doneTasksTmp = tasks.filter((item) => item.done == true);
     setDoneTasks(doneTasksTmp);
-  }
+  };
 
   useEffect(() => {
     if (id) {
-      const obraId = parseInt(id, 10); 
-      fetchObraById(obraId); 
+      const obraId = parseInt(id, 10);
+      fetchObraById(obraId);
       fetchObraTasks(obraId);
+      console.log("fetching tasks in obra page!");
+      console.log("updated tasks:", tasks);
     }
   }, [id]);
 
@@ -62,21 +62,20 @@ const obraPage = () => {
   );
 
   if (!obra) {
-    return <Text>Loading...</Text>; 
+    return <Text>Loading...</Text>;
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.backArrowContainer}>
-          <TouchableOpacity onPress={() => router.push('/')}>
-          <Image
-            source={require("../../../Images/backArrow.png")}
-            style={styles.backArrowImage}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push("/")}>
+            <Image
+              source={require("../../../Images/backArrow.png")}
+              style={styles.backArrowImage}
+            />
+          </TouchableOpacity>
         </View>
-        
       </View>
       <View style={styles.header}>
         <Image
@@ -107,9 +106,9 @@ const obraPage = () => {
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "/Pages/Obras/Orcamentos/obraOrcamentoPage", 
+              pathname: "/Pages/Obras/Orcamentos/obraOrcamentoPage",
               params: {
-                id: id, 
+                id: id,
               },
             })
           }
@@ -127,7 +126,7 @@ const obraPage = () => {
             router.push({
               pathname: "/Pages/Obras/Tarefas/obraTarefas",
               params: {
-                id: id
+                id: id,
               },
             })
           }
@@ -145,7 +144,7 @@ const obraPage = () => {
             router.push({
               pathname: "/Pages/Obras/Funcionarios/obraFuncionarios",
               params: {
-                id: id, 
+                id: id,
               },
             })
           }
@@ -163,19 +162,20 @@ const obraPage = () => {
       <View style={styles.taskContainer}>
         <Text style={styles.headerTitle}>Últimas tarefas</Text>
         <TouchableOpacity
-        onPress={() =>
-          router.push({
-            pathname: "/Pages/Obras/Tarefas/obraTarefas",
-            params: {
-              id: id
-            },
-          })
-        }>
+          onPress={() =>
+            router.push({
+              pathname: "/Pages/Obras/Tarefas/obraTarefas",
+              params: {
+                id: id,
+              },
+            })
+          }
+        >
           <Text style={styles.viewAllText}>Ver todas</Text>
         </TouchableOpacity>
       </View>
       <FlatList
-        data={tasks.slice(0, 2)}
+        data={tasks.reverse().slice(0, 2)}
         renderItem={renderTaskItem}
         keyExtractor={(item) => item.id}
       />
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 50,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   header: {
     alignItems: "center",
