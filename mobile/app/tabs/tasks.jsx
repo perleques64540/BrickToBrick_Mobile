@@ -36,7 +36,9 @@ const App = () => {
     );
 
     if (selectedFilter !== null) {
-      filteredTasks = filteredTasks.filter((task) => task.done === selectedFilter);
+      filteredTasks = filteredTasks.filter(
+        (task) => task.done === selectedFilter
+      );
     }
 
     setTasks(filteredTasks);
@@ -62,7 +64,7 @@ const App = () => {
           >
             <OrangeEmptyButton
               label={"Concluídas"}
-              width={150}
+              width={160}
               height={45}
               selected={selectedFilter === true}
             />
@@ -72,8 +74,8 @@ const App = () => {
             style={styles.button}
           >
             <OrangeEmptyButton
-              label={"Pendentes"} 
-              width={150}
+              label={"Pendentes"}
+              width={160}
               height={45}
               selected={selectedFilter === false}
             />
@@ -106,20 +108,15 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight || 0,
-    paddingHorizontal: 16,
   },
   title: {
     fontSize: 36,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 10,
+    paddingBottom: 20,
   },
   button: {
     borderRadius: 5,
-  },
-  listStyle: {
-    marginBottom: 20,
   },
   item: {
     flexDirection: "row",
@@ -163,6 +160,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
+    marginTop: 10,
     alignItems: "center",
   },
 });

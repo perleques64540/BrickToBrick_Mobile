@@ -79,10 +79,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#e7efef",
   },
   title: {
-    fontSize: 30,
+    fontSize: 36,
     fontWeight: "bold",
-    textAlign: "left",
-    marginBottom: 10,
+    textAlign: "center",
+    paddingBottom: 20,
   },
 });
 
