@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   View,
@@ -8,12 +8,29 @@ import {
   FlatList,
 } from "react-native";
 import employees from "../data/employees.json";
+import tasksData from "../data/tasks.json";
 import Checkbox from "expo-checkbox";
 import OrangeButton from "./OrangeButton";
 import GreyButton from "./GreyButton";
 
-const EmployeesPopup = ({ visible, onClose, onConfirm }) => {
+const EmployeesPopup = ({ visible, onClose, onConfirm, id }) => {
   const [selectedEmployees, setSelectedEmployees] = useState({});
+  const [task, setTask] = useState(null);
+
+  const fetchTaskEmployees = () => {
+    const foundTask = tasksData.find((item) => item.id == id);
+    if (foundTask) {
+      setTask(foundTask);
+      const initialSelectedEmployees = employees.reduce((acc, employee) => {
+        acc[employee.id] = foundTask.employeeId.includes(employee.id);
+        return acc;
+      }, {});
+      setSelectedEmployees(initialSelectedEmployees);
+    } else {
+      setTask(null);
+      setSelectedEmployees({});
+    }
+  };
 
   const toggleSelection = (employeeId) => {
     setSelectedEmployees((prev) => ({
@@ -41,6 +58,12 @@ const EmployeesPopup = ({ visible, onClose, onConfirm }) => {
       <Text style={styles.employeeName}>{item.name}</Text>
     </View>
   );
+
+  useEffect(() => {
+    if (visible) {
+      fetchTaskEmployees();
+    }
+  }, [visible]);
 
   return (
     <Modal visible={visible} transparent animationType="slide">

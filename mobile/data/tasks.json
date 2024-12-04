@@ -4,7 +4,7 @@
     "obraId": 1,
     "title": "Inspecionar Trabalho de Fundação",
     "description": "Garantir que a fundação está corretamente executada e cumpre os padrões de segurança.",
-    "employeeId": 101,
+    "employeeId": "e101",
     "done": false
   },
   {
@@ -12,7 +12,7 @@
     "obraId": 1,
     "title": "Coordenação de Entrega de Materiais",
     "description": "Organizar e confirmar a entrega de betão e vigas de aço.",
-    "employeeId": 101,
+    "employeeId": "e101",
     "done": true
   },
   {
@@ -20,7 +20,7 @@
     "obraId": 1,
     "title": "Atualizar Planos do Local",
     "description": "Incorporar alterações recentes nos planos do local de construção.",
-    "employeeId": 103,
+    "employeeId": "e103",
     "done": false
   },
   {
@@ -28,7 +28,7 @@
     "obraId": 2,
     "title": "Verificação de Inventário de Equipamentos",
     "description": "Verificar a disponibilidade e condição dos equipamentos de construção.",
-    "employeeId": 104,
+    "employeeId": "e104",
     "done": true
   },
   {
@@ -36,7 +36,7 @@
     "obraId": 2,
     "title": "Elaborar Diretrizes de Segurança",
     "description": "Preparar protocolos de segurança atualizados para o local de trabalho.",
-    "employeeId": 105,
+    "employeeId": "e105",
     "done": false
   },
   {
@@ -44,7 +44,7 @@
     "obraId": 2,
     "title": "Realizar Formação no Local",
     "description": "Fornecer formação em segurança e operações para novos trabalhadores de construção.",
-    "employeeId": 106,
+    "employeeId": "e106",
     "done": true
   },
   {
@@ -52,7 +52,7 @@
     "obraId": 2,
     "title": "Revisão da Alocação do Orçamento",
     "description": "Reavaliar e ajustar o orçamento para as fases em curso da construção.",
-    "employeeId": 107,
+    "employeeId": "e107",
     "done": false
   },
   {
@@ -60,7 +60,7 @@
     "obraId": 1,
     "title": "Analisar Feedback dos Empreiteiros",
     "description": "Rever o feedback dos empreiteiros para melhorar os fluxos de trabalho.",
-    "employeeId": 108,
+    "employeeId": "e108",
     "done": true
   },
   {
@@ -68,7 +68,7 @@
     "obraId": 1,
     "title": "Planejar Horário de Lançamento de Betão",
     "description": "Organizar o horário para lançamento de betão em diferentes secções.",
-    "employeeId": 109,
+    "employeeId": "e109",
     "done": false
   },
   {
@@ -76,7 +76,7 @@
     "obraId": 3,
     "title": "Fazer Cópia de Segurança dos Registos da Construção",
     "description": "Fazer uma cópia de segurança dos projetos e documentação do projeto.",
-    "employeeId": 110,
+    "employeeId": "e110",
     "done": true
   },
   {
@@ -84,7 +84,7 @@
     "obraId": 3,
     "title": "Preparar Relatório de Progresso",
     "description": "Compilar atualizações de progresso para a próxima reunião de revisão do projeto.",
-    "employeeId": 101,
+    "employeeId": "e111",
     "done": false
   },
   {
@@ -92,7 +92,7 @@
     "obraId": 4,
     "title": "Acompanhar Problemas no Local de Trabalho",
     "description": "Resolver problemas pendentes relatados no local de construção.",
-    "employeeId": 102,
+    "employeeId": "e112",
     "done": true
   }
 ]

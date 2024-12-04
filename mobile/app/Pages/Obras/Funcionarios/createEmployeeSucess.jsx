@@ -2,9 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import OrangeButton from "../../../../components/OrangeButton";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { YellowBox } from "react-native-web";
 
-const obraFuncionariosPageDone = () => {
+const createEmployeeSucess = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
 
@@ -42,7 +41,9 @@ const obraFuncionariosPageDone = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e7efef",
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column",
   },
   image: {
     height: 200,
@@ -75,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default obraFuncionariosPageDone;
+export default createEmployeeSucess;

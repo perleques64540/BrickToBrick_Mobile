@@ -50,8 +50,6 @@ const obraPage = () => {
       const obraId = parseInt(id, 10);
       fetchObraById(obraId);
       fetchObraTasks(obraId);
-      console.log("fetching tasks in obra page!");
-      console.log("updated tasks:", tasks);
     }
   }, [id]);
 

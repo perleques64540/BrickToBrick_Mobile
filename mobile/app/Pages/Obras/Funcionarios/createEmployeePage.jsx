@@ -8,13 +8,12 @@ import employeesData from "../../../../data/employees.json";
 import { useState } from "react";
 import { usePopUp } from "../../../_layout";
 
-const obraFuncionariosPage = () => {
+const createEmployeePage = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const [funcionarioName, setFuncionarioName] = useState("");
   const [funcionarioContact, setFuncionarioContact] = useState("");
   const { showPopUp } = usePopUp();
-
 
   const handleCreateFuncionario = () => {
     const newFuncionario = {
@@ -27,12 +26,12 @@ const obraFuncionariosPage = () => {
     employeesData.push(newFuncionario);
 
     router.push({
-      pathname: "Pages/Obras/Funcionarios/obraFuncionariosPageDone",
+      pathname: "Pages/Obras/Funcionarios/createEmployeeSucess",
       params: {
         id: id,
       },
     });
-  }
+  };
 
   const handleInvalidInput = () => {
     showPopUp({
@@ -62,51 +61,48 @@ const obraFuncionariosPage = () => {
         />
       </View>
 
-      <Text style={styles.title}>Adicionar Funcionário</Text>
-
-      <View>
+      <View style={styles.headerPosition}>
+        <Text style={styles.headerTitle}>Adicionar Funcionário</Text>
+      </View>
+      <View style={styles.headerPosition}>
         <TextBox
           label={"Nome"}
-          width={360}
-          textcolor={"black"}
-          borderColor={"black"}
           backgroundColor={"white"}
+          textcolor={"black"}
           value={funcionarioName}
           onChangeText={setFuncionarioName}
+          width={330}
+          height={50}
         />
-      </View>
 
-      <View>
         <TextBox
-          label={"Email ou nº telemóvel"}
-          width={360}
-          textcolor={"black"}
-          borderColor={"black"}
+          label={"Nº Telemóvel ou Email"}
           backgroundColor={"white"}
+          textcolor={"black"}
           value={funcionarioContact}
           onChangeText={setFuncionarioContact}
+          width={330}
+          height={50}
         />
       </View>
 
-      <View style={styles.buttonContainer}>
+      <View style={styles.bottomButton}>
         <TouchableOpacity>
           <OrangeButton
-            width={360}
-            height={55}
             label={"Confirmar"}
-            onPress={() =>
-              handleConfirmButtonPress()
-            }
+            width={330}
+            height={50}
+            onPress={() => handleConfirmButtonPress()}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => alert(`bbbbbb`)}>
+      </View>
+      <View style={styles.bottomButton}>
+        <TouchableOpacity>
           <GreyButton
-            width={360}
-            height={55}
             label={"Cancelar"}
-            onPress={() =>
-              router.back()
-            }
+            width={330}
+            height={50}
+            onPress={() => router.back()}
           />
         </TouchableOpacity>
       </View>
@@ -117,7 +113,9 @@ const obraFuncionariosPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f8f8",
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: "column",
   },
   image: {
     height: 200,
@@ -126,6 +124,15 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     alignItems: "center",
+  },
+  headerPosition: {
+    alignContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: "bold",
   },
   title: {
     fontSize: 26,
@@ -152,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default obraFuncionariosPage;
+export default createEmployeePage;

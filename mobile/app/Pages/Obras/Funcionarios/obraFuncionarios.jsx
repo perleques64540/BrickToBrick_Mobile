@@ -127,7 +127,7 @@ const obraFuncionarios = () => {
             label={"Adicionar Funcionário"}
             onPress={() =>
               router.push({
-                pathname: "Pages/Obras/Funcionarios/obraFuncionariosPage",
+                pathname: "Pages/Obras/Funcionarios/createEmployeePage",
                 params: {
                   id: id,
                 },

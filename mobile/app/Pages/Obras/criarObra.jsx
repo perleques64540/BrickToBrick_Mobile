@@ -47,7 +47,7 @@ const AddWorkScreen = () => {
   };
 
   const handleConfirmButtonPress = () => {
-    if (title == "" || clientName == "" || address == "" || description == "") {
+    if (title == "" || clientName == "" || address == "") {
       console.log("Invalid input");
       handleInvalidInput();
     } else {
@@ -87,7 +87,7 @@ const AddWorkScreen = () => {
 
       <TextBox
         backgroundColor={"white"}
-        label={"Título"}
+        label={"Título *"}
         width={"100%"}
         textcolor={"#333"}
         value={title}
@@ -95,7 +95,7 @@ const AddWorkScreen = () => {
       />
       <TextBox
         backgroundColor={"white"}
-        label={"Nome Cliente"}
+        label={"Nome Cliente *"}
         width={"100%"}
         textcolor={"#333"}
         value={clientName}
@@ -103,7 +103,7 @@ const AddWorkScreen = () => {
       />
       <TextBox
         backgroundColor={"white"}
-        label={"Morada"}
+        label={"Morada *"}
         width={"100%"}
         textcolor={"#333"}
         value={address}

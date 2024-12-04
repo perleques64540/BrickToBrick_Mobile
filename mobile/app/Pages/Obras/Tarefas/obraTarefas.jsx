@@ -21,6 +21,7 @@ const obraTarefas = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const [obra, setObra] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [tasks, setTasks] = useState(
     tasksData.filter((item) => item.obraId == id)
   );
@@ -37,17 +38,17 @@ const obraTarefas = () => {
 
   const { showPopUp } = usePopUp();
 
-  const handleAddPersonPopUp = () => {
+  const handleAddPersonPopUp = (taskId) => {
+    setSelectedTaskId(taskId);
     setPopupVisible(true);
   };
 
   const handleAssignTask = (selectedEmployeeIds) => {
     const obraId = parseInt(id, 10);
-    const taskIndex = tasksData.findIndex((task) => task.id === obraId);
+    const taskIndex = tasksData.findIndex((task) => task.id === selectedTaskId); //isto vai buscar todas as tasks da obra
 
     if (taskIndex !== -1) {
       tasksData[taskIndex].employeeId = selectedEmployeeIds;
-      console.log(tasksData[taskIndex]);
     } else {
       console.log("Task not found with ID:", obraId);
     }
@@ -138,6 +139,7 @@ const obraTarefas = () => {
   };
 
   const fetchObraTasks = (id) => {
+    //console.log(tasksData);
     return tasksData.filter((item) => item.obraId == id);
   };
 
@@ -157,8 +159,6 @@ const obraTarefas = () => {
       fetchObraTasks(obraId);
       countDoneTasks(tasks);
     }
-    console.log("fetching tasks in obra tarefa page!");
-    console.log("updated tasks:", tasks);
   }, [id]);
 
   useEffect(() => {
@@ -231,16 +231,6 @@ const obraTarefas = () => {
 
       <Text style={styles.tasksHeader}>Tarefas</Text>
 
-      <EmployeesPopup
-        visible={popupVisible}
-        id={id}
-        onConfirm={(selectedEmployeeIds) => {
-          console.log("Selected Employee IDs:", selectedEmployeeIds);
-          handleAssignTask(selectedEmployeeIds);
-        }}
-        onClose={() => setPopupVisible(false)}
-      />
-
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => filterByState(true)}>
           <OrangeEmptyButton
@@ -266,6 +256,15 @@ const obraTarefas = () => {
           renderItem={renderTaskItem}
           keyExtractor={(item) => item.id}
           ListEmptyComponent={<EmptyList message="tarefas" />}
+        />
+        <EmployeesPopup
+          visible={popupVisible}
+          id={selectedTaskId}
+          onConfirm={(selectedEmployeeIds) => {
+            console.log("Selected Employee IDs:", selectedEmployeeIds);
+            handleAssignTask(selectedEmployeeIds); //aqui tenho que enviar o taskId da obra selecionada
+          }}
+          onClose={() => setPopupVisible(false)}
         />
       </View>
 
