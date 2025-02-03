@@ -2,9 +2,7 @@
 
 ### It should be a simple process so if you are having trouble please contact any element of the group
 
-João Perleques - 93041719
-
-João Cristóvão - 935474946, jg.cristovao@campus.fct.unl.pt
+João Perleques - https://www.linkedin.com/in/jperleques/
 
 * First of all you need to create an account in expo and log in from the cli (npx expo login) and the expo go app
 
